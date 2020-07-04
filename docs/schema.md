@@ -65,14 +65,15 @@ sub_chain_address | STRING             |
 
 ### put_block_actions
 
-Column            | Type               |
-------------------|--------------------|
-version           | INTEGER            |
-nonce             | INTEGER            |
-gas_limit         | INTEGER            |
-gas_price         | STRING             |
-sub_chain_address | STRING             |
-height            | INTEGER            |
+Column            | Type                 |
+------------------|----------------------|
+version           | INTEGER              |
+nonce             | INTEGER              |
+gas_limit         | INTEGER              |
+gas_price         | STRING               |
+sub_chain_address | STRING               |
+height            | INTEGER              |
+roots             | merkle_root REPEATED |
 
 ### merkle_root
 
@@ -134,7 +135,14 @@ gas_limit         | INTEGER            |
 gas_price         | STRING             |
 sub_chain_address | STRING             |
 height            | INTEGER            |
-roots             |                    |
+roots             | root REPEATED      |
+
+### root
+
+Column            | Type               |
+------------------|--------------------|
+key               | STRING             |
+value             | STRING             |
 
 ### plum_create_deposit_actions
 
@@ -274,7 +282,18 @@ staked_duration   | INTEGER            |
 auto_stake        | BOOLEAN            |
 payload           | INTEGER            |
 
-### stake_reclaim_actions
+### stake_unstake_actions
+
+Column            | Type               |
+------------------|--------------------|
+version           | INTEGER            |
+nonce             | INTEGER            |
+gas_limit         | INTEGER            |
+gas_price         | STRING             |
+bucket_index      | INTEGER            |
+payload           | STRING             |
+
+### stake_withdraw_actions
 
 Column            | Type               |
 ------------------|--------------------|
@@ -372,6 +391,7 @@ nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
 height            | INTEGER            |
+candidates        | candidate REPEATED |
 
 ### candidate
 
@@ -397,7 +417,7 @@ contract_address  | STRING             |
 Column            | Type               |
 ------------------|--------------------|
 contract_address  | STRING             |
-topics            |                    |
+topics            | STRING REPEATED    |
 data              | STRING             |
 blk_height        | INTEGER            |
 act_hash          | STRING             |
