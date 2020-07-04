@@ -7,9 +7,8 @@ height             | INTEGER            |
 timestamp          | TIMESTAMP          |
 prev_block_hash    | STRING             |
 tx_root            | STRING             |
-delta_state_digest | STRING             |
 receipt_root       | STRING             |
-logsBloom          | STRING             |
+delta_state_digest | STRING             |
 producer_pubkey    | STRING             |
 signature          | STRING             |
 
@@ -17,10 +16,17 @@ signature          | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 amount            | STRING             |
 recipient         | STRING             |
 payload           | STRING             |
@@ -29,10 +35,17 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 amount            | STRING             |
 contract          | STRING             |
 data              | STRING             |
@@ -41,10 +54,17 @@ data              | STRING             |
 
 Column               | Type               |
 ---------------------|--------------------|
+hash              | INTEGER            |
+height               | INTEGER            |
+timestamp            | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version              | INTEGER            |
 nonce                | INTEGER            |
 gas_limit            | INTEGER            |
 gas_price            | STRING             |
+status               | INTEGER            |
+gas_consumed         | INTEGER            |
+contract_address     | STRING             |
 chain_id             | INTEGER            |
 security_deposit     | STRING             |
 operation_deposit    | STRING             |
@@ -55,10 +75,17 @@ parent_height_offset | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 chain_id          | INTEGER            |
 stop_height       | INTEGER            |
 sub_chain_address | STRING             |
@@ -67,29 +94,38 @@ sub_chain_address | STRING             |
 
 Column            | Type                 |
 ------------------|----------------------|
+hash              | INTEGER            |
+height            | INTEGER              |
+timestamp         | TIMESTAMP            |
+sender_pub_key    | STRING               |
 version           | INTEGER              |
 nonce             | INTEGER              |
 gas_limit         | INTEGER              |
 gas_price         | STRING               |
+status            | INTEGER              |
+gas_consumed      | INTEGER              |
+contract_address  | STRING               |
 sub_chain_address | STRING               |
 height            | INTEGER              |
-roots             | merkle_root REPEATED |
-
-### merkle_root
-
-Column            | Type               |
-------------------|--------------------|
-name              | STRING             |
-value             | STRING             |
+roots             | STRUCT (REPEATED)    |
+roots.name        | STRING               |
+roots.value       | STRING               |
 
 ### create_deposit_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 chain_id          | INTEGER            |
 amount            | STRING             |
 recipient         | STRING             |
@@ -98,10 +134,17 @@ recipient         | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 amount            | STRING             |
 recipient         | STRING             |
 index             | INTEGER            |
@@ -110,48 +153,71 @@ index             | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 
 ### terminate_plum_chain_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 sub_chain_address | STRING             |
 
 ### plum_put_block_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 sub_chain_address | STRING             |
 height            | INTEGER            |
-roots             | root REPEATED      |
-
-### root
-
-Column            | Type               |
-------------------|--------------------|
-key               | STRING             |
-value             | STRING             |
+roots             | STRUCT (REPEATED)  |
+roots.name        | STRING             |
+roots.value       | STRING             |
 
 ### plum_create_deposit_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 sub_chain_address | STRING             |
 amount            | STRING             |
 recipient         | STRING             |
@@ -160,10 +226,17 @@ recipient         | STRING             |
 
 Column                         | Type               |
 -------------------------------|--------------------|
+hash                           | INTEGER            |
+height                         | INTEGER            |
+timestamp                      | TIMESTAMP          |
+sender_pub_key                 | STRING             |
 version                        | INTEGER            |
 nonce                          | INTEGER            |
 gas_limit                      | INTEGER            |
 gas_price                      | STRING             |
+status                         | INTEGER            |
+gas_consumed                   | INTEGER            |
+contract_address               | STRING             |
 sub_chain_address              | STRING             |
 previous_transfer              | STRING             |
 previous_transfer_block_proof  | STRING             |
@@ -176,10 +249,17 @@ exit_transfer_block_height     | INTEGER            |
 
 Column                          | Type               |
 --------------------------------|--------------------|
+hash                            | INTEGER            |
+height                          | INTEGER            |
+timestamp                       | TIMESTAMP          |
+sender_pub_key                  | STRING             |
 version                         | INTEGER            |
 nonce                           | INTEGER            |
 gas_limit                       | INTEGER            |
 gas_price                       | STRING             |
+status                          | INTEGER            |
+gas_consumed                    | INTEGER            |
+contract_address                | STRING             |
 sub_chain_address               | STRING             |
 coin_id                         | INTEGER            |
 challenge_transfer              | STRING             |
@@ -190,10 +270,17 @@ challenge_transfer_block_height | STRING             |
 
 Column                         | Type               |
 -------------------------------|--------------------|
+hash                           | INTEGER            |
+height                         | INTEGER            |
+timestamp                      | TIMESTAMP          |
+sender_pub_key                 | STRING             |
 version                        | INTEGER            |
 nonce                          | INTEGER            |
 gas_limit                      | INTEGER            |
 gas_price                      | STRING             |
+status                         | INTEGER            |
+gas_consumed                   | INTEGER            |
+contract_address               | STRING             |
 sub_chain_address              | STRING             |
 coin_id                        | INTEGER            |
 challenge_transfer             | STRING             |
@@ -205,10 +292,17 @@ previous_transfer_block_height | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 sub_chain_address | STRING             |
 coin_id           | INTEGER            |
 
@@ -216,20 +310,34 @@ coin_id           | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
-gas_price         | STRING             
+gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 coin_id           | INTEGER            |
 
 ### plum_transfer_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 coin_id           | INTEGER            |
 denomination      | STRING             |
 owner             | STRING             |
@@ -239,10 +347,17 @@ recipient         | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 amount            | STRING             |
 data              | STRING             |
 
@@ -250,10 +365,17 @@ data              | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 amount            | STRING             |
 data              | STRING             |
 
@@ -261,10 +383,17 @@ data              | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 type              | INTEGER            |
 height            | INTEGER            |
 
@@ -272,10 +401,17 @@ height            | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 candidate_name    | STRING             |
 staked_amount     | STRING             |
 staked_duration   | INTEGER            |
@@ -286,10 +422,17 @@ payload           | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 bucket_index      | INTEGER            |
 payload           | STRING             |
 
@@ -297,10 +440,17 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 bucket_index      | INTEGER            |
 payload           | STRING             |
 
@@ -308,6 +458,10 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
@@ -315,15 +469,25 @@ gas_price         | STRING             |
 bucket_index      | INTEGER            |
 amount            | STRING             |
 payload           | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 
 ### stake_restake_actions
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 bucket_index      | INTEGER            |
 stakedDuration    | INTEGER            |
 autoStake         | BOOLEAN            |
@@ -333,10 +497,17 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 bucket_index      | INTEGER            |
 candidate_name    | STRING             |
 payload           | STRING             |
@@ -345,10 +516,17 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 bucket_index      | INTEGER            |
 voter_address     | STRING             |
 payload           | STRING             |
@@ -357,10 +535,17 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 name              | STRING             |
 operator_address  | STRING             |
 reward_address    | STRING             |
@@ -374,50 +559,52 @@ payload           | STRING             |
 
 Column            | Type               |
 ------------------|--------------------|
+hash              | INTEGER            |
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+sender_pub_key    | STRING             |
 version           | INTEGER            |
 nonce             | INTEGER            |
 gas_limit         | INTEGER            |
 gas_price         | STRING             |
+status            | INTEGER            |
+gas_consumed      | INTEGER            |
+contract_address  | STRING             |
 name              | STRING             |
 operator_address  | STRING             |
 reward_address    | STRING             |
 
 ### put_poll_result_actions
 
-Column            | Type               |
-------------------|--------------------|
-version           | INTEGER            |
-nonce             | INTEGER            |
-gas_limit         | INTEGER            |
-gas_price         | STRING             |
-height            | INTEGER            |
-candidates        | candidate REPEATED |
-
-### candidate
-
-Column            | Type               |
-------------------|--------------------|
-address           | STRING             |
-votes             | STRING             |
-pub_key           | STRING             |
-reward_address    | STRING             |
-
-### receipts
-
-Column            | Type               |
-------------------|--------------------|
-status            | INTEGER            |
-blk_height        | INTEGER            |
-act_hash          | STRING             |
-gas_consumed      | INTEGER            |
-contract_address  | STRING             |
+Column                        | Type               |
+------------------------------|--------------------|
+hash                          | INTEGER            |
+height                        | INTEGER            |
+timestamp                     | TIMESTAMP          |
+sender_pub_key                | STRING             |
+version                       | INTEGER            |
+nonce                         | INTEGER            |
+gas_limit                     | INTEGER            |
+gas_price                     | STRING             |
+status                        | INTEGER            |
+gas_consumed                  | INTEGER            |
+contract_address              | STRING             |
+height                        | INTEGER            |
+candidates                    | STRUCT (REPEATED)  |
+candidates.address            | STRING             |
+candidates.votes              | STRING             |
+candidates.pub_key            | STRING             |
+candidates.reward_address     | STRING             |
 
 ### logs
 
 Column            | Type               |
 ------------------|--------------------|
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+action_hash       | STRING             |
 contract_address  | STRING             |
-topics            | STRING REPEATED    |
+topics            | STRING (REPEATED)  |
 data              | STRING             |
 blk_height        | INTEGER            |
 act_hash          | STRING             |
@@ -427,6 +614,10 @@ index             | INTEGER            |
 
 Column            | Type               |
 ------------------|--------------------|
+height            | INTEGER            |
+timestamp         | TIMESTAMP          |
+action_hash       | STRING             |
 amount            | STRING             |
 from              | STRING             |
 to                | STRING             |
+index             | INTEGER            |
