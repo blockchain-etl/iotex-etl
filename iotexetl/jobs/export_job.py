@@ -58,10 +58,10 @@ class ExportJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        responses = self.iotex_service.get_blocks(block_number_batch)
-        for response in responses:
-            self.item_exporter.export_item(map_block(response))
-            self.item_exporter.export_items(map_action(response))
+        results = self.iotex_service.get_blocks(block_number_batch)
+        for item in results:
+            self.item_exporter.export_item(map_block(item))
+            self.item_exporter.export_items(map_action(item))
 
     def _end(self):
         self.batch_work_executor.shutdown()

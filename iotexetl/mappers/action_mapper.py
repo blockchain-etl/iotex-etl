@@ -22,8 +22,8 @@
 from iotexetl.utils import string_utils, iotex_utils
 
 
-def map_action(response):
-    for action in response.blocks[0].block.body.actions:
+def map_action(raw):
+    for action in raw.block.body.actions:
         action_dict = {}
         if action.core.WhichOneof('action') == 'transfer':
             action_dict = map_transfer(action)

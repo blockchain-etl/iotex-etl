@@ -25,17 +25,18 @@ class IotexService(object):
     def __init__(self, iotex_rpc):
         self.iotex_rpc = iotex_rpc
 
-    def get_block(self, block_id):
-        return self.iotex_rpc.get_block(block_id)
-
     def get_genesis_block(self):
-        return self.get_block(0)
+        return self.get_blocks(0)
 
     def get_latest_block(self):
-        return self.get_block('head')
+        return self.get_blocks('head')
+
+    def get_block(self, block_number):
+        return self.get_blocks([block_number])
 
     def get_blocks(self, block_number_batch):
         if not block_number_batch:
             return []
 
-        return [self.get_block(x) for x in block_number_batch]
+        response = self.iotex_rpc.get_blocks(block_number_batch)
+        return response.blocks

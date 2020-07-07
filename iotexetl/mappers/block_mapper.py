@@ -23,8 +23,8 @@
 from iotexetl.utils.string_utils import base64_string
 import json
 
-def map_block(response):
-    header = response.blocks[0].block.header
+def map_block(raw):
+    header = raw.block.header
     # body = response.block.body
     # footer = response.block.footer
 

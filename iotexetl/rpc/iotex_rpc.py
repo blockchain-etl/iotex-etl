@@ -32,22 +32,8 @@ class IotexRpc:
     def __init__(self, provider_uri, timeout=60):
         self.timeout = timeout
         self.provider_uri = provider_uri
-        # self.stub = api_pb2_grpc.APIServiceStub(grpc.insecure_channel(provider_uri))
+        channel = grpc.insecure_channel(self.provider_uri)
+        self.stub = api_pb2_grpc.APIServiceStub(channel)
 
-    # def get(self, endpoint):
-    #     raw_response = make_get_request(
-    #         self.provider_uri + endpoint,
-    #         timeout=self.timeout
-    #     )
-    #
-    #     response = self._decode_rpc_response(raw_response)
-    #     return response
-
-    # def _decode_rpc_response(self, response):
-    #     response_text = response.decode('utf-8')
-    #     return json.loads(response_text, parse_float=decimal.Decimal)
-
-    def get_block(self, block_id):
-        with grpc.insecure_channel(self.provider_uri) as channel:
-            stub = api_pb2_grpc.APIServiceStub(channel)
-            return stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_id, count=1, withReceipts=True))
+    def get_blocks(self, block_number_batch):
+        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True))
