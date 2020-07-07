@@ -1,6 +1,6 @@
 import pytest
 
-from iotexetl.utils.iotex_utils import pubkey_to_address
+from iotexetl.utils.iotex_utils import pubkey_hex_to_address
 
 
 @pytest.mark.parametrize("pubkey,expected_address", [
@@ -9,5 +9,5 @@ from iotexetl.utils.iotex_utils import pubkey_to_address
 
 ])
 def test_pubkey_to_address(pubkey, expected_address):
-    address = pubkey_to_address(pubkey)
+    address = pubkey_hex_to_address(pubkey)
     assert address == expected_address
