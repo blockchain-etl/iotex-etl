@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-from iotexetl.utils import string_utils
+from iotexetl.utils import string_utils, iotex_utils
 
 
 def map_action(response):
@@ -94,7 +94,8 @@ def map_base_action(action):
         'version': action.core.version,
         'nonce': action.core.nonce,
         'gas_limit': action.core.gasLimit,
-        'gas_price': action.core.gasPrice
+        'gas_price': action.core.gasPrice,
+        'sender_pub_key': iotex_utils.pubkey_to_address(action.senderPubKey)
     }
 
 def map_transfer(action):
