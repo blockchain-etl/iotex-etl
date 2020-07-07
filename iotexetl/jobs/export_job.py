@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 from iotexetl.mappers.block_mapper import map_block
+from iotexetl.mappers.action_mapper import map_action
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
@@ -59,10 +60,8 @@ class ExportJob(BaseJob):
     def _export_batch(self, block_number_batch):
         responses = self.iotex_service.get_blocks(block_number_batch)
         for response in responses:
-            block = map_block(response)
-            self.item_exporter.export_item(block)
-            # self.item_exporter.export_items(map_balance_updates(block, response))
-            # self.item_exporter.export_items(map_operations(block, response))
+            self.item_exporter.export_item(map_block(response))
+            self.item_exporter.export_items(map_action(response))
 
     def _end(self):
         self.batch_work_executor.shutdown()
