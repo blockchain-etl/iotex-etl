@@ -19,7 +19,7 @@ signature          | STRING             |
 | hash                                                        | STRING            |
 | height                                                      | INTEGER           |
 | timestamp                                                   | TIMESTAMP         |
-| type                                                        | STRING            |
+| action_type                                                 | STRING            |
 | sender_pub_key                                              | STRING            |
 | version                                                     | INTEGER           |
 | nonce                                                       | INTEGER           |
