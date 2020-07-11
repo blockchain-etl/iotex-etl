@@ -32,7 +32,8 @@ class IotexRpc:
     def __init__(self, provider_uri, timeout=60):
         self.timeout = timeout
         self.provider_uri = provider_uri
-        channel = grpc.insecure_channel(self.provider_uri)
+        credentials = grpc.ssl_channel_credentials()
+        channel = grpc.secure_channel(self.provider_uri, credentials)
         self.stub = api_pb2_grpc.APIServiceStub(channel)
 
     def get_blocks(self, block_number_batch):

@@ -35,7 +35,7 @@ logging_basic_config()
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
 @click.option('-s', '--start-block', default=0, show_default=True, type=int, help='Start block')
 @click.option('-e', '--end-block', required=True, type=int, help='End block')
-@click.option('-p', '--provider-uri', default='api.mainnet.iotex.one:80', show_default=True, type=str,
+@click.option('-p', '--provider-uri', default='api.mainnet.iotex.one:443', show_default=True, type=str,
               help='The URI of the remote Tezos node')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
