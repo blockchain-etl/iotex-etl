@@ -19,11 +19,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+from iotexetl.mappers.receipt_mapper import map_receipt
 from iotexetl.utils import string_utils, iotex_utils
 
 
 def map_action(raw):
-    for action in raw.block.body.actions:
+    for action, receipt in zip(raw.block.body.actions, raw.receipts):
         action_dict = {}
         if action.core.WhichOneof('action') == 'transfer':
             action_dict = map_transfer(action)
@@ -86,7 +87,7 @@ def map_action(raw):
         elif action.core.WhichOneof('action') == 'putPollResult':
             action_dict = map_put_poll_result(action)
 
-        yield {**map_base_action(action), **action_dict}
+        yield {**map_base_action(action), **map_receipt(receipt), **action_dict}
 
 def map_base_action(action):
     return {
@@ -101,6 +102,7 @@ def map_base_action(action):
 def map_transfer(action):
     transfer = action.core.transfer
     return {
+        'action_type': 'transfer',
         'transfer': {
             'amount': transfer.amount,
             'recipient': transfer.recipient,
@@ -111,6 +113,7 @@ def map_transfer(action):
 def map_execution(action):
     execution = action.core.execution
     return {
+        'action_type': 'execution',
         'execution': {
             'amount': execution.amount,
             'contract': execution.contract,
@@ -121,6 +124,7 @@ def map_execution(action):
 def map_start_sub_chain(action):
     start_sub_chain = action.core.startSubChain
     return {
+        'action_type': 'start_sub_chain',
         'start_sub_chain': {
             'chain_id': start_sub_chain.chainID,
             'security_deposit': start_sub_chain.securityDeposit,
@@ -133,6 +137,7 @@ def map_start_sub_chain(action):
 def map_stop_sub_chain(action):
     stop_sub_chain = action.core.stopSubChain
     return {
+        'action_type': 'stop_sub_chain',
         'stop_sub_chain': {
             'chain_id': stop_sub_chain.chainID,
             'stop_height': stop_sub_chain.stopHeight,
@@ -143,6 +148,7 @@ def map_stop_sub_chain(action):
 def map_put_block(action):
     put_block = action.core.putBlock
     return {
+        'action_type': 'put_block',
         'put_block': {
             'sub_chain_address': put_block.subChainAddress,
             'height': put_block.height,
@@ -153,6 +159,7 @@ def map_put_block(action):
 def map_create_deposit(action):
     create_deposit = action.core.createDeposit
     return {
+        'action_type': 'create_deposit',
         'create_deposit': {
             'chain_id': create_deposit.chainID,
             'amount': create_deposit.amount,
@@ -163,6 +170,7 @@ def map_create_deposit(action):
 def map_settle_deposit(action):
     settle_deposit = action.core.settleDeposit
     return {
+        'action_type': 'settle_deposit',
         'settle_deposit': {
             'amount': settle_deposit.amount,
             'recipient': settle_deposit.recipient,
@@ -171,11 +179,14 @@ def map_settle_deposit(action):
     }
 
 def map_create_plum_chain(action):
-    return {}
+    return {
+        'action_type': 'create_plum_chain'
+    }
 
 def map_terminate_plum_chain(action):
     terminate_plum_chain = action.core.terminatePlumChain
     return {
+        'action_type': 'terminate_plum_chain',
         'terminate_plum_chain': {
             'sub_chain_address': terminate_plum_chain.subChainAddress
         }
@@ -184,6 +195,7 @@ def map_terminate_plum_chain(action):
 def map_plum_put_block(action):
     plum_put_block = action.core.plumPutBlock
     return {
+        'action_type': 'plum_put_block',
         'plum_put_block': {
             'sub_chain_address': plum_put_block.subChainAddress,
             'height': plum_put_block.height,
@@ -194,6 +206,7 @@ def map_plum_put_block(action):
 def map_plum_create_deposit(action):
     plum_create_deposit = action.core.plumCreateDeposit
     return {
+        'action_type': 'plum_create_deposit',
         'plum_create_deposit': {
             'sub_chain_address': plum_create_deposit.subChainAddress,
             'amount': plum_create_deposit.amount,
@@ -204,6 +217,7 @@ def map_plum_create_deposit(action):
 def map_plum_start_exit(action):
     plum_start_exit = action.core.plumStartExit
     return {
+        'action_type': 'plum_start_exit',
         'plum_start_exit': {
             'sub_chain_address': plum_start_exit.subChainAddress,
             'previous_transfer': string_utils.base64_string(plum_start_exit.previousTransfer),
@@ -218,6 +232,7 @@ def map_plum_start_exit(action):
 def map_plum_challenge_exit(action):
     plum_challenge_exit = action.core.plumChallengeExit
     return {
+        'action_type': 'plum_challenge_exit',
         'plum_challenge_exit': {
             'sub_chain_address': plum_challenge_exit.subChainAddress,
             'coin_id': plum_challenge_exit.coinID,
@@ -230,6 +245,7 @@ def map_plum_challenge_exit(action):
 def map_plum_response_challenge_exit(action):
     plum_response_challenge_exit = action.core.plumResponseChallengeExit
     return {
+        'action_type': 'plum_response_challenge_exit',
         'plum_response_challenge_exit': {
             'sub_chain_address': plum_response_challenge_exit.subChainAddress,
             'coin_id': plum_response_challenge_exit.coinID,
@@ -243,6 +259,7 @@ def map_plum_response_challenge_exit(action):
 def map_plum_finalize_exit(action):
     plum_finalize_exit = action.core.finalizeExit
     return {
+        'action_type': 'plum_finalize_exit',
         'plum_finalize_exit': {
             'sub_chain_address': plum_finalize_exit.subChainAddress,
             'coin_id': plum_finalize_exit.coinID,
@@ -252,6 +269,7 @@ def map_plum_finalize_exit(action):
 def map_plum_settle_deposit(action):
     plum_settle_deposit = action.core.plumSettleDeposit
     return {
+        'action_type': 'plum_settle_deposit',
         'plum_settle_deposit': {
             'coin_id': plum_settle_deposit.coinID
         }
@@ -260,6 +278,7 @@ def map_plum_settle_deposit(action):
 def map_plum_transfer(action):
     plum_transfer = action.core.plumTransfer
     return {
+        'action_type': 'plum_transfer',
         'plum_transfer': {
             'coin_id': plum_transfer.coinID,
             'denomination': string_utils.base64_string(plum_transfer.denomination),
@@ -271,6 +290,7 @@ def map_plum_transfer(action):
 def map_deposit_to_rewarding_fund(action):
     deposit_to_rewarding_fund = action.core.depositToRewardingFund
     return {
+        'action_type': 'deposit_to_rewarding_fund',
         'deposit_to_rewarding_fund': {
             'amount': deposit_to_rewarding_fund.amount,
             'data': string_utils.base64_string(deposit_to_rewarding_fund.data),
@@ -280,6 +300,7 @@ def map_deposit_to_rewarding_fund(action):
 def map_claim_from_rewarding_fund(action):
     claim_from_rewarding_fund = action.core.claimFromRewardingFund
     return {
+        'action_type': 'claim_from_rewarding_fund',
         'claim_from_rewarding_fund': {
             'amount': claim_from_rewarding_fund.amount,
             'data': string_utils.base64_string(claim_from_rewarding_fund.data),
@@ -289,6 +310,7 @@ def map_claim_from_rewarding_fund(action):
 def map_grant_reward(action):
     grant_reward = action.core.grantReward
     return {
+        'action_type': 'grant_reward',
         'grant_reward': {
             'type': grant_reward.type,
             'height': grant_reward.height
@@ -298,6 +320,7 @@ def map_grant_reward(action):
 def map_stake_create(action):
     stake_create = action.core.stakeCreate
     return {
+        'action_type': 'stake_create',
         'stake_create': {
             'candidate_name': stake_create.candidateName,
             'staked_amount': stake_create.stakedAmount,
@@ -310,6 +333,7 @@ def map_stake_create(action):
 def map_stake_unstake(action):
     stake_unstake = action.core.stakeUnstake
     return {
+        'action_type': 'stake_unstake',
         'stake_unstake': {
             'bucket_index': stake_unstake.bucketIndex,
             'payload': string_utils.base64_string(stake_unstake.payload),
@@ -319,6 +343,7 @@ def map_stake_unstake(action):
 def map_stake_withdraw(action):
     stake_withdraw = action.core.stakeWithdraw
     return {
+        'action_type': 'stake_withdraw',
         'stake_withdraw': {
             'bucket_index': stake_withdraw.bucketIndex,
             'payload': string_utils.base64_string(stake_withdraw.payload),
@@ -328,6 +353,7 @@ def map_stake_withdraw(action):
 def map_stake_add_deposit(action):
     stake_add_deposit = action.core.stakeAddDeposit
     return {
+        'action_type': 'stake_add_deposit',
         'stake_add_deposit': {
             'bucket_index': stake_add_deposit.bucketIndex,
             'amount': stake_add_deposit.amount,
@@ -338,6 +364,7 @@ def map_stake_add_deposit(action):
 def map_stake_restake(action):
     stake_restake = action.core.stakeRestake
     return {
+        'action_type': 'stake_restake',
         'stake_restake': {
             'bucket_index': stake_restake.bucketIndex,
             'staked_duration': stake_restake.stakedDuration,
@@ -349,6 +376,7 @@ def map_stake_restake(action):
 def map_stake_change_candidate(action):
     stake_change_candidate = action.core.stakeChangeCandidate
     return {
+        'action_type': 'stake_change_candidate',
         'stake_change_candidate': {
             'bucket_index': stake_change_candidate.bucketIndex,
             'candidate_name': stake_change_candidate.candidateName,
@@ -359,6 +387,7 @@ def map_stake_change_candidate(action):
 def map_stake_transfer_ownership(action):
     stake_transfer_ownership = action.core.stakeTransferOwnership
     return {
+        'action_type': 'stake_transfer_ownership',
         'stake_transfer_ownership': {
             'bucket_index': stake_transfer_ownership.bucketIndex,
             'voter_address': stake_transfer_ownership.voterAddress,
@@ -369,6 +398,7 @@ def map_stake_transfer_ownership(action):
 def map_candidate_register(action):
     candidate_register = action.core.candidateRegister
     return {
+        'action_type': 'candidate_register',
         'candidate_register': {
             'name': candidate_register.candidate.name,
             'operator_address': candidate_register.candidate.operatorAddress,
@@ -384,6 +414,7 @@ def map_candidate_register(action):
 def map_candidate_update(action):
     candidate_update = action.core.candidateUpdate
     return {
+        'action_type': 'candidate_update',
         'candidate_update': {
             'name': candidate_update.name,
             'operator_address': candidate_update.operatorAddress,
@@ -395,6 +426,7 @@ def map_put_poll_result(action):
     put_poll_result = action.core.putPollResult
     candidates = [map_candidate(candidate) for candidate in put_poll_result.candidates.candidates]
     return {
+        'action_type': 'put_poll_result',
         'put_poll_result': {
             'height': put_poll_result.height,
             'candidates': candidates,
