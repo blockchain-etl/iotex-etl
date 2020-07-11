@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n com.github.iotexproject.grpc.apiP\001Z3github.com/iotexproject/iotex-proto/golang/iotexapi',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13proto/api/api.proto\x12\x08iotexapi\x1a\x18proto/types/action.proto\x1a\x1cproto/types/blockchain.proto\x1a\x16proto/types/node.proto\x1a\x1aproto/types/election.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"X\n\x06\x42ucket\x12\r\n\x05voter\x18\x01 \x01(\t\x12\r\n\x05votes\x18\x02 \x01(\t\x12\x15\n\rweightedVotes\x18\x03 \x01(\t\x12\x19\n\x11remainingDuration\x18\x04 \x01(\t\"$\n\x11GetAccountRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\"x\n\x12GetAccountResponse\x12,\n\x0b\x61\x63\x63ountMeta\x18\x01 \x01(\x0b\x32\x17.iotextypes.AccountMeta\x12\x34\n\x0f\x62lockIdentifier\x18\x02 \x01(\x0b\x32\x1b.iotextypes.BlockIdentifier\"\xc3\x02\n\x11GetActionsRequest\x12\x35\n\x07\x62yIndex\x18\x01 \x01(\x0b\x32\".iotexapi.GetActionsByIndexRequestH\x00\x12\x32\n\x06\x62yHash\x18\x02 \x01(\x0b\x32 .iotexapi.GetActionByHashRequestH\x00\x12\x36\n\x06\x62yAddr\x18\x03 \x01(\x0b\x32$.iotexapi.GetActionsByAddressRequestH\x00\x12L\n\x11unconfirmedByAddr\x18\x04 \x01(\x0b\x32/.iotexapi.GetUnconfirmedActionsByAddressRequestH\x00\x12\x33\n\x05\x62yBlk\x18\x05 \x01(\x0b\x32\".iotexapi.GetActionsByBlockRequestH\x00\x42\x08\n\x06lookup\"8\n\x18GetActionsByIndexRequest\x12\r\n\x05start\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\"B\n\x16GetActionByHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\x12\x14\n\x0c\x63heckPending\x18\x02 \x01(\x08\"K\n\x1aGetActionsByAddressRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"V\n%GetUnconfirmedActionsByAddressRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"I\n\x18GetActionsByBlockRequest\x12\x0f\n\x07\x62lkHash\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"\xb4\x01\n\nActionInfo\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\x12\x0f\n\x07\x61\x63tHash\x18\x02 \x01(\t\x12\x0f\n\x07\x62lkHash\x18\x03 \x01(\t\x12\x11\n\tblkHeight\x18\x05 \x01(\x04\x12\x0e\n\x06sender\x18\x06 \x01(\t\x12\x0e\n\x06gasFee\x18\x07 \x01(\t\x12-\n\ttimestamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"D\n\x0bReceiptInfo\x12$\n\x07receipt\x18\x01 \x01(\x0b\x32\x13.iotextypes.Receipt\x12\x0f\n\x07\x62lkHash\x18\x02 \x01(\t\"W\n\x11\x42lockProducerInfo\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05votes\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x63tive\x18\x03 \x01(\x08\x12\x12\n\nproduction\x18\x04 \x01(\x04\"T\n\tBlockInfo\x12 \n\x05\x62lock\x18\x01 \x01(\x0b\x32\x11.iotextypes.Block\x12%\n\x08receipts\x18\x02 \x03(\x0b\x32\x13.iotextypes.Receipt\"M\n\x12GetActionsResponse\x12\r\n\x05total\x18\x02 \x01(\x04\x12(\n\nactionInfo\x18\x01 \x03(\x0b\x32\x14.iotexapi.ActionInfo\"\x91\x01\n\x14GetBlockMetasRequest\x12\x38\n\x07\x62yIndex\x18\x01 \x01(\x0b\x32%.iotexapi.GetBlockMetasByIndexRequestH\x00\x12\x35\n\x06\x62yHash\x18\x02 \x01(\x0b\x32#.iotexapi.GetBlockMetaByHashRequestH\x00\x42\x08\n\x06lookup\";\n\x1bGetBlockMetasByIndexRequest\x12\r\n\x05start\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\",\n\x19GetBlockMetaByHashRequest\x12\x0f\n\x07\x62lkHash\x18\x01 \x01(\t\"O\n\x15GetBlockMetasResponse\x12\r\n\x05total\x18\x02 \x01(\x04\x12\'\n\x08\x62lkMetas\x18\x01 \x03(\x0b\x32\x15.iotextypes.BlockMeta\"\x15\n\x13GetChainMetaRequest\"@\n\x14GetChainMetaResponse\x12(\n\tchainMeta\x18\x01 \x01(\x0b\x32\x15.iotextypes.ChainMeta\"\x16\n\x14GetServerMetaRequest\"C\n\x15GetServerMetaResponse\x12*\n\nserverMeta\x18\x01 \x01(\x0b\x32\x16.iotextypes.ServerMeta\"7\n\x11SendActionRequest\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\"9\n\x1cSendSignedActionBytesRequest\x12\x19\n\x11signedActionBytes\x18\x01 \x01(\t\"(\n\x12SendActionResponse\x12\x12\n\nactionHash\x18\x01 \x01(\t\"/\n\x19GetReceiptByActionRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"H\n\x1aGetReceiptByActionResponse\x12*\n\x0breceiptInfo\x18\x01 \x01(\x0b\x32\x15.iotexapi.ReceiptInfo\"V\n\x13ReadContractRequest\x12(\n\texecution\x18\x01 \x01(\x0b\x32\x15.iotextypes.Execution\x12\x15\n\rcallerAddress\x18\x02 \x01(\t\"J\n\x14ReadContractResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12$\n\x07receipt\x18\x02 \x01(\x0b\x32\x13.iotextypes.Receipt\"\x18\n\x16SuggestGasPriceRequest\"+\n\x17SuggestGasPriceResponse\x12\x10\n\x08gasPrice\x18\x01 \x01(\x04\"A\n\x1b\x45stimateGasForActionRequest\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\"\x9a\x05\n#EstimateActionGasConsumptionRequest\x12(\n\x08transfer\x18\x01 \x01(\x0b\x32\x14.iotextypes.TransferH\x00\x12*\n\texecution\x18\x02 \x01(\x0b\x32\x15.iotextypes.ExecutionH\x00\x12.\n\x0bstakeCreate\x18( \x01(\x0b\x32\x17.iotextypes.StakeCreateH\x00\x12\x30\n\x0cstakeUnstake\x18) \x01(\x0b\x32\x18.iotextypes.StakeReclaimH\x00\x12\x31\n\rstakeWithdraw\x18* \x01(\x0b\x32\x18.iotextypes.StakeReclaimH\x00\x12\x36\n\x0fstakeAddDeposit\x18+ \x01(\x0b\x32\x1b.iotextypes.StakeAddDepositH\x00\x12\x30\n\x0cstakeRestake\x18, \x01(\x0b\x32\x18.iotextypes.StakeRestakeH\x00\x12@\n\x14stakeChangeCandidate\x18- \x01(\x0b\x32 .iotextypes.StakeChangeCandidateH\x00\x12\x44\n\x16stakeTransferOwnership\x18. \x01(\x0b\x32\".iotextypes.StakeTransferOwnershipH\x00\x12:\n\x11\x63\x61ndidateRegister\x18/ \x01(\x0b\x32\x1d.iotextypes.CandidateRegisterH\x00\x12\x39\n\x0f\x63\x61ndidateUpdate\x18\x30 \x01(\x0b\x32\x1e.iotextypes.CandidateBasicInfoH\x00\x12\x15\n\rcallerAddress\x18\x64 \x01(\tB\x08\n\x06\x61\x63tion\"3\n$EstimateActionGasConsumptionResponse\x12\x0b\n\x03gas\x18\x01 \x01(\x04\"+\n\x1c\x45stimateGasForActionResponse\x12\x0b\n\x03gas\x18\x01 \x01(\x04\"]\n\x10ReadStateRequest\x12\x12\n\nprotocolID\x18\x01 \x01(\x0c\x12\x12\n\nmethodName\x18\x02 \x01(\x0c\x12\x11\n\targuments\x18\x03 \x03(\x0c\x12\x0e\n\x06height\x18\x04 \x01(\t\"!\n\x11ReadStateResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\"*\n\x13GetEpochMetaRequest\x12\x13\n\x0b\x65pochNumber\x18\x01 \x01(\x04\"\x8e\x01\n\x14GetEpochMetaResponse\x12(\n\tepochData\x18\x01 \x01(\x0b\x32\x15.iotextypes.EpochData\x12\x13\n\x0btotalBlocks\x18\x02 \x01(\x04\x12\x37\n\x12\x62lockProducersInfo\x18\x03 \x03(\x0b\x32\x1b.iotexapi.BlockProducerInfo\"O\n\x13GetRawBlocksRequest\x12\x13\n\x0bstartHeight\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x14\n\x0cwithReceipts\x18\x03 \x01(\x08\";\n\x14GetRawBlocksResponse\x12#\n\x06\x62locks\x18\x01 \x03(\x0b\x32\x13.iotexapi.BlockInfo\"#\n\x0eGetLogsByBlock\x12\x11\n\tblockHash\x18\x01 \x01(\x0c\"2\n\x0eGetLogsByRange\x12\x11\n\tfromBlock\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\"\x17\n\x06Topics\x12\r\n\x05topic\x18\x01 \x03(\x0c\"?\n\nLogsFilter\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x03(\t\x12 \n\x06topics\x18\x02 \x03(\x0b\x32\x10.iotexapi.Topics\"\x9a\x01\n\x0eGetLogsRequest\x12$\n\x06\x66ilter\x18\x01 \x01(\x0b\x32\x14.iotexapi.LogsFilter\x12+\n\x07\x62yBlock\x18\x02 \x01(\x0b\x32\x18.iotexapi.GetLogsByBlockH\x00\x12+\n\x07\x62yRange\x18\x03 \x01(\x0b\x32\x18.iotexapi.GetLogsByRangeH\x00\x42\x08\n\x06lookup\"0\n\x0fGetLogsResponse\x12\x1d\n\x04logs\x18\x01 \x03(\x0b\x32\x0f.iotextypes.Log\"8\n\"GetEvmTransfersByActionHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"`\n#GetEvmTransfersByActionHashResponse\x12\x39\n\x12\x61\x63tionEvmTransfers\x18\x01 \x01(\x0b\x32\x1d.iotextypes.ActionEvmTransfer\":\n#GetEvmTransfersByBlockHeightRequest\x12\x13\n\x0b\x62lockHeight\x18\x01 \x01(\x04\"_\n$GetEvmTransfersByBlockHeightResponse\x12\x37\n\x11\x62lockEvmTransfers\x18\x01 \x01(\x0b\x32\x1c.iotextypes.BlockEvmTransfer\"5\n\x1fGetSystemLogByActionHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"X\n GetSystemLogByActionHashResponse\x12\x34\n\x0f\x61\x63tionSystemLog\x18\x01 \x01(\x0b\x32\x1b.iotextypes.ActionSystemLog\"7\n GetSystemLogByBlockHeightRequest\x12\x13\n\x0b\x62lockHeight\x18\x01 \x01(\x04\"\x8d\x01\n!GetSystemLogByBlockHeightResponse\x12\x34\n\x0f\x62lockIdentifier\x18\x01 \x01(\x0b\x32\x1b.iotextypes.BlockIdentifier\x12\x32\n\x0e\x62lockSystemLog\x18\x02 \x01(\x0b\x32\x1a.iotextypes.BlockSystemLog\"\x15\n\x13StreamBlocksRequest\":\n\x14StreamBlocksResponse\x12\"\n\x05\x62lock\x18\x01 \x01(\x0b\x32\x13.iotexapi.BlockInfo\"9\n\x11StreamLogsRequest\x12$\n\x06\x66ilter\x18\x01 \x01(\x0b\x32\x14.iotexapi.LogsFilter\"2\n\x12StreamLogsResponse\x12\x1c\n\x03log\x18\x01 \x01(\x0b\x32\x0f.iotextypes.Log\"-\n\x19GetElectionBucketsRequest\x12\x10\n\x08\x65pochNum\x18\x01 \x01(\x04\"I\n\x1aGetElectionBucketsResponse\x12+\n\x07\x62uckets\x18\x01 \x03(\x0b\x32\x1a.iotextypes.ElectionBucket2\xf9\x0f\n\nAPIService\x12I\n\nGetAccount\x12\x1b.iotexapi.GetAccountRequest\x1a\x1c.iotexapi.GetAccountResponse\"\x00\x12I\n\nGetActions\x12\x1b.iotexapi.GetActionsRequest\x1a\x1c.iotexapi.GetActionsResponse\"\x00\x12R\n\rGetBlockMetas\x12\x1e.iotexapi.GetBlockMetasRequest\x1a\x1f.iotexapi.GetBlockMetasResponse\"\x00\x12O\n\x0cGetChainMeta\x12\x1d.iotexapi.GetChainMetaRequest\x1a\x1e.iotexapi.GetChainMetaResponse\"\x00\x12R\n\rGetServerMeta\x12\x1e.iotexapi.GetServerMetaRequest\x1a\x1f.iotexapi.GetServerMetaResponse\"\x00\x12I\n\nSendAction\x12\x1b.iotexapi.SendActionRequest\x1a\x1c.iotexapi.SendActionResponse\"\x00\x12\x61\n\x12GetReceiptByAction\x12#.iotexapi.GetReceiptByActionRequest\x1a$.iotexapi.GetReceiptByActionResponse\"\x00\x12O\n\x0cReadContract\x12\x1d.iotexapi.ReadContractRequest\x1a\x1e.iotexapi.ReadContractResponse\"\x00\x12X\n\x0fSuggestGasPrice\x12 .iotexapi.SuggestGasPriceRequest\x1a!.iotexapi.SuggestGasPriceResponse\"\x00\x12g\n\x14\x45stimateGasForAction\x12%.iotexapi.EstimateGasForActionRequest\x1a&.iotexapi.EstimateGasForActionResponse\"\x00\x12\x7f\n\x1c\x45stimateActionGasConsumption\x12-.iotexapi.EstimateActionGasConsumptionRequest\x1a..iotexapi.EstimateActionGasConsumptionResponse\"\x00\x12\x46\n\tReadState\x12\x1a.iotexapi.ReadStateRequest\x1a\x1b.iotexapi.ReadStateResponse\"\x00\x12O\n\x0cGetEpochMeta\x12\x1d.iotexapi.GetEpochMetaRequest\x1a\x1e.iotexapi.GetEpochMetaResponse\"\x00\x12O\n\x0cGetRawBlocks\x12\x1d.iotexapi.GetRawBlocksRequest\x1a\x1e.iotexapi.GetRawBlocksResponse\"\x00\x12@\n\x07GetLogs\x12\x18.iotexapi.GetLogsRequest\x1a\x19.iotexapi.GetLogsResponse\"\x00\x12|\n\x1bGetEvmTransfersByActionHash\x12,.iotexapi.GetEvmTransfersByActionHashRequest\x1a-.iotexapi.GetEvmTransfersByActionHashResponse\"\x00\x12\x7f\n\x1cGetEvmTransfersByBlockHeight\x12-.iotexapi.GetEvmTransfersByBlockHeightRequest\x1a..iotexapi.GetEvmTransfersByBlockHeightResponse\"\x00\x12s\n\x18GetSystemLogByActionHash\x12).iotexapi.GetSystemLogByActionHashRequest\x1a*.iotexapi.GetSystemLogByActionHashResponse\"\x00\x12v\n\x19GetSystemLogByBlockHeight\x12*.iotexapi.GetSystemLogByBlockHeightRequest\x1a+.iotexapi.GetSystemLogByBlockHeightResponse\"\x00\x12Q\n\x0cStreamBlocks\x12\x1d.iotexapi.StreamBlocksRequest\x1a\x1e.iotexapi.StreamBlocksResponse\"\x00\x30\x01\x12K\n\nStreamLogs\x12\x1b.iotexapi.StreamLogsRequest\x1a\x1c.iotexapi.StreamLogsResponse\"\x00\x30\x01\x12\x61\n\x12GetElectionBuckets\x12#.iotexapi.GetElectionBucketsRequest\x1a$.iotexapi.GetElectionBucketsResponse\"\x00\x42Y\n com.github.iotexproject.grpc.apiP\x01Z3github.com/iotexproject/iotex-proto/golang/iotexapib\x06proto3'
+  serialized_pb=b'\n\x13proto/api/api.proto\x12\x08iotexapi\x1a\x18proto/types/action.proto\x1a\x1cproto/types/blockchain.proto\x1a\x16proto/types/node.proto\x1a\x1aproto/types/election.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"X\n\x06\x42ucket\x12\r\n\x05voter\x18\x01 \x01(\t\x12\r\n\x05votes\x18\x02 \x01(\t\x12\x15\n\rweightedVotes\x18\x03 \x01(\t\x12\x19\n\x11remainingDuration\x18\x04 \x01(\t\"$\n\x11GetAccountRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\"x\n\x12GetAccountResponse\x12,\n\x0b\x61\x63\x63ountMeta\x18\x01 \x01(\x0b\x32\x17.iotextypes.AccountMeta\x12\x34\n\x0f\x62lockIdentifier\x18\x02 \x01(\x0b\x32\x1b.iotextypes.BlockIdentifier\"\xc3\x02\n\x11GetActionsRequest\x12\x35\n\x07\x62yIndex\x18\x01 \x01(\x0b\x32\".iotexapi.GetActionsByIndexRequestH\x00\x12\x32\n\x06\x62yHash\x18\x02 \x01(\x0b\x32 .iotexapi.GetActionByHashRequestH\x00\x12\x36\n\x06\x62yAddr\x18\x03 \x01(\x0b\x32$.iotexapi.GetActionsByAddressRequestH\x00\x12L\n\x11unconfirmedByAddr\x18\x04 \x01(\x0b\x32/.iotexapi.GetUnconfirmedActionsByAddressRequestH\x00\x12\x33\n\x05\x62yBlk\x18\x05 \x01(\x0b\x32\".iotexapi.GetActionsByBlockRequestH\x00\x42\x08\n\x06lookup\"8\n\x18GetActionsByIndexRequest\x12\r\n\x05start\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\"B\n\x16GetActionByHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\x12\x14\n\x0c\x63heckPending\x18\x02 \x01(\x08\"K\n\x1aGetActionsByAddressRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"V\n%GetUnconfirmedActionsByAddressRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"I\n\x18GetActionsByBlockRequest\x12\x0f\n\x07\x62lkHash\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"\xb4\x01\n\nActionInfo\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\x12\x0f\n\x07\x61\x63tHash\x18\x02 \x01(\t\x12\x0f\n\x07\x62lkHash\x18\x03 \x01(\t\x12\x11\n\tblkHeight\x18\x05 \x01(\x04\x12\x0e\n\x06sender\x18\x06 \x01(\t\x12\x0e\n\x06gasFee\x18\x07 \x01(\t\x12-\n\ttimestamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"D\n\x0bReceiptInfo\x12$\n\x07receipt\x18\x01 \x01(\x0b\x32\x13.iotextypes.Receipt\x12\x0f\n\x07\x62lkHash\x18\x02 \x01(\t\"W\n\x11\x42lockProducerInfo\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\r\n\x05votes\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x63tive\x18\x03 \x01(\x08\x12\x12\n\nproduction\x18\x04 \x01(\x04\"T\n\tBlockInfo\x12 \n\x05\x62lock\x18\x01 \x01(\x0b\x32\x11.iotextypes.Block\x12%\n\x08receipts\x18\x02 \x03(\x0b\x32\x13.iotextypes.Receipt\"M\n\x12GetActionsResponse\x12\r\n\x05total\x18\x02 \x01(\x04\x12(\n\nactionInfo\x18\x01 \x03(\x0b\x32\x14.iotexapi.ActionInfo\"\x91\x01\n\x14GetBlockMetasRequest\x12\x38\n\x07\x62yIndex\x18\x01 \x01(\x0b\x32%.iotexapi.GetBlockMetasByIndexRequestH\x00\x12\x35\n\x06\x62yHash\x18\x02 \x01(\x0b\x32#.iotexapi.GetBlockMetaByHashRequestH\x00\x42\x08\n\x06lookup\";\n\x1bGetBlockMetasByIndexRequest\x12\r\n\x05start\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\",\n\x19GetBlockMetaByHashRequest\x12\x0f\n\x07\x62lkHash\x18\x01 \x01(\t\"O\n\x15GetBlockMetasResponse\x12\r\n\x05total\x18\x02 \x01(\x04\x12\'\n\x08\x62lkMetas\x18\x01 \x03(\x0b\x32\x15.iotextypes.BlockMeta\"\x15\n\x13GetChainMetaRequest\"@\n\x14GetChainMetaResponse\x12(\n\tchainMeta\x18\x01 \x01(\x0b\x32\x15.iotextypes.ChainMeta\"\x16\n\x14GetServerMetaRequest\"C\n\x15GetServerMetaResponse\x12*\n\nserverMeta\x18\x01 \x01(\x0b\x32\x16.iotextypes.ServerMeta\"7\n\x11SendActionRequest\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\"9\n\x1cSendSignedActionBytesRequest\x12\x19\n\x11signedActionBytes\x18\x01 \x01(\t\"(\n\x12SendActionResponse\x12\x12\n\nactionHash\x18\x01 \x01(\t\"/\n\x19GetReceiptByActionRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"H\n\x1aGetReceiptByActionResponse\x12*\n\x0breceiptInfo\x18\x01 \x01(\x0b\x32\x15.iotexapi.ReceiptInfo\"V\n\x13ReadContractRequest\x12(\n\texecution\x18\x01 \x01(\x0b\x32\x15.iotextypes.Execution\x12\x15\n\rcallerAddress\x18\x02 \x01(\t\"J\n\x14ReadContractResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12$\n\x07receipt\x18\x02 \x01(\x0b\x32\x13.iotextypes.Receipt\"\x18\n\x16SuggestGasPriceRequest\"+\n\x17SuggestGasPriceResponse\x12\x10\n\x08gasPrice\x18\x01 \x01(\x04\"A\n\x1b\x45stimateGasForActionRequest\x12\"\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x12.iotextypes.Action\"\x9a\x05\n#EstimateActionGasConsumptionRequest\x12(\n\x08transfer\x18\x01 \x01(\x0b\x32\x14.iotextypes.TransferH\x00\x12*\n\texecution\x18\x02 \x01(\x0b\x32\x15.iotextypes.ExecutionH\x00\x12.\n\x0bstakeCreate\x18( \x01(\x0b\x32\x17.iotextypes.StakeCreateH\x00\x12\x30\n\x0cstakeUnstake\x18) \x01(\x0b\x32\x18.iotextypes.StakeReclaimH\x00\x12\x31\n\rstakeWithdraw\x18* \x01(\x0b\x32\x18.iotextypes.StakeReclaimH\x00\x12\x36\n\x0fstakeAddDeposit\x18+ \x01(\x0b\x32\x1b.iotextypes.StakeAddDepositH\x00\x12\x30\n\x0cstakeRestake\x18, \x01(\x0b\x32\x18.iotextypes.StakeRestakeH\x00\x12@\n\x14stakeChangeCandidate\x18- \x01(\x0b\x32 .iotextypes.StakeChangeCandidateH\x00\x12\x44\n\x16stakeTransferOwnership\x18. \x01(\x0b\x32\".iotextypes.StakeTransferOwnershipH\x00\x12:\n\x11\x63\x61ndidateRegister\x18/ \x01(\x0b\x32\x1d.iotextypes.CandidateRegisterH\x00\x12\x39\n\x0f\x63\x61ndidateUpdate\x18\x30 \x01(\x0b\x32\x1e.iotextypes.CandidateBasicInfoH\x00\x12\x15\n\rcallerAddress\x18\x64 \x01(\tB\x08\n\x06\x61\x63tion\"3\n$EstimateActionGasConsumptionResponse\x12\x0b\n\x03gas\x18\x01 \x01(\x04\"+\n\x1c\x45stimateGasForActionResponse\x12\x0b\n\x03gas\x18\x01 \x01(\x04\"]\n\x10ReadStateRequest\x12\x12\n\nprotocolID\x18\x01 \x01(\x0c\x12\x12\n\nmethodName\x18\x02 \x01(\x0c\x12\x11\n\targuments\x18\x03 \x03(\x0c\x12\x0e\n\x06height\x18\x04 \x01(\t\"W\n\x11ReadStateResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x34\n\x0f\x62lockIdentifier\x18\x02 \x01(\x0b\x32\x1b.iotextypes.BlockIdentifier\"*\n\x13GetEpochMetaRequest\x12\x13\n\x0b\x65pochNumber\x18\x01 \x01(\x04\"\x8e\x01\n\x14GetEpochMetaResponse\x12(\n\tepochData\x18\x01 \x01(\x0b\x32\x15.iotextypes.EpochData\x12\x13\n\x0btotalBlocks\x18\x02 \x01(\x04\x12\x37\n\x12\x62lockProducersInfo\x18\x03 \x03(\x0b\x32\x1b.iotexapi.BlockProducerInfo\"O\n\x13GetRawBlocksRequest\x12\x13\n\x0bstartHeight\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x14\n\x0cwithReceipts\x18\x03 \x01(\x08\";\n\x14GetRawBlocksResponse\x12#\n\x06\x62locks\x18\x01 \x03(\x0b\x32\x13.iotexapi.BlockInfo\"#\n\x0eGetLogsByBlock\x12\x11\n\tblockHash\x18\x01 \x01(\x0c\"2\n\x0eGetLogsByRange\x12\x11\n\tfromBlock\x18\x01 \x01(\x04\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\"\x17\n\x06Topics\x12\r\n\x05topic\x18\x01 \x03(\x0c\"?\n\nLogsFilter\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x03(\t\x12 \n\x06topics\x18\x02 \x03(\x0b\x32\x10.iotexapi.Topics\"\x9a\x01\n\x0eGetLogsRequest\x12$\n\x06\x66ilter\x18\x01 \x01(\x0b\x32\x14.iotexapi.LogsFilter\x12+\n\x07\x62yBlock\x18\x02 \x01(\x0b\x32\x18.iotexapi.GetLogsByBlockH\x00\x12+\n\x07\x62yRange\x18\x03 \x01(\x0b\x32\x18.iotexapi.GetLogsByRangeH\x00\x42\x08\n\x06lookup\"0\n\x0fGetLogsResponse\x12\x1d\n\x04logs\x18\x01 \x03(\x0b\x32\x0f.iotextypes.Log\"8\n\"GetEvmTransfersByActionHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"`\n#GetEvmTransfersByActionHashResponse\x12\x39\n\x12\x61\x63tionEvmTransfers\x18\x01 \x01(\x0b\x32\x1d.iotextypes.ActionEvmTransfer\":\n#GetEvmTransfersByBlockHeightRequest\x12\x13\n\x0b\x62lockHeight\x18\x01 \x01(\x04\"_\n$GetEvmTransfersByBlockHeightResponse\x12\x37\n\x11\x62lockEvmTransfers\x18\x01 \x01(\x0b\x32\x1c.iotextypes.BlockEvmTransfer\"?\n)GetImplicitTransferLogByActionHashRequest\x12\x12\n\nactionHash\x18\x01 \x01(\t\"j\n*GetImplicitTransferLogByActionHashResponse\x12<\n\x13implicitTransferLog\x18\x01 \x01(\x0b\x32\x1f.iotextypes.ImplicitTransferLog\"A\n*GetImplicitTransferLogByBlockHeightRequest\x12\x13\n\x0b\x62lockHeight\x18\x01 \x01(\x04\"\xab\x01\n+GetImplicitTransferLogByBlockHeightResponse\x12\x46\n\x18\x62lockImplicitTransferLog\x18\x01 \x01(\x0b\x32$.iotextypes.BlockImplicitTransferLog\x12\x34\n\x0f\x62lockIdentifier\x18\x02 \x01(\x0b\x32\x1b.iotextypes.BlockIdentifier\"\x15\n\x13StreamBlocksRequest\":\n\x14StreamBlocksResponse\x12\"\n\x05\x62lock\x18\x01 \x01(\x0b\x32\x13.iotexapi.BlockInfo\"9\n\x11StreamLogsRequest\x12$\n\x06\x66ilter\x18\x01 \x01(\x0b\x32\x14.iotexapi.LogsFilter\"2\n\x12StreamLogsResponse\x12\x1c\n\x03log\x18\x01 \x01(\x0b\x32\x0f.iotextypes.Log\"-\n\x19GetElectionBucketsRequest\x12\x10\n\x08\x65pochNum\x18\x01 \x01(\x04\"I\n\x1aGetElectionBucketsResponse\x12+\n\x07\x62uckets\x18\x01 \x03(\x0b\x32\x1a.iotextypes.ElectionBucket2\xb7\x10\n\nAPIService\x12I\n\nGetAccount\x12\x1b.iotexapi.GetAccountRequest\x1a\x1c.iotexapi.GetAccountResponse\"\x00\x12I\n\nGetActions\x12\x1b.iotexapi.GetActionsRequest\x1a\x1c.iotexapi.GetActionsResponse\"\x00\x12R\n\rGetBlockMetas\x12\x1e.iotexapi.GetBlockMetasRequest\x1a\x1f.iotexapi.GetBlockMetasResponse\"\x00\x12O\n\x0cGetChainMeta\x12\x1d.iotexapi.GetChainMetaRequest\x1a\x1e.iotexapi.GetChainMetaResponse\"\x00\x12R\n\rGetServerMeta\x12\x1e.iotexapi.GetServerMetaRequest\x1a\x1f.iotexapi.GetServerMetaResponse\"\x00\x12I\n\nSendAction\x12\x1b.iotexapi.SendActionRequest\x1a\x1c.iotexapi.SendActionResponse\"\x00\x12\x61\n\x12GetReceiptByAction\x12#.iotexapi.GetReceiptByActionRequest\x1a$.iotexapi.GetReceiptByActionResponse\"\x00\x12O\n\x0cReadContract\x12\x1d.iotexapi.ReadContractRequest\x1a\x1e.iotexapi.ReadContractResponse\"\x00\x12X\n\x0fSuggestGasPrice\x12 .iotexapi.SuggestGasPriceRequest\x1a!.iotexapi.SuggestGasPriceResponse\"\x00\x12g\n\x14\x45stimateGasForAction\x12%.iotexapi.EstimateGasForActionRequest\x1a&.iotexapi.EstimateGasForActionResponse\"\x00\x12\x7f\n\x1c\x45stimateActionGasConsumption\x12-.iotexapi.EstimateActionGasConsumptionRequest\x1a..iotexapi.EstimateActionGasConsumptionResponse\"\x00\x12\x46\n\tReadState\x12\x1a.iotexapi.ReadStateRequest\x1a\x1b.iotexapi.ReadStateResponse\"\x00\x12O\n\x0cGetEpochMeta\x12\x1d.iotexapi.GetEpochMetaRequest\x1a\x1e.iotexapi.GetEpochMetaResponse\"\x00\x12O\n\x0cGetRawBlocks\x12\x1d.iotexapi.GetRawBlocksRequest\x1a\x1e.iotexapi.GetRawBlocksResponse\"\x00\x12@\n\x07GetLogs\x12\x18.iotexapi.GetLogsRequest\x1a\x19.iotexapi.GetLogsResponse\"\x00\x12|\n\x1bGetEvmTransfersByActionHash\x12,.iotexapi.GetEvmTransfersByActionHashRequest\x1a-.iotexapi.GetEvmTransfersByActionHashResponse\"\x00\x12\x7f\n\x1cGetEvmTransfersByBlockHeight\x12-.iotexapi.GetEvmTransfersByBlockHeightRequest\x1a..iotexapi.GetEvmTransfersByBlockHeightResponse\"\x00\x12\x91\x01\n\"GetImplicitTransferLogByActionHash\x12\x33.iotexapi.GetImplicitTransferLogByActionHashRequest\x1a\x34.iotexapi.GetImplicitTransferLogByActionHashResponse\"\x00\x12\x94\x01\n#GetImplicitTransferLogByBlockHeight\x12\x34.iotexapi.GetImplicitTransferLogByBlockHeightRequest\x1a\x35.iotexapi.GetImplicitTransferLogByBlockHeightResponse\"\x00\x12Q\n\x0cStreamBlocks\x12\x1d.iotexapi.StreamBlocksRequest\x1a\x1e.iotexapi.StreamBlocksResponse\"\x00\x30\x01\x12K\n\nStreamLogs\x12\x1b.iotexapi.StreamLogsRequest\x1a\x1c.iotexapi.StreamLogsResponse\"\x00\x30\x01\x12\x61\n\x12GetElectionBuckets\x12#.iotexapi.GetElectionBucketsRequest\x1a$.iotexapi.GetElectionBucketsResponse\"\x00\x42Y\n com.github.iotexproject.grpc.apiP\x01Z3github.com/iotexproject/iotex-proto/golang/iotexapib\x06proto3'
   ,
   dependencies=[proto_dot_types_dot_action__pb2.DESCRIPTOR,proto_dot_types_dot_blockchain__pb2.DESCRIPTOR,proto_dot_types_dot_node__pb2.DESCRIPTOR,proto_dot_types_dot_election__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -1521,6 +1521,13 @@ _READSTATERESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='blockIdentifier', full_name='iotexapi.ReadStateResponse.blockIdentifier', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1534,7 +1541,7 @@ _READSTATERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=3586,
-  serialized_end=3619,
+  serialized_end=3673,
 )
 
 
@@ -1565,8 +1572,8 @@ _GETEPOCHMETAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3621,
-  serialized_end=3663,
+  serialized_start=3675,
+  serialized_end=3717,
 )
 
 
@@ -1611,8 +1618,8 @@ _GETEPOCHMETARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3666,
-  serialized_end=3808,
+  serialized_start=3720,
+  serialized_end=3862,
 )
 
 
@@ -1657,8 +1664,8 @@ _GETRAWBLOCKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3810,
-  serialized_end=3889,
+  serialized_start=3864,
+  serialized_end=3943,
 )
 
 
@@ -1689,8 +1696,8 @@ _GETRAWBLOCKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3891,
-  serialized_end=3950,
+  serialized_start=3945,
+  serialized_end=4004,
 )
 
 
@@ -1721,8 +1728,8 @@ _GETLOGSBYBLOCK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3952,
-  serialized_end=3987,
+  serialized_start=4006,
+  serialized_end=4041,
 )
 
 
@@ -1760,8 +1767,8 @@ _GETLOGSBYRANGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3989,
-  serialized_end=4039,
+  serialized_start=4043,
+  serialized_end=4093,
 )
 
 
@@ -1792,8 +1799,8 @@ _TOPICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4041,
-  serialized_end=4064,
+  serialized_start=4095,
+  serialized_end=4118,
 )
 
 
@@ -1831,8 +1838,8 @@ _LOGSFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4066,
-  serialized_end=4129,
+  serialized_start=4120,
+  serialized_end=4183,
 )
 
 
@@ -1882,8 +1889,8 @@ _GETLOGSREQUEST = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=4132,
-  serialized_end=4286,
+  serialized_start=4186,
+  serialized_end=4340,
 )
 
 
@@ -1914,8 +1921,8 @@ _GETLOGSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4288,
-  serialized_end=4336,
+  serialized_start=4342,
+  serialized_end=4390,
 )
 
 
@@ -1946,8 +1953,8 @@ _GETEVMTRANSFERSBYACTIONHASHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4338,
-  serialized_end=4394,
+  serialized_start=4392,
+  serialized_end=4448,
 )
 
 
@@ -1978,8 +1985,8 @@ _GETEVMTRANSFERSBYACTIONHASHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4396,
-  serialized_end=4492,
+  serialized_start=4450,
+  serialized_end=4546,
 )
 
 
@@ -2010,8 +2017,8 @@ _GETEVMTRANSFERSBYBLOCKHEIGHTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4494,
-  serialized_end=4552,
+  serialized_start=4548,
+  serialized_end=4606,
 )
 
 
@@ -2042,21 +2049,21 @@ _GETEVMTRANSFERSBYBLOCKHEIGHTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4554,
-  serialized_end=4649,
+  serialized_start=4608,
+  serialized_end=4703,
 )
 
 
-_GETSYSTEMLOGBYACTIONHASHREQUEST = _descriptor.Descriptor(
-  name='GetSystemLogByActionHashRequest',
-  full_name='iotexapi.GetSystemLogByActionHashRequest',
+_GETIMPLICITTRANSFERLOGBYACTIONHASHREQUEST = _descriptor.Descriptor(
+  name='GetImplicitTransferLogByActionHashRequest',
+  full_name='iotexapi.GetImplicitTransferLogByActionHashRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='actionHash', full_name='iotexapi.GetSystemLogByActionHashRequest.actionHash', index=0,
+      name='actionHash', full_name='iotexapi.GetImplicitTransferLogByActionHashRequest.actionHash', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2074,21 +2081,21 @@ _GETSYSTEMLOGBYACTIONHASHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4651,
-  serialized_end=4704,
+  serialized_start=4705,
+  serialized_end=4768,
 )
 
 
-_GETSYSTEMLOGBYACTIONHASHRESPONSE = _descriptor.Descriptor(
-  name='GetSystemLogByActionHashResponse',
-  full_name='iotexapi.GetSystemLogByActionHashResponse',
+_GETIMPLICITTRANSFERLOGBYACTIONHASHRESPONSE = _descriptor.Descriptor(
+  name='GetImplicitTransferLogByActionHashResponse',
+  full_name='iotexapi.GetImplicitTransferLogByActionHashResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='actionSystemLog', full_name='iotexapi.GetSystemLogByActionHashResponse.actionSystemLog', index=0,
+      name='implicitTransferLog', full_name='iotexapi.GetImplicitTransferLogByActionHashResponse.implicitTransferLog', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -2106,21 +2113,21 @@ _GETSYSTEMLOGBYACTIONHASHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4706,
-  serialized_end=4794,
+  serialized_start=4770,
+  serialized_end=4876,
 )
 
 
-_GETSYSTEMLOGBYBLOCKHEIGHTREQUEST = _descriptor.Descriptor(
-  name='GetSystemLogByBlockHeightRequest',
-  full_name='iotexapi.GetSystemLogByBlockHeightRequest',
+_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTREQUEST = _descriptor.Descriptor(
+  name='GetImplicitTransferLogByBlockHeightRequest',
+  full_name='iotexapi.GetImplicitTransferLogByBlockHeightRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='blockHeight', full_name='iotexapi.GetSystemLogByBlockHeightRequest.blockHeight', index=0,
+      name='blockHeight', full_name='iotexapi.GetImplicitTransferLogByBlockHeightRequest.blockHeight', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2138,28 +2145,28 @@ _GETSYSTEMLOGBYBLOCKHEIGHTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4796,
-  serialized_end=4851,
+  serialized_start=4878,
+  serialized_end=4943,
 )
 
 
-_GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE = _descriptor.Descriptor(
-  name='GetSystemLogByBlockHeightResponse',
-  full_name='iotexapi.GetSystemLogByBlockHeightResponse',
+_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE = _descriptor.Descriptor(
+  name='GetImplicitTransferLogByBlockHeightResponse',
+  full_name='iotexapi.GetImplicitTransferLogByBlockHeightResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='blockIdentifier', full_name='iotexapi.GetSystemLogByBlockHeightResponse.blockIdentifier', index=0,
+      name='blockImplicitTransferLog', full_name='iotexapi.GetImplicitTransferLogByBlockHeightResponse.blockImplicitTransferLog', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='blockSystemLog', full_name='iotexapi.GetSystemLogByBlockHeightResponse.blockSystemLog', index=1,
+      name='blockIdentifier', full_name='iotexapi.GetImplicitTransferLogByBlockHeightResponse.blockIdentifier', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -2177,8 +2184,8 @@ _GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4854,
-  serialized_end=4995,
+  serialized_start=4946,
+  serialized_end=5117,
 )
 
 
@@ -2202,8 +2209,8 @@ _STREAMBLOCKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4997,
-  serialized_end=5018,
+  serialized_start=5119,
+  serialized_end=5140,
 )
 
 
@@ -2234,8 +2241,8 @@ _STREAMBLOCKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5020,
-  serialized_end=5078,
+  serialized_start=5142,
+  serialized_end=5200,
 )
 
 
@@ -2266,8 +2273,8 @@ _STREAMLOGSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5080,
-  serialized_end=5137,
+  serialized_start=5202,
+  serialized_end=5259,
 )
 
 
@@ -2298,8 +2305,8 @@ _STREAMLOGSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5139,
-  serialized_end=5189,
+  serialized_start=5261,
+  serialized_end=5311,
 )
 
 
@@ -2330,8 +2337,8 @@ _GETELECTIONBUCKETSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5191,
-  serialized_end=5236,
+  serialized_start=5313,
+  serialized_end=5358,
 )
 
 
@@ -2362,8 +2369,8 @@ _GETELECTIONBUCKETSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5238,
-  serialized_end=5311,
+  serialized_start=5360,
+  serialized_end=5433,
 )
 
 _GETACCOUNTRESPONSE.fields_by_name['accountMeta'].message_type = proto_dot_types_dot_blockchain__pb2._ACCOUNTMETA
@@ -2454,6 +2461,7 @@ _ESTIMATEACTIONGASCONSUMPTIONREQUEST.fields_by_name['candidateRegister'].contain
 _ESTIMATEACTIONGASCONSUMPTIONREQUEST.oneofs_by_name['action'].fields.append(
   _ESTIMATEACTIONGASCONSUMPTIONREQUEST.fields_by_name['candidateUpdate'])
 _ESTIMATEACTIONGASCONSUMPTIONREQUEST.fields_by_name['candidateUpdate'].containing_oneof = _ESTIMATEACTIONGASCONSUMPTIONREQUEST.oneofs_by_name['action']
+_READSTATERESPONSE.fields_by_name['blockIdentifier'].message_type = proto_dot_types_dot_blockchain__pb2._BLOCKIDENTIFIER
 _GETEPOCHMETARESPONSE.fields_by_name['epochData'].message_type = proto_dot_types_dot_blockchain__pb2._EPOCHDATA
 _GETEPOCHMETARESPONSE.fields_by_name['blockProducersInfo'].message_type = _BLOCKPRODUCERINFO
 _GETRAWBLOCKSRESPONSE.fields_by_name['blocks'].message_type = _BLOCKINFO
@@ -2470,9 +2478,9 @@ _GETLOGSREQUEST.fields_by_name['byRange'].containing_oneof = _GETLOGSREQUEST.one
 _GETLOGSRESPONSE.fields_by_name['logs'].message_type = proto_dot_types_dot_action__pb2._LOG
 _GETEVMTRANSFERSBYACTIONHASHRESPONSE.fields_by_name['actionEvmTransfers'].message_type = proto_dot_types_dot_action__pb2._ACTIONEVMTRANSFER
 _GETEVMTRANSFERSBYBLOCKHEIGHTRESPONSE.fields_by_name['blockEvmTransfers'].message_type = proto_dot_types_dot_action__pb2._BLOCKEVMTRANSFER
-_GETSYSTEMLOGBYACTIONHASHRESPONSE.fields_by_name['actionSystemLog'].message_type = proto_dot_types_dot_action__pb2._ACTIONSYSTEMLOG
-_GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE.fields_by_name['blockIdentifier'].message_type = proto_dot_types_dot_blockchain__pb2._BLOCKIDENTIFIER
-_GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE.fields_by_name['blockSystemLog'].message_type = proto_dot_types_dot_action__pb2._BLOCKSYSTEMLOG
+_GETIMPLICITTRANSFERLOGBYACTIONHASHRESPONSE.fields_by_name['implicitTransferLog'].message_type = proto_dot_types_dot_action__pb2._IMPLICITTRANSFERLOG
+_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE.fields_by_name['blockImplicitTransferLog'].message_type = proto_dot_types_dot_action__pb2._BLOCKIMPLICITTRANSFERLOG
+_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE.fields_by_name['blockIdentifier'].message_type = proto_dot_types_dot_blockchain__pb2._BLOCKIDENTIFIER
 _STREAMBLOCKSRESPONSE.fields_by_name['block'].message_type = _BLOCKINFO
 _STREAMLOGSREQUEST.fields_by_name['filter'].message_type = _LOGSFILTER
 _STREAMLOGSRESPONSE.fields_by_name['log'].message_type = proto_dot_types_dot_action__pb2._LOG
@@ -2528,10 +2536,10 @@ DESCRIPTOR.message_types_by_name['GetEvmTransfersByActionHashRequest'] = _GETEVM
 DESCRIPTOR.message_types_by_name['GetEvmTransfersByActionHashResponse'] = _GETEVMTRANSFERSBYACTIONHASHRESPONSE
 DESCRIPTOR.message_types_by_name['GetEvmTransfersByBlockHeightRequest'] = _GETEVMTRANSFERSBYBLOCKHEIGHTREQUEST
 DESCRIPTOR.message_types_by_name['GetEvmTransfersByBlockHeightResponse'] = _GETEVMTRANSFERSBYBLOCKHEIGHTRESPONSE
-DESCRIPTOR.message_types_by_name['GetSystemLogByActionHashRequest'] = _GETSYSTEMLOGBYACTIONHASHREQUEST
-DESCRIPTOR.message_types_by_name['GetSystemLogByActionHashResponse'] = _GETSYSTEMLOGBYACTIONHASHRESPONSE
-DESCRIPTOR.message_types_by_name['GetSystemLogByBlockHeightRequest'] = _GETSYSTEMLOGBYBLOCKHEIGHTREQUEST
-DESCRIPTOR.message_types_by_name['GetSystemLogByBlockHeightResponse'] = _GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE
+DESCRIPTOR.message_types_by_name['GetImplicitTransferLogByActionHashRequest'] = _GETIMPLICITTRANSFERLOGBYACTIONHASHREQUEST
+DESCRIPTOR.message_types_by_name['GetImplicitTransferLogByActionHashResponse'] = _GETIMPLICITTRANSFERLOGBYACTIONHASHRESPONSE
+DESCRIPTOR.message_types_by_name['GetImplicitTransferLogByBlockHeightRequest'] = _GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTREQUEST
+DESCRIPTOR.message_types_by_name['GetImplicitTransferLogByBlockHeightResponse'] = _GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE
 DESCRIPTOR.message_types_by_name['StreamBlocksRequest'] = _STREAMBLOCKSREQUEST
 DESCRIPTOR.message_types_by_name['StreamBlocksResponse'] = _STREAMBLOCKSRESPONSE
 DESCRIPTOR.message_types_by_name['StreamLogsRequest'] = _STREAMLOGSREQUEST
@@ -2897,33 +2905,33 @@ GetEvmTransfersByBlockHeightResponse = _reflection.GeneratedProtocolMessageType(
   })
 _sym_db.RegisterMessage(GetEvmTransfersByBlockHeightResponse)
 
-GetSystemLogByActionHashRequest = _reflection.GeneratedProtocolMessageType('GetSystemLogByActionHashRequest', (_message.Message,), {
-  'DESCRIPTOR' : _GETSYSTEMLOGBYACTIONHASHREQUEST,
+GetImplicitTransferLogByActionHashRequest = _reflection.GeneratedProtocolMessageType('GetImplicitTransferLogByActionHashRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETIMPLICITTRANSFERLOGBYACTIONHASHREQUEST,
   '__module__' : 'proto.api.api_pb2'
-  # @@protoc_insertion_point(class_scope:iotexapi.GetSystemLogByActionHashRequest)
+  # @@protoc_insertion_point(class_scope:iotexapi.GetImplicitTransferLogByActionHashRequest)
   })
-_sym_db.RegisterMessage(GetSystemLogByActionHashRequest)
+_sym_db.RegisterMessage(GetImplicitTransferLogByActionHashRequest)
 
-GetSystemLogByActionHashResponse = _reflection.GeneratedProtocolMessageType('GetSystemLogByActionHashResponse', (_message.Message,), {
-  'DESCRIPTOR' : _GETSYSTEMLOGBYACTIONHASHRESPONSE,
+GetImplicitTransferLogByActionHashResponse = _reflection.GeneratedProtocolMessageType('GetImplicitTransferLogByActionHashResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETIMPLICITTRANSFERLOGBYACTIONHASHRESPONSE,
   '__module__' : 'proto.api.api_pb2'
-  # @@protoc_insertion_point(class_scope:iotexapi.GetSystemLogByActionHashResponse)
+  # @@protoc_insertion_point(class_scope:iotexapi.GetImplicitTransferLogByActionHashResponse)
   })
-_sym_db.RegisterMessage(GetSystemLogByActionHashResponse)
+_sym_db.RegisterMessage(GetImplicitTransferLogByActionHashResponse)
 
-GetSystemLogByBlockHeightRequest = _reflection.GeneratedProtocolMessageType('GetSystemLogByBlockHeightRequest', (_message.Message,), {
-  'DESCRIPTOR' : _GETSYSTEMLOGBYBLOCKHEIGHTREQUEST,
+GetImplicitTransferLogByBlockHeightRequest = _reflection.GeneratedProtocolMessageType('GetImplicitTransferLogByBlockHeightRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTREQUEST,
   '__module__' : 'proto.api.api_pb2'
-  # @@protoc_insertion_point(class_scope:iotexapi.GetSystemLogByBlockHeightRequest)
+  # @@protoc_insertion_point(class_scope:iotexapi.GetImplicitTransferLogByBlockHeightRequest)
   })
-_sym_db.RegisterMessage(GetSystemLogByBlockHeightRequest)
+_sym_db.RegisterMessage(GetImplicitTransferLogByBlockHeightRequest)
 
-GetSystemLogByBlockHeightResponse = _reflection.GeneratedProtocolMessageType('GetSystemLogByBlockHeightResponse', (_message.Message,), {
-  'DESCRIPTOR' : _GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE,
+GetImplicitTransferLogByBlockHeightResponse = _reflection.GeneratedProtocolMessageType('GetImplicitTransferLogByBlockHeightResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE,
   '__module__' : 'proto.api.api_pb2'
-  # @@protoc_insertion_point(class_scope:iotexapi.GetSystemLogByBlockHeightResponse)
+  # @@protoc_insertion_point(class_scope:iotexapi.GetImplicitTransferLogByBlockHeightResponse)
   })
-_sym_db.RegisterMessage(GetSystemLogByBlockHeightResponse)
+_sym_db.RegisterMessage(GetImplicitTransferLogByBlockHeightResponse)
 
 StreamBlocksRequest = _reflection.GeneratedProtocolMessageType('StreamBlocksRequest', (_message.Message,), {
   'DESCRIPTOR' : _STREAMBLOCKSREQUEST,
@@ -2977,8 +2985,8 @@ _APISERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=5314,
-  serialized_end=7355,
+  serialized_start=5436,
+  serialized_end=7539,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAccount',
@@ -3151,22 +3159,22 @@ _APISERVICE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='GetSystemLogByActionHash',
-    full_name='iotexapi.APIService.GetSystemLogByActionHash',
+    name='GetImplicitTransferLogByActionHash',
+    full_name='iotexapi.APIService.GetImplicitTransferLogByActionHash',
     index=17,
     containing_service=None,
-    input_type=_GETSYSTEMLOGBYACTIONHASHREQUEST,
-    output_type=_GETSYSTEMLOGBYACTIONHASHRESPONSE,
+    input_type=_GETIMPLICITTRANSFERLOGBYACTIONHASHREQUEST,
+    output_type=_GETIMPLICITTRANSFERLOGBYACTIONHASHRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='GetSystemLogByBlockHeight',
-    full_name='iotexapi.APIService.GetSystemLogByBlockHeight',
+    name='GetImplicitTransferLogByBlockHeight',
+    full_name='iotexapi.APIService.GetImplicitTransferLogByBlockHeight',
     index=18,
     containing_service=None,
-    input_type=_GETSYSTEMLOGBYBLOCKHEIGHTREQUEST,
-    output_type=_GETSYSTEMLOGBYBLOCKHEIGHTRESPONSE,
+    input_type=_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTREQUEST,
+    output_type=_GETIMPLICITTRANSFERLOGBYBLOCKHEIGHTRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
