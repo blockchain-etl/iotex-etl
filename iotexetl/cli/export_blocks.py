@@ -22,7 +22,7 @@
 
 import click
 
-from iotexetl.jobs.export_job import ExportJob
+from iotexetl.jobs.export_blocks_job import ExportBlocksJob
 
 from iotexetl.exporters.iotex_item_exporter import IotexItemExporter
 from iotexetl.rpc.iotex_rpc import IotexRpc
@@ -41,10 +41,10 @@ logging_basic_config()
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
 @click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json', 'csv']),
               help='The output format.')
-def export(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
+def export_blocks(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
     """Exports blocks, balance updates, and operations."""
 
-    job = ExportJob(
+    job = ExportBlocksJob(
         start_block=start_block,
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(lambda: IotexRpc(provider_uri)),

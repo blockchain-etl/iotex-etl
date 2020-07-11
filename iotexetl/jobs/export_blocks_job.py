@@ -28,8 +28,8 @@ from blockchainetl_common.jobs.base_job import BaseJob
 from blockchainetl_common.utils import validate_range
 
 
-# Exports blocks, balance updates and operations
-class ExportJob(BaseJob):
+# Exports blocks, actions, and receipts
+class ExportBlocksJob(BaseJob):
     def __init__(
             self,
             start_block,

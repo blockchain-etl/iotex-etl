@@ -22,7 +22,7 @@
 
 import click
 
-from iotexetl.cli.export import export
+from iotexetl.cli.export_blocks import export_blocks
 
 
 @click.group()
@@ -33,4 +33,4 @@ def cli(ctx):
 
 
 # export
-cli.add_command(export, "export")
+cli.add_command(export_blocks, "export_blocks")
