@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import decimal
-import json
 import grpc
 
 from iotexetl.rpc.iotexapi import api_pb2
@@ -37,13 +35,13 @@ class IotexRpc:
         self.stub = api_pb2_grpc.APIServiceStub(channel)
 
     def get_blocks(self, block_number_batch):
-        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True))
+        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True), timeout=self.timeout)
 
     def get_evm_transfers(self, block_number):
-        return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number))
+        return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
     def get_implicit_transfer_logs(self, block_number):
-        return self.stub.GetImplicitTransferLogByBlockHeight(api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number))
+        return self.stub.GetImplicitTransferLogByBlockHeight(api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
     def get_logs(self, block_number_batch):
-        return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(), byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0], count=len(block_number_batch))))
+        return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(), byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0], count=len(block_number_batch))), timeout=self.timeout)

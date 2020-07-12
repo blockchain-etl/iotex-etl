@@ -22,6 +22,7 @@
 
 from iotexetl.mappers.block_mapper import map_block
 from iotexetl.mappers.action_mapper import map_action
+from iotexetl.mappers.log_mapper import map_log
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
@@ -62,6 +63,8 @@ class ExportBlocksJob(BaseJob):
         for item in results:
             self.item_exporter.export_item(map_block(item))
             self.item_exporter.export_items(map_action(item))
+            for receipt in item.receipts:
+                self.item_exporter.export_items([map_log(log) for log in receipt.logs])
 
     def _end(self):
         self.batch_work_executor.shutdown()

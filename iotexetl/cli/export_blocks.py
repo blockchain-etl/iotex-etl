@@ -42,7 +42,7 @@ logging_basic_config()
 @click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json', 'csv']),
               help='The output format.')
 def export_blocks(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
-    """Exports blocks, actions, and receipts."""
+    """Exports blocks, actions, receipts, and logs."""
 
     job = ExportBlocksJob(
         start_block=start_block,
