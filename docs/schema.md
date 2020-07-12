@@ -5,6 +5,7 @@ Column             | Type               |
 version            | INTEGER            |
 height             | INTEGER            |
 timestamp          | TIMESTAMP          |
+block_hash         | STRING             |
 prev_block_hash    | STRING             |
 tx_root            | STRING             |
 receipt_root       | STRING             |
