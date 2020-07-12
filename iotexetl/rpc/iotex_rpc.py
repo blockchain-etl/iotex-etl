@@ -42,5 +42,8 @@ class IotexRpc:
     def get_evm_transfers(self, block_number):
         return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number))
 
+    def get_implicit_transfer_logs(self, block_number):
+        return self.stub.GetImplicitTransferLogByBlockHeight(api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number))
+
     def get_logs(self, block_number_batch):
         return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(), byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0], count=len(block_number_batch))))
