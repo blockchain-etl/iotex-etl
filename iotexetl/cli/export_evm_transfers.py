@@ -22,7 +22,7 @@
 
 import click
 
-from iotexetl.jobs.export_job import ExportJob
+from iotexetl.jobs.export_evm_transfers_job import ExportEvmTransfersJob
 
 from iotexetl.exporters.iotex_item_exporter import IotexItemExporter
 from iotexetl.rpc.iotex_rpc import IotexRpc
@@ -35,20 +35,21 @@ logging_basic_config()
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
 @click.option('-s', '--start-block', default=0, show_default=True, type=int, help='Start block')
 @click.option('-e', '--end-block', required=True, type=int, help='End block')
-@click.option('-p', '--provider-uri', default='api.mainnet.iotex.one:80', show_default=True, type=str,
-              help='The URI of the remote Tezos node')
+@click.option('-p', '--provider-uri', default='api.mainnet.iotex.one:443', show_default=True, type=str,
+              help='The URI of the remote Iotex node')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
-@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json', 'csv']),
+@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
-def export(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
-    """Exports blocks, balance updates, and operations."""
+def export_evm_transfers(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
+    """Exports evm transfers."""
 
-    job = ExportJob(
+    job = ExportEvmTransfersJob(
         start_block=start_block,
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(lambda: IotexRpc(provider_uri)),
         max_workers=max_workers,
         item_exporter=IotexItemExporter(output_dir, output_format=output_format),
+        batch_size=10
     )
     job.run()

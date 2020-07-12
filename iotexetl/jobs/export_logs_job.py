@@ -20,16 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from iotexetl.mappers.block_mapper import map_block
-from iotexetl.mappers.action_mapper import map_action
+from iotexetl.mappers.log_mapper import map_log
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
 from blockchainetl_common.utils import validate_range
 
 
-# Exports blocks, balance updates and operations
-class ExportJob(BaseJob):
+# Exports logs
+class ExportLogsJob(BaseJob):
     def __init__(
             self,
             start_block,
@@ -58,10 +57,9 @@ class ExportJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        responses = self.iotex_service.get_blocks(block_number_batch)
-        for response in responses:
-            self.item_exporter.export_item(map_block(response))
-            self.item_exporter.export_items(map_action(response))
+        logs = self.iotex_service.get_logs(block_number_batch)
+        for log in logs:
+            self.item_exporter.export_item(map_log(log))
 
     def _end(self):
         self.batch_work_executor.shutdown()

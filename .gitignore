@@ -51,3 +51,5 @@ ENV/
 
 # IDE
 .idea
+
+out/

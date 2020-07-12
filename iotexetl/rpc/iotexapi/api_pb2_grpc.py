@@ -99,15 +99,15 @@ class APIServiceStub(object):
                 request_serializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightRequest.SerializeToString,
                 response_deserializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightResponse.FromString,
                 )
-        self.GetSystemLogByActionHash = channel.unary_unary(
-                '/iotexapi.APIService/GetSystemLogByActionHash',
-                request_serializer=proto_dot_api_dot_api__pb2.GetSystemLogByActionHashRequest.SerializeToString,
-                response_deserializer=proto_dot_api_dot_api__pb2.GetSystemLogByActionHashResponse.FromString,
+        self.GetImplicitTransferLogByActionHash = channel.unary_unary(
+                '/iotexapi.APIService/GetImplicitTransferLogByActionHash',
+                request_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.FromString,
                 )
-        self.GetSystemLogByBlockHeight = channel.unary_unary(
-                '/iotexapi.APIService/GetSystemLogByBlockHeight',
-                request_serializer=proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightRequest.SerializeToString,
-                response_deserializer=proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightResponse.FromString,
+        self.GetImplicitTransferLogByBlockHeight = channel.unary_unary(
+                '/iotexapi.APIService/GetImplicitTransferLogByBlockHeight',
+                request_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.FromString,
                 )
         self.StreamBlocks = channel.unary_stream(
                 '/iotexapi.APIService/StreamBlocks',
@@ -258,13 +258,13 @@ class APIServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetSystemLogByActionHash(self, request, context):
+    def GetImplicitTransferLogByActionHash(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetSystemLogByBlockHeight(self, request, context):
+    def GetImplicitTransferLogByBlockHeight(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -383,15 +383,15 @@ def add_APIServiceServicer_to_server(servicer, server):
                     request_deserializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightRequest.FromString,
                     response_serializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightResponse.SerializeToString,
             ),
-            'GetSystemLogByActionHash': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetSystemLogByActionHash,
-                    request_deserializer=proto_dot_api_dot_api__pb2.GetSystemLogByActionHashRequest.FromString,
-                    response_serializer=proto_dot_api_dot_api__pb2.GetSystemLogByActionHashResponse.SerializeToString,
+            'GetImplicitTransferLogByActionHash': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetImplicitTransferLogByActionHash,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.SerializeToString,
             ),
-            'GetSystemLogByBlockHeight': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetSystemLogByBlockHeight,
-                    request_deserializer=proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightRequest.FromString,
-                    response_serializer=proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightResponse.SerializeToString,
+            'GetImplicitTransferLogByBlockHeight': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetImplicitTransferLogByBlockHeight,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.SerializeToString,
             ),
             'StreamBlocks': grpc.unary_stream_rpc_method_handler(
                     servicer.StreamBlocks,
@@ -691,7 +691,7 @@ class APIService(object):
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetSystemLogByActionHash(request,
+    def GetImplicitTransferLogByActionHash(request,
             target,
             options=(),
             channel_credentials=None,
@@ -700,14 +700,14 @@ class APIService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetSystemLogByActionHash',
-            proto_dot_api_dot_api__pb2.GetSystemLogByActionHashRequest.SerializeToString,
-            proto_dot_api_dot_api__pb2.GetSystemLogByActionHashResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetImplicitTransferLogByActionHash',
+            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetSystemLogByBlockHeight(request,
+    def GetImplicitTransferLogByBlockHeight(request,
             target,
             options=(),
             channel_credentials=None,
@@ -716,9 +716,9 @@ class APIService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetSystemLogByBlockHeight',
-            proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightRequest.SerializeToString,
-            proto_dot_api_dot_api__pb2.GetSystemLogByBlockHeightResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetImplicitTransferLogByBlockHeight',
+            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
