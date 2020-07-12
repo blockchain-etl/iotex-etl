@@ -37,6 +37,7 @@ setup(
         'pycryptodome==3.9.8',
         'eth-hash==0.2.0',
         'bech32==1.2.0',
+        'protobuf==3.12.2',
         'grpcio==1.30.0'
     ],
     extras_require={
