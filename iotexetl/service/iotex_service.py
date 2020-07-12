@@ -53,3 +53,9 @@ class IotexService(object):
                 if e.code() != grpc.StatusCode.NOT_FOUND:
                     print(e.details())
                     raise
+
+    def get_logs(self, block_number_batch):
+        if not block_number_batch:
+            return []
+        response = self.iotex_rpc.get_logs(block_number_batch)
+        return response.logs
