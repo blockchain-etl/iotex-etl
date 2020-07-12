@@ -6,7 +6,7 @@ def map_implicit_transfer_log(raw):
         for transaction in action.transactions:
             yield {
                 'type': 'implicit_transfer_log',
-                'action_hash': string_utils.base64_string(action.actionHash),
+                'action_hash': action.actionHash.hex(),
                 'topic': string_utils.base64_string(transaction.topic),
                 'amount': transaction.amount,
                 'sender': transaction.sender,

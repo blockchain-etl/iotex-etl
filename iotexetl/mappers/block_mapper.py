@@ -21,19 +21,15 @@
 # SOFTWARE.
 
 from iotexetl.utils.string_utils import base64_string
-import json
 
 def map_block(raw):
     header = raw.block.header
-    # body = response.block.body
-    # footer = response.block.footer
-
     block = {
         'type': 'block',
         'version': header.core.version,
         'height': header.core.height,
         'timestamp': header.core.timestamp.ToJsonString(),
-        'prev_block_hash': base64_string(header.core.prevBlockHash),
+        'prev_block_hash': header.core.prevBlockHash.hex(),
         'tx_root': base64_string(header.core.txRoot),
         'receipt_root': base64_string(header.core.receiptRoot),
         'delta_state_digest': base64_string(header.core.deltaStateDigest),

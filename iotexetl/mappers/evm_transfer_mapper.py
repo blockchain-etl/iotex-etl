@@ -7,7 +7,7 @@ def map_evm_transfers(raw):
             yield {
                 'type': 'evm_transfer',
                 'height': raw.blockHeight,
-                'action_hash': string_utils.base64_string(action.actionHash),
+                'action_hash': action.actionHash.hex(),
                 'amount': string_utils.base64_string(transfer.amount),
                 'from': getattr(transfer, 'from'),
                 'to': transfer.to,
