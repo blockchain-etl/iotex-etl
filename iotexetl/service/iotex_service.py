@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import grpc
 
 
 class IotexService(object):
@@ -37,6 +38,18 @@ class IotexService(object):
     def get_blocks(self, block_number_batch):
         if not block_number_batch:
             return []
-
         response = self.iotex_rpc.get_blocks(block_number_batch)
         return response.blocks
+
+    def get_evm_transfers(self, block_number_batch):
+        if not block_number_batch:
+            return []
+        for block_number in block_number_batch:
+            try:
+                response = self.iotex_rpc.get_evm_transfers(block_number)
+                for evm_transfers in response.blockEvmTransfers:
+                    yield evm_transfers
+            except grpc.RpcError as e:
+                if e.code() != grpc.StatusCode.NOT_FOUND:
+                    print(e.details())
+                    raise

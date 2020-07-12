@@ -22,7 +22,7 @@
 
 import click
 
-from iotexetl.jobs.export_blocks_job import ExportBlocksJob
+from iotexetl.jobs.export_evm_transfers_job import ExportEvmTransfersJob
 
 from iotexetl.exporters.iotex_item_exporter import IotexItemExporter
 from iotexetl.rpc.iotex_rpc import IotexRpc
@@ -39,12 +39,12 @@ logging_basic_config()
               help='The URI of the remote Iotex node')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
-@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json', 'csv']),
+@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
-def export_blocks(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
-    """Exports blocks, actions, and receipts."""
+def export_evm_transfers(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
+    """Exports evm transfers."""
 
-    job = ExportBlocksJob(
+    job = ExportEvmTransfersJob(
         start_block=start_block,
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(lambda: IotexRpc(provider_uri)),

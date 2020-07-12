@@ -38,3 +38,6 @@ class IotexRpc:
 
     def get_blocks(self, block_number_batch):
         return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True))
+
+    def get_evm_transfers(self, block_number):
+        return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number))
