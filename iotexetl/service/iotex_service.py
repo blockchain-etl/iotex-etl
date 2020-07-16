@@ -27,13 +27,18 @@ class IotexService(object):
         self.iotex_rpc = iotex_rpc
 
     def get_genesis_block(self):
-        return self.get_blocks(0)
+        return self.get_block(1)
 
     def get_latest_block(self):
-        return self.get_blocks('head')
+        meta = self.iotex_rpc.get_chain_meta()
+        return self.get_block(meta.chainMeta.height)
 
     def get_block(self, block_number):
-        return self.get_blocks([block_number])
+        blocks = self.get_blocks([block_number])
+        if len(blocks) == 0:
+            return None
+        else:
+            return blocks[0]
 
     def get_blocks(self, block_number_batch):
         if not block_number_batch:
