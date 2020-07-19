@@ -64,7 +64,7 @@ class ExportBlocksJob(BaseJob):
             self.item_exporter.export_item(map_block(item))
             self.item_exporter.export_items(map_action(item))
             for receipt in item.receipts:
-                self.item_exporter.export_items([map_log(log) for log in receipt.logs])
+                self.item_exporter.export_items([map_log(item.block, log) for log in receipt.logs])
 
     def _end(self):
         self.batch_work_executor.shutdown()

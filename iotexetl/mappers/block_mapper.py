@@ -35,6 +35,7 @@ def map_block(raw):
         'delta_state_digest': base64_string(header.core.deltaStateDigest),
         'producer_pubkey': base64_string(header.producerPubkey),
         'signature': base64_string(header.signature),
+        'number_of_actions': len(raw.block.body.actions)
     }
 
     return block

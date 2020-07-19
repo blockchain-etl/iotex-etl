@@ -87,16 +87,17 @@ def map_action(raw):
         elif action.core.WhichOneof('action') == 'putPollResult':
             action_dict = map_put_poll_result(action)
 
-        yield {**map_base_action(action), **map_receipt(receipt), **action_dict}
+        yield {**map_base_action(raw.block, action), **map_receipt(receipt), **action_dict}
 
-def map_base_action(action):
+def map_base_action(block, action):
     return {
         'type': 'action',
         'version': action.core.version,
         'nonce': action.core.nonce,
         'gas_limit': action.core.gasLimit,
         'gas_price': action.core.gasPrice,
-        'sender_pub_key': iotex_utils.pubkey_to_address(action.senderPubKey)
+        'sender_pub_key': iotex_utils.pubkey_to_address(action.senderPubKey),
+        'timestamp': block.header.core.timestamp.ToJsonString()
     }
 
 def map_transfer(action):
