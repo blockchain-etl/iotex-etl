@@ -57,9 +57,9 @@ class ExportEvmTransfersJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        evm_transfers = self.iotex_service.get_evm_transfers(block_number_batch)
-        for item in evm_transfers:
-            self.item_exporter.export_items(map_evm_transfers(item))
+        block_evm_transfers = self.iotex_service.get_evm_transfers(block_number_batch)
+        if block_evm_transfers:
+            self.item_exporter.export_items(map_evm_transfers(block_evm_transfers))
 
     def _end(self):
         self.batch_work_executor.shutdown()
