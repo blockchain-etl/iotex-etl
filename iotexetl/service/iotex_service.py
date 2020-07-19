@@ -43,8 +43,14 @@ class IotexService(object):
     def get_blocks(self, block_number_batch):
         if not block_number_batch:
             return []
-        response = self.iotex_rpc.get_blocks(block_number_batch)
+        response = self.iotex_rpc.get_raw_blocks(start_height=block_number_batch[0], count=len(block_number_batch))
         return response.blocks
+
+    def get_block_metas(self, block_number_batch):
+        if not block_number_batch:
+            return []
+        response = self.iotex_rpc.get_block_metas(start_height=block_number_batch[0], count=len(block_number_batch))
+        return response.blkMetas
 
     def get_evm_transfers(self, block_number_batch):
         if not block_number_batch:

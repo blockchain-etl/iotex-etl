@@ -34,8 +34,13 @@ class IotexRpc:
         channel = grpc.secure_channel(self.provider_uri, credentials)
         self.stub = api_pb2_grpc.APIServiceStub(channel)
 
-    def get_blocks(self, block_number_batch):
-        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True), timeout=self.timeout)
+    def get_raw_blocks(self, start_height, count):
+        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=start_height, count=count, withReceipts=True), timeout=self.timeout)
+
+    def get_block_metas(self, start_height, count):
+        return self.stub.GetBlockMetas(api_pb2.GetBlockMetasRequest(
+            byIndex=api_pb2.GetBlockMetasByIndexRequest(start=start_height, count=count)
+        ), timeout=self.timeout)
 
     def get_evm_transfers(self, block_number):
         return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
