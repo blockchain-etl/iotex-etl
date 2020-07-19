@@ -1,7 +1,7 @@
 from iotexetl.utils import string_utils
 
 
-def map_log(log):
+def map_log(block, log):
     return {
         'type': 'log',
         'height': log.blkHeight,
@@ -10,4 +10,5 @@ def map_log(log):
         'topics': [string_utils.base64_string(topic) for topic in log.topics],
         'data': string_utils.base64_string(log.data),
         'index': log.index,
+        'timestamp': block.header.core.timestamp.ToJsonString()
     }
