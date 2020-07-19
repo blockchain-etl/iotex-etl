@@ -58,12 +58,12 @@ class IotexService(object):
         for block_number in block_number_batch:
             try:
                 response = self.iotex_rpc.get_evm_transfers(block_number)
-                for evm_transfers in response.blockEvmTransfers:
-                    yield evm_transfers
+                return response.blockEvmTransfers
             except grpc.RpcError as e:
                 if e.code() != grpc.StatusCode.NOT_FOUND:
                     print(e.details())
                     raise
+                return None
 
     def get_implicit_transfer_logs(self, block_number_batch):
         if not block_number_batch:
