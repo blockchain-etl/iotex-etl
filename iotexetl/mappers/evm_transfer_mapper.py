@@ -1,7 +1,7 @@
 from iotexetl.utils import string_utils
 
 
-def map_evm_transfers(block_evm_transfers):
+def map_evm_transfers(raw_block, block_evm_transfers):
     for action in block_evm_transfers.actionEvmTransfers:
         for transfer in action.evmTransfers:
             yield {
@@ -11,4 +11,5 @@ def map_evm_transfers(block_evm_transfers):
                 'amount': string_utils.base64_string(transfer.amount),
                 'from': getattr(transfer, 'from'),
                 'to': transfer.to,
+                'timestamp': raw_block.block.header.core.timestamp.ToJsonString(),
             }
