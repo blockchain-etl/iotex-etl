@@ -52,18 +52,14 @@ class IotexService(object):
         response = self.iotex_rpc.get_block_metas(start_height=block_number_batch[0], count=len(block_number_batch))
         return response.blkMetas
 
-    def get_evm_transfers(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        for block_number in block_number_batch:
-            try:
-                response = self.iotex_rpc.get_evm_transfers(block_number)
-                return response.blockEvmTransfers
-            except grpc.RpcError as e:
-                if e.code() != grpc.StatusCode.NOT_FOUND:
-                    print(e.details())
-                    raise
-                return None
+    def get_evm_transfers(self, block_number):
+        try:
+            response = self.iotex_rpc.get_evm_transfers(block_number)
+            return response.blockEvmTransfers
+        except grpc.RpcError as e:
+            if e.code() != grpc.StatusCode.NOT_FOUND:
+                raise
+            return None
 
     def get_implicit_transfer_logs(self, block_number_batch):
         if not block_number_batch:

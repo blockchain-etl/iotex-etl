@@ -4,3 +4,11 @@ def base64_string(val):
     if val is None:
         return val
     return base64.b64encode(val).decode('utf-8')
+
+
+def to_int(val):
+    if val is None:
+        return val
+    if val == b'':
+        return 0
+    return int.from_bytes(val, 'big')

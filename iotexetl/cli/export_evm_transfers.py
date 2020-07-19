@@ -49,7 +49,6 @@ def export_evm_transfers(start_block, end_block, provider_uri, max_workers, outp
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(lambda: IotexRpc(provider_uri)),
         max_workers=max_workers,
-        item_exporter=IotexItemExporter(output_dir, output_format=output_format),
-        batch_size=10
+        item_exporter=IotexItemExporter(output_dir, output_format=output_format)
     )
     job.run()

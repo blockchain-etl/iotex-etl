@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from iotexetl.jobs import RETRY_EXCEPTIONS
 from iotexetl.mappers.block_mapper import map_block
 from iotexetl.mappers.action_mapper import map_action
 from iotexetl.mappers.log_mapper import map_log
@@ -43,7 +43,7 @@ class ExportBlocksJob(BaseJob):
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)
