@@ -65,7 +65,7 @@ def get_channel_from_uri_string(provider_uri):
     uri = urlparse(provider_uri)
     if uri.scheme == 'grpcs':
         credentials = grpc.ssl_channel_credentials()
-        channel = grpc.insecure_channel(uri.netloc, credentials)
+        channel = grpc.secure_channel(uri.netloc, credentials)
     elif uri.scheme == 'grpc':
         channel = grpc.insecure_channel(uri.netloc)
     else:
