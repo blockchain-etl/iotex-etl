@@ -96,7 +96,7 @@ def map_base_action(block, action):
         'nonce': action.core.nonce,
         'gas_limit': action.core.gasLimit,
         'gas_price': action.core.gasPrice,
-        'sender_pub_key': iotex_utils.pubkey_to_address(action.senderPubKey),
+        'sender': iotex_utils.pubkey_to_address(action.senderPubKey),
         'timestamp': block.header.core.timestamp.ToJsonString()
     }
 

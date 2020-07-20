@@ -21,7 +21,7 @@ signature          | STRING             |
 | height                                                      | INTEGER           |
 | timestamp                                                   | TIMESTAMP         |
 | action_type                                                 | STRING            |
-| sender_pub_key                                              | STRING            |
+| sender                                                      | STRING            |
 | version                                                     | INTEGER           |
 | nonce                                                       | INTEGER           |
 | gas_limit                                                   | INTEGER           |
