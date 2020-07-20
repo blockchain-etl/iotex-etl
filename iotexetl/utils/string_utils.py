@@ -1,5 +1,6 @@
 import base64
 
+
 def base64_string(val):
     if val is None:
         return val
@@ -11,4 +12,9 @@ def to_int(val):
         return val
     if val == b'':
         return 0
-    return int.from_bytes(val, 'big')
+    if isinstance(val, bytes):
+        return int.from_bytes(val, 'big')
+    if isinstance(val, str):
+        return int(val)
+
+    return val
