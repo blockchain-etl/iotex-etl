@@ -22,7 +22,7 @@
 
 import pytest
 
-from iotexetl.jobs.export_blocks_job import ExportBlocksJob
+from iotexetl.jobs.export_evm_transfers_job import ExportEvmTransfersJob
 from iotexetl.exporters.iotex_item_exporter import IotexItemExporter
 from tests.iotexetl.helpers import get_iotex_rpc
 from blockchainetl_common.thread_local_proxy import ThreadLocalProxy
@@ -30,7 +30,7 @@ from blockchainetl_common.thread_local_proxy import ThreadLocalProxy
 import tests.resources
 from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
 
-RESOURCE_GROUP = 'test_export_blocks_job'
+RESOURCE_GROUP = 'test_export_evm_transfers_job'
 
 
 def read_resource(resource_group, file_name):
@@ -38,11 +38,11 @@ def read_resource(resource_group, file_name):
 
 
 @pytest.mark.parametrize("start_block, end_block, resource_group ,provider_type", [
-    (3290498, 3290498, 'blocks_with_actions', 'mock'),
-    skip_if_slow_tests_disabled([3290498, 3290498, 'blocks_with_actions', 'online']),
+    (5890781, 5890781, 'evm_transfers', 'mock'),
+    skip_if_slow_tests_disabled([5890781, 5890781, 'evm_transfers', 'online']),
 ])
 def test_export_blocks_job(tmpdir, start_block, end_block, resource_group, provider_type):
-    job = ExportBlocksJob(
+    job = ExportEvmTransfersJob(
         start_block=start_block,
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(
@@ -54,10 +54,6 @@ def test_export_blocks_job(tmpdir, start_block, end_block, resource_group, provi
     )
     job.run()
 
-    all_files = ['blocks.json', 'actions.json', 'logs.json']
-
-    for file in all_files:
-        print(read_file(str(tmpdir.join(file))))
-        compare_lines_ignore_order(
-            read_resource(resource_group, f'expected_{file}'), read_file(str(tmpdir.join(file)))
-        )
+    compare_lines_ignore_order(
+        read_resource(resource_group, 'expected_evm_transfers.json'), read_file(str(tmpdir.join('evm_transfers.json')))
+    )

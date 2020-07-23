@@ -40,6 +40,10 @@ class MockIotexRpc:
         file_content = self.read_resource('mock_get_block_metas.json')
         return json_format.Parse(file_content, api_pb2.GetBlockMetasResponse())
 
+    def get_evm_transfers(self, block_number):
+        file_content = self.read_resource('mock_get_evm_transfers.json')
+        return json_format.Parse(file_content, api_pb2.GetEvmTransfersByBlockHeightResponse())
+
 
 def json_loads(s):
     return json.loads(s, parse_float=decimal.Decimal)
