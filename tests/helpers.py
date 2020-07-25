@@ -55,7 +55,7 @@ def read_file(path):
 
 
 def run_slow_tests():
-    provider_uri_variable = os.environ.get('TEZOSETL_PROVIDER_URI', '')
+    provider_uri_variable = os.environ.get('IOTEXETL_PROVIDER_URI', '')
     return provider_uri_variable is not None and len(provider_uri_variable) > 0
 
 

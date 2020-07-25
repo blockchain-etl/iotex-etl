@@ -38,8 +38,8 @@ def read_resource(resource_group, file_name):
 
 
 @pytest.mark.parametrize("start_block, end_block, resource_group ,provider_type", [
-    (5890781, 5890781, 'evm_transfers', 'mock'),
-    skip_if_slow_tests_disabled([5890781, 5890781, 'evm_transfers', 'online']),
+    (5890794, 5890794, 'evm_transfers', 'mock'),
+    skip_if_slow_tests_disabled([5890794, 5890794, 'evm_transfers', 'online']),
 ])
 def test_export_blocks_job(tmpdir, start_block, end_block, resource_group, provider_type):
     job = ExportEvmTransfersJob(

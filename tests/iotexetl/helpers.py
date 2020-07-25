@@ -33,7 +33,7 @@ def get_iotex_rpc(provider_type, read_resource_lambda=None):
         rpc = MockIotexRpc(read_resource_lambda)
 
     elif provider_type == "online":
-        env_variable_name = "TEZOSETL_PROVIDER_URI"
+        env_variable_name = "IOTEXETL_PROVIDER_URI"
         provider_uri = os.environ.get(env_variable_name)
         if provider_uri is None or len(provider_uri) == 0:
             raise ValueError('{} is required environment variable'.format(env_variable_name))
