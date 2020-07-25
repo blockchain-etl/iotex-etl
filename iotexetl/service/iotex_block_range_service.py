@@ -28,8 +28,8 @@ from blockchainetl_common.graph.graph_operations import GraphOperations, OutOfBo
 
 
 class IotexBlockRangeService(object):
-    def __init__(self, tezos_rpc):
-        graph = BlockTimestampGraph(tezos_rpc)
+    def __init__(self, iotex_rpc):
+        graph = BlockTimestampGraph(iotex_rpc)
         self._graph_operations = GraphOperations(graph, max_not_monotonic_points=5, prefetch_size=0)
 
     def get_block_range_for_date(self, date):
