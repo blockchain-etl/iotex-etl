@@ -19,29 +19,56 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+from urllib.parse import urlparse
 
 import grpc
 
 from iotexetl.rpc.iotexapi import api_pb2
 from iotexetl.rpc.iotexapi import api_pb2_grpc
 
+
 class IotexRpc:
 
     def __init__(self, provider_uri, timeout=60):
         self.timeout = timeout
-        self.provider_uri = provider_uri
-        credentials = grpc.ssl_channel_credentials()
-        channel = grpc.secure_channel(self.provider_uri, credentials)
+        channel = get_channel_from_uri_string(provider_uri)
         self.stub = api_pb2_grpc.APIServiceStub(channel)
 
-    def get_blocks(self, block_number_batch):
-        return self.stub.GetRawBlocks(api_pb2.GetRawBlocksRequest(startHeight=block_number_batch[0], count=len(block_number_batch), withReceipts=True), timeout=self.timeout)
+    def get_raw_blocks(self, start_height, count):
+        return self.stub.GetRawBlocks(
+            api_pb2.GetRawBlocksRequest(startHeight=start_height, count=count, withReceipts=True), timeout=self.timeout)
+
+    def get_block_metas(self, start_height, count):
+        return self.stub.GetBlockMetas(api_pb2.GetBlockMetasRequest(
+            byIndex=api_pb2.GetBlockMetasByIndexRequest(start=start_height, count=count)
+        ), timeout=self.timeout)
 
     def get_evm_transfers(self, block_number):
-        return self.stub.GetEvmTransfersByBlockHeight(api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
+        return self.stub.GetEvmTransfersByBlockHeight(
+            api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
     def get_implicit_transfer_logs(self, block_number):
-        return self.stub.GetImplicitTransferLogByBlockHeight(api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
+        return self.stub.GetImplicitTransferLogByBlockHeight(
+            api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
     def get_logs(self, block_number_batch):
-        return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(), byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0], count=len(block_number_batch))), timeout=self.timeout)
+        return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(),
+                                                        byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0],
+                                                                                       count=len(block_number_batch))),
+                                 timeout=self.timeout)
+
+    def get_chain_meta(self):
+        return self.stub.GetChainMeta(api_pb2.GetChainMetaRequest(), timeout=self.timeout)
+
+
+def get_channel_from_uri_string(provider_uri):
+    uri = urlparse(provider_uri)
+    if uri.scheme == 'grpcs':
+        credentials = grpc.ssl_channel_credentials()
+        channel = grpc.secure_channel(uri.netloc, credentials)
+    elif uri.scheme == 'grpc':
+        channel = grpc.insecure_channel(uri.netloc)
+    else:
+        raise ValueError(f'The uri scheme {uri.scheme} is not recognized. Use grpc:// or grpcs://')
+
+    return channel

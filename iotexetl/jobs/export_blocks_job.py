@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from iotexetl.jobs import RETRY_EXCEPTIONS
 from iotexetl.mappers.block_mapper import map_block
 from iotexetl.mappers.action_mapper import map_action
 from iotexetl.mappers.log_mapper import map_log
@@ -43,7 +43,7 @@ class ExportBlocksJob(BaseJob):
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)
@@ -59,12 +59,13 @@ class ExportBlocksJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        results = self.iotex_service.get_blocks(block_number_batch)
-        for item in results:
-            self.item_exporter.export_item(map_block(item))
-            self.item_exporter.export_items(map_action(item))
-            for receipt in item.receipts:
-                self.item_exporter.export_items([map_log(log) for log in receipt.logs])
+        blocks = self.iotex_service.get_blocks(block_number_batch)
+        block_metas = self.iotex_service.get_block_metas(block_number_batch)
+        for block, block_meta in zip(blocks, block_metas):
+            self.item_exporter.export_item(map_block(block, block_meta))
+            self.item_exporter.export_items(map_action(block))
+            for receipt in block.receipts:
+                self.item_exporter.export_items([map_log(block.block, log) for log in receipt.logs])
 
     def _end(self):
         self.batch_work_executor.shutdown()

@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from iotexetl.jobs import RETRY_EXCEPTIONS
 from iotexetl.mappers.implicit_transfer_log_mapper import map_implicit_transfer_log
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
@@ -41,7 +41,7 @@ class ExportImplicitTransferLogsJob(BaseJob):
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)

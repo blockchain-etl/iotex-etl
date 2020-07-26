@@ -27,32 +27,39 @@ class IotexService(object):
         self.iotex_rpc = iotex_rpc
 
     def get_genesis_block(self):
-        return self.get_blocks(0)
+        return self.get_block(1)
 
     def get_latest_block(self):
-        return self.get_blocks('head')
+        meta = self.iotex_rpc.get_chain_meta()
+        return self.get_block(meta.chainMeta.height)
 
     def get_block(self, block_number):
-        return self.get_blocks([block_number])
+        blocks = self.get_blocks([block_number])
+        if len(blocks) == 0:
+            return None
+        else:
+            return blocks[0]
 
     def get_blocks(self, block_number_batch):
         if not block_number_batch:
             return []
-        response = self.iotex_rpc.get_blocks(block_number_batch)
+        response = self.iotex_rpc.get_raw_blocks(start_height=block_number_batch[0], count=len(block_number_batch))
         return response.blocks
 
-    def get_evm_transfers(self, block_number_batch):
+    def get_block_metas(self, block_number_batch):
         if not block_number_batch:
             return []
-        for block_number in block_number_batch:
-            try:
-                response = self.iotex_rpc.get_evm_transfers(block_number)
-                for evm_transfers in response.blockEvmTransfers:
-                    yield evm_transfers
-            except grpc.RpcError as e:
-                if e.code() != grpc.StatusCode.NOT_FOUND:
-                    print(e.details())
-                    raise
+        response = self.iotex_rpc.get_block_metas(start_height=block_number_batch[0], count=len(block_number_batch))
+        return response.blkMetas
+
+    def get_evm_transfers(self, block_number):
+        try:
+            response = self.iotex_rpc.get_evm_transfers(block_number)
+            return response.blockEvmTransfers
+        except grpc.RpcError as e:
+            if e.code() != grpc.StatusCode.NOT_FOUND:
+                raise
+            return None
 
     def get_implicit_transfer_logs(self, block_number_batch):
         if not block_number_batch:

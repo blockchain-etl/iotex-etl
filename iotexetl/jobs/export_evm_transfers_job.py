@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from iotexetl.jobs import RETRY_EXCEPTIONS
 from iotexetl.mappers.evm_transfer_mapper import map_evm_transfers
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
@@ -35,13 +35,12 @@ class ExportEvmTransfersJob(BaseJob):
             end_block,
             iotex_rpc,
             max_workers,
-            item_exporter,
-            batch_size=1):
+            item_exporter):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(1, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)
@@ -57,9 +56,12 @@ class ExportEvmTransfersJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        evm_transfers = self.iotex_service.get_evm_transfers(block_number_batch)
-        for item in evm_transfers:
-            self.item_exporter.export_items(map_evm_transfers(item))
+        assert len(block_number_batch) == 1
+        block_number = block_number_batch[0]
+        block_evm_transfers = self.iotex_service.get_evm_transfers(block_number)
+        if block_evm_transfers:
+            block = self.iotex_service.get_block(block_evm_transfers.blockHeight)
+            self.item_exporter.export_items(map_evm_transfers(block, block_evm_transfers))
 
     def _end(self):
         self.batch_work_executor.shutdown()

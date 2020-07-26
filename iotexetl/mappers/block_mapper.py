@@ -22,12 +22,13 @@
 
 from iotexetl.utils.string_utils import base64_string
 
-def map_block(raw):
-    header = raw.block.header
+def map_block(raw_block, raw_block_meta):
+    header = raw_block.block.header
     block = {
         'type': 'block',
         'version': header.core.version,
         'height': header.core.height,
+        'hash': raw_block_meta.hash,
         'timestamp': header.core.timestamp.ToJsonString(),
         'prev_block_hash': header.core.prevBlockHash.hex(),
         'tx_root': base64_string(header.core.txRoot),
@@ -35,6 +36,7 @@ def map_block(raw):
         'delta_state_digest': base64_string(header.core.deltaStateDigest),
         'producer_pubkey': base64_string(header.producerPubkey),
         'signature': base64_string(header.signature),
+        'number_of_actions': len(raw_block.block.body.actions)
     }
 
     return block

@@ -21,6 +21,7 @@
 # SOFTWARE.
 from iotexetl.mappers.receipt_mapper import map_receipt
 from iotexetl.utils import string_utils, iotex_utils
+from iotexetl.utils.string_utils import to_int
 
 
 def map_action(raw):
@@ -87,16 +88,17 @@ def map_action(raw):
         elif action.core.WhichOneof('action') == 'putPollResult':
             action_dict = map_put_poll_result(action)
 
-        yield {**map_base_action(action), **map_receipt(receipt), **action_dict}
+        yield {**map_base_action(raw.block, action), **map_receipt(receipt), **action_dict}
 
-def map_base_action(action):
+def map_base_action(block, action):
     return {
         'type': 'action',
         'version': action.core.version,
         'nonce': action.core.nonce,
-        'gas_limit': action.core.gasLimit,
-        'gas_price': action.core.gasPrice,
-        'sender_pub_key': iotex_utils.pubkey_to_address(action.senderPubKey)
+        'gas_limit': to_int(action.core.gasLimit),
+        'gas_price': to_int(action.core.gasPrice),
+        'sender': iotex_utils.pubkey_to_address(action.senderPubKey),
+        'timestamp': block.header.core.timestamp.ToJsonString()
     }
 
 def map_transfer(action):
@@ -104,7 +106,7 @@ def map_transfer(action):
     return {
         'action_type': 'transfer',
         'transfer': {
-            'amount': transfer.amount,
+            'amount': to_int(transfer.amount),
             'recipient': transfer.recipient,
             'payload': string_utils.base64_string(transfer.payload),
         }
@@ -115,7 +117,7 @@ def map_execution(action):
     return {
         'action_type': 'execution',
         'execution': {
-            'amount': execution.amount,
+            'amount': to_int(execution.amount),
             'contract': execution.contract,
             'data': string_utils.base64_string(execution.data),
         }
@@ -162,7 +164,7 @@ def map_create_deposit(action):
         'action_type': 'create_deposit',
         'create_deposit': {
             'chain_id': create_deposit.chainID,
-            'amount': create_deposit.amount,
+            'amount': to_int(create_deposit.amount),
             'recipient': create_deposit.recipient,
         }
     }
@@ -172,7 +174,7 @@ def map_settle_deposit(action):
     return {
         'action_type': 'settle_deposit',
         'settle_deposit': {
-            'amount': settle_deposit.amount,
+            'amount': to_int(settle_deposit.amount),
             'recipient': settle_deposit.recipient,
             'index': settle_deposit.index
         }
@@ -209,7 +211,7 @@ def map_plum_create_deposit(action):
         'action_type': 'plum_create_deposit',
         'plum_create_deposit': {
             'sub_chain_address': plum_create_deposit.subChainAddress,
-            'amount': plum_create_deposit.amount,
+            'amount': to_int(plum_create_deposit.amount),
             'recipient': plum_create_deposit.recipient,
         }
     }
@@ -292,7 +294,7 @@ def map_deposit_to_rewarding_fund(action):
     return {
         'action_type': 'deposit_to_rewarding_fund',
         'deposit_to_rewarding_fund': {
-            'amount': deposit_to_rewarding_fund.amount,
+            'amount': to_int(deposit_to_rewarding_fund.amount),
             'data': string_utils.base64_string(deposit_to_rewarding_fund.data),
         }
     }
@@ -302,7 +304,7 @@ def map_claim_from_rewarding_fund(action):
     return {
         'action_type': 'claim_from_rewarding_fund',
         'claim_from_rewarding_fund': {
-            'amount': claim_from_rewarding_fund.amount,
+            'amount': to_int(claim_from_rewarding_fund.amount),
             'data': string_utils.base64_string(claim_from_rewarding_fund.data),
         }
     }
@@ -323,7 +325,7 @@ def map_stake_create(action):
         'action_type': 'stake_create',
         'stake_create': {
             'candidate_name': stake_create.candidateName,
-            'staked_amount': stake_create.stakedAmount,
+            'staked_amount': to_int(stake_create.stakedAmount),
             'staked_duration': stake_create.stakedDuration,
             'auto_stake': stake_create.autoStake,
             'payload': string_utils.base64_string(stake_create.payload),
@@ -356,7 +358,7 @@ def map_stake_add_deposit(action):
         'action_type': 'stake_add_deposit',
         'stake_add_deposit': {
             'bucket_index': stake_add_deposit.bucketIndex,
-            'amount': stake_add_deposit.amount,
+            'amount': to_int(stake_add_deposit.amount),
             'payload': string_utils.base64_string(stake_add_deposit.payload),
         }
     }
@@ -403,7 +405,7 @@ def map_candidate_register(action):
             'name': candidate_register.candidate.name,
             'operator_address': candidate_register.candidate.operatorAddress,
             'reward_address': candidate_register.candidate.rewardAddress,
-            'staked_amount': candidate_register.stakedAmount,
+            'staked_amount': to_int(candidate_register.stakedAmount),
             'staked_duration': candidate_register.stakedDuration,
             'auto_stake': candidate_register.autoStake,
             'owner_address': candidate_register.ownerAddress,
