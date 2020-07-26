@@ -33,16 +33,20 @@ class MockIotexRpc:
         self.read_resource = read_resource
 
     def get_raw_blocks(self, start_height, count):
-        file_content = self.read_resource('mock_get_raw_blocks.json')
+        file_content = self.read_resource(build_file_name('get_raw_blocks', start_height, count))
         return json_format.Parse(file_content, api_pb2.GetRawBlocksResponse())
 
     def get_block_metas(self, start_height, count):
-        file_content = self.read_resource('mock_get_block_metas.json')
+        file_content = self.read_resource(build_file_name('get_block_metas', start_height, count))
         return json_format.Parse(file_content, api_pb2.GetBlockMetasResponse())
 
     def get_evm_transfers(self, block_number):
-        file_content = self.read_resource('mock_get_evm_transfers.json')
+        file_content = self.read_resource(build_file_name('get_evm_transfers', block_number))
         return json_format.Parse(file_content, api_pb2.GetEvmTransfersByBlockHeightResponse())
+
+
+def build_file_name(method, *args):
+    return 'mock_{method}_{args}.json'.format(method=method, args='_'.join([str(arg) for arg in args]))
 
 
 def json_loads(s):
