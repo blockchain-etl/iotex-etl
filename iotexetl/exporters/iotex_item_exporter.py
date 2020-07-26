@@ -46,10 +46,6 @@ class IotexItemExporter:
     def open(self):
         pass
 
-    def export_items(self, items):
-        for item in items:
-            self.export_item(item)
-
     def export_item(self, item):
         item_type = item.get('type')
         if item_type is None:

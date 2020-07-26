@@ -41,6 +41,10 @@ setup(
         'grpcio==1.30.0'
     ],
     extras_require={
+        'streaming': [
+            'timeout-decorator==0.4.1',
+            'google-cloud-pubsub==0.39.1',
+        ],
         'dev': [
             'pytest~=4.3.0',
             'pytest-timeout~=1.3.3'
