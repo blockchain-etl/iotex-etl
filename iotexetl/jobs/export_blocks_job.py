@@ -38,7 +38,10 @@ class ExportBlocksJob(BaseJob):
             iotex_rpc,
             max_workers,
             item_exporter,
-            batch_size=1):
+            batch_size=1,
+            export_blocks=True,
+            export_actions=True,
+            export_logs=True):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
@@ -47,6 +50,10 @@ class ExportBlocksJob(BaseJob):
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)
+
+        self.export_blocks = export_blocks
+        self.export_actions = export_actions
+        self.export_logs = export_logs
 
     def _start(self):
         self.item_exporter.open()
@@ -62,10 +69,15 @@ class ExportBlocksJob(BaseJob):
         blocks = self.iotex_service.get_blocks(block_number_batch)
         block_metas = self.iotex_service.get_block_metas(block_number_batch)
         for block, block_meta in zip(blocks, block_metas):
-            self.item_exporter.export_item(map_block(block, block_meta))
-            self.item_exporter.export_items(map_action(block))
-            for receipt in block.receipts:
-                self.item_exporter.export_items([map_log(block.block, log) for log in receipt.logs])
+            if self.export_blocks:
+                self.item_exporter.export_item(map_block(block, block_meta))
+            if self.export_actions:
+                for action in map_action(block):
+                    self.item_exporter.export_item(action)
+            if self.export_logs:
+                for receipt in block.receipts:
+                    for log in [map_log(block.block, log) for log in receipt.logs]:
+                        self.item_exporter.export_item(log)
 
     def _end(self):
         self.batch_work_executor.shutdown()

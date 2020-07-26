@@ -27,6 +27,7 @@ from iotexetl.cli.export_evm_transfers import export_evm_transfers
 from iotexetl.cli.export_implicit_transfer_logs import export_implicit_transfer_logs
 from iotexetl.cli.export_logs import export_logs
 from iotexetl.cli.get_block_range_for_date import get_block_range_for_date
+from iotexetl.cli.stream import stream
 
 
 @click.group()
@@ -41,6 +42,9 @@ cli.add_command(export_blocks, "export_blocks")
 cli.add_command(export_evm_transfers, "export_evm_transfers")
 cli.add_command(export_implicit_transfer_logs, "export_implicit_transfer_logs")
 cli.add_command(export_logs, "export_logs")
+
+# streaming
+cli.add_command(stream, "stream")
 
 # utils
 cli.add_command(get_block_range_for_date, "get_block_range_for_date")
