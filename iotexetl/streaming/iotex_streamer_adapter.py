@@ -40,17 +40,12 @@ class IotexStreamerAdapter:
         if self._should_export(EntityType.EVM_TRANSFER):
             evm_transfers = self._export_evm_transfers(start_block, end_block)
 
-        enriched_blocks = blocks if EntityType.BLOCK in self.entity_types else []
-        enriched_actions = actions if EntityType.ACTION in self.entity_types else []
-        enriched_logs = logs if EntityType.LOG in self.entity_types else []
-        enriched_evm_transfers = evm_transfers if EntityType.EVM_TRANSFER in self.entity_types else []
-
         logging.info('Exporting with ' + type(self.item_exporter).__name__)
 
-        all_items = enriched_blocks + \
-            enriched_actions + \
-            enriched_logs + \
-            enriched_evm_transfers
+        all_items = blocks + \
+            actions + \
+            logs + \
+            evm_transfers
 
         self.item_exporter.export_items(all_items)
 
