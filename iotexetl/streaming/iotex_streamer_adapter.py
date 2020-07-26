@@ -33,7 +33,7 @@ class IotexStreamerAdapter:
         # Export blocks, actions and logs
         blocks, actions, logs = [], [], []
         if self._should_export(EntityType.BLOCK) or self._should_export(EntityType.ACTION) or self._should_export(EntityType.LOG):
-            blocks, transactions, logs = self._export_blocks(start_block, end_block)
+            blocks, actions, logs = self._export_blocks(start_block, end_block)
 
         # Extract evm transfers
         evm_transfers = []

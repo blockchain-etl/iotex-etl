@@ -44,9 +44,14 @@ class MockIotexRpc:
         file_content = self.read_resource(build_file_name('get_evm_transfers', block_number))
         return json_format.Parse(file_content, api_pb2.GetEvmTransfersByBlockHeightResponse())
 
+    def get_chain_meta(self):
+        file_content = self.read_resource(build_file_name('get_chain_meta'))
+        return json_format.Parse(file_content, api_pb2.GetChainMetaResponse())
+
 
 def build_file_name(method, *args):
-    return 'mock_{method}_{args}.json'.format(method=method, args='_'.join([str(arg) for arg in args]))
+    return 'mock_{method}{args}.json'.format(method=method,
+                                              args='_' + '_'.join([str(arg) for arg in args]) if len(args) > 0 else '')
 
 
 def json_loads(s):
