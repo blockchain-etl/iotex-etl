@@ -1,12 +1,12 @@
 def GenerateConfig(context):
     resources = []
 
-    chains = ['iotex']
+    chains = ['mainnet']
     entity_types = ['blocks', 'actions', 'logs', 'evm_transfers']
 
     for chain in chains:
-        topic_name_prefix = 'crypto_' + chain
-        subscription_name_prefix = 'crypto_' + chain + '.dataflow.bigquery'
+        topic_name_prefix = chain
+        subscription_name_prefix = chain + '.dataflow.bigquery'
         # 7 days
         message_retention_duration = '604800s'
 
