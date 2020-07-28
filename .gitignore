@@ -53,3 +53,4 @@ ENV/
 .idea
 
 out/
+last_synced_block.txt
