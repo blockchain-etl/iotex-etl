@@ -1,8 +1,9 @@
 package io.blockchainetl.iotex;
 
 import com.google.common.collect.Lists;
-import io.blockchainetl.common.PubSubToBigQueryPipelineOptions;
-import io.blockchainetl.common.domain.ChainConfig;
+import io.blockchainetl.iotex.domain.ChainConfig;
+import io.blockchainetl.iotex.utils.FileUtils;
+import io.blockchainetl.iotex.utils.JsonUtils;
 import io.blockchainetl.iotex.fns.EntityJsonToTableRow;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
@@ -10,10 +11,10 @@ import org.apache.beam.sdk.io.gcp.bigquery.InsertRetryPolicy;
 import org.apache.beam.sdk.io.gcp.bigquery.WriteResult;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
+import org.codehaus.jackson.type.TypeReference;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-
-import static io.blockchainetl.common.PubSubToBigQueryPipeline.readChainConfigs;
 
 
 public class IotexPubSubToBigQueryPipeline {
@@ -23,13 +24,14 @@ public class IotexPubSubToBigQueryPipeline {
     public static void main(String[] args) {
         PubSubToBigQueryPipelineOptions options =
             PipelineOptionsFactory.fromArgs(args).withValidation().as(PubSubToBigQueryPipelineOptions.class);
-        
+
         Pipeline pipeline = Pipeline.create(options);
-        
+
         List<ChainConfig> chainConfigs = readChainConfigs(options.getChainConfigFile());
 
-        List<String> entityNames = Lists.newArrayList("blocks", "actions", "logs", "evm_transfers");
-        
+//        List<String> entityNames = Lists.newArrayList("blocks", "actions", "logs", "evm_transfers");
+        List<String> entityNames = Lists.newArrayList("blocks");
+
         for (ChainConfig chainConfig : chainConfigs) {
             for (String entityName : entityNames) {
                 buildPipelineForEntity(pipeline, chainConfig, entityName);
@@ -58,5 +60,11 @@ public class IotexPubSubToBigQueryPipeline {
                 .withExtendedErrorInfo()
                 .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                 .withFailedInsertRetryPolicy(InsertRetryPolicy.retryTransientErrors()));
+    }
+
+    public static List<ChainConfig> readChainConfigs(String file) {
+        String fileContents = FileUtils.readFile(file, StandardCharsets.UTF_8);
+        return JsonUtils.parseJson(fileContents, new TypeReference<List<ChainConfig>>() {
+        });
     }
 }

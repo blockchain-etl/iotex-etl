@@ -1,0 +1,8 @@
+[
+    {
+        "transformNamePrefix": "Iotex",
+        "pubSubSubscriptionPrefix": "projects/iotex-etl-dev/subscriptions/mainnet.dataflow.bigquery",
+        "bigQueryDataset": "iotex-etl-dev:mainnet_test0",
+        "startTimestamp": "2020-07-29T00:00:00Z"
+    }
+]

@@ -1,4 +1,4 @@
-package io.blockchainetl.common.domain;
+package io.blockchainetl.iotex.domain;
 
 public class ChainConfig {
     

@@ -1,4 +1,4 @@
-package io.blockchainetl.common.utils;
+package io.blockchainetl.iotex.utils;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
