@@ -2,12 +2,11 @@ package io.blockchainetl.iotex;
 
 import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
-import org.apache.beam.sdk.options.SdkHarnessOptions;
 import org.apache.beam.sdk.options.StreamingOptions;
 import org.apache.beam.sdk.options.Validation;
 import org.apache.beam.sdk.options.ValueProvider;
 
-public interface PubSubToBigQueryPipelineOptions extends PipelineOptions, StreamingOptions, SdkHarnessOptions {
+public interface PubSubToBigQueryPipelineOptions extends PipelineOptions, StreamingOptions {
     
     @Description("JSON file containing chain configuration")
     @Validation.Required
