@@ -6,6 +6,7 @@ from iotexetl.enumeration.entity_type import EntityType
 from iotexetl.jobs.export_blocks_job import ExportBlocksJob
 
 from iotexetl.jobs.export_evm_transfers_job import ExportEvmTransfersJob
+from iotexetl.streaming.item_id_calculator import ItemIdCalculator
 
 
 class IotexStreamerAdapter:
@@ -21,6 +22,7 @@ class IotexStreamerAdapter:
         self.batch_size = batch_size
         self.max_workers = max_workers
         self.entity_types = entity_types
+        self.item_id_calculator = ItemIdCalculator()
 
     def open(self):
         self.item_exporter.open()
@@ -46,6 +48,8 @@ class IotexStreamerAdapter:
             actions + \
             logs + \
             evm_transfers
+
+        self.calculate_item_ids(all_items)
 
         self.item_exporter.export_items(all_items)
 
@@ -90,6 +94,10 @@ class IotexStreamerAdapter:
             return entity_type in self.entity_types
 
         raise ValueError('Unexpected entity type ' + entity_type)
+
+    def calculate_item_ids(self, items):
+        for item in items:
+            item['item_id'] = self.item_id_calculator.calculate(item)
 
     def close(self):
         self.item_exporter.close()
