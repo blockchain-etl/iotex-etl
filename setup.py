@@ -11,7 +11,7 @@ long_description = read('README.md') if os.path.isfile("README.md") else ""
 
 setup(
     name='iotex-etl',
-    version='0.0.2',
+    version='0.0.4',
     author='Evgeny Medvedev',
     author_email='evge.medvedev@gmail.com',
     description='Tools for exporting IoTeX blockchain data to JSON',
@@ -41,6 +41,10 @@ setup(
         'grpcio==1.30.0'
     ],
     extras_require={
+        'streaming': [
+            'timeout-decorator==0.4.1',
+            'google-cloud-pubsub==0.39.1',
+        ],
         'dev': [
             'pytest~=4.3.0',
             'pytest-timeout~=1.3.3'

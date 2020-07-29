@@ -40,8 +40,8 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize("start_block, end_block, resource_group ,provider_type", [
     (3290498, 3290498, 'blocks_with_actions', 'mock'),
     skip_if_slow_tests_disabled([3290498, 3290498, 'blocks_with_actions', 'online']),
-    (5728441, 5728441, 'blocks_with_executions', 'mock'),
-    skip_if_slow_tests_disabled([5728441, 5728441, 'blocks_with_executions', 'online']),
+    (5728441, 5728441, 'blocks_with_execution', 'mock'),
+    skip_if_slow_tests_disabled([5728441, 5728441, 'blocks_with_execution', 'online']),
     (5914081, 5914081, 'blocks_with_put_poll_result', 'mock'),
     skip_if_slow_tests_disabled([5914081, 5914081, 'blocks_with_put_poll_result', 'online']),
     (5908046, 5908046, 'blocks_with_claim_from_rewarding_fund', 'mock'),

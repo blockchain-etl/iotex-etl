@@ -59,7 +59,8 @@ class ExportImplicitTransferLogsJob(BaseJob):
     def _export_batch(self, block_number_batch):
         logs = self.iotex_service.get_implicit_transfer_logs(block_number_batch)
         for log in logs:
-            self.item_exporter.export_items(map_implicit_transfer_log(log))
+            for implicit_transfer_log in map_implicit_transfer_log(log):
+                self.item_exporter.export_item(implicit_transfer_log)
 
     def _end(self):
         self.batch_work_executor.shutdown()
