@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from iotexetl.utils import iotex_utils
 from iotexetl.utils.string_utils import base64_string
 
 def map_block(raw_block, raw_block_meta):
@@ -34,7 +34,7 @@ def map_block(raw_block, raw_block_meta):
         'tx_root': base64_string(header.core.txRoot),
         'receipt_root': base64_string(header.core.receiptRoot),
         'delta_state_digest': base64_string(header.core.deltaStateDigest),
-        'producer_pubkey': base64_string(header.producerPubkey),
+        'producer': iotex_utils.pubkey_to_address(header.producerPubkey),
         'signature': base64_string(header.signature),
         'number_of_actions': len(raw_block.block.body.actions)
     }
