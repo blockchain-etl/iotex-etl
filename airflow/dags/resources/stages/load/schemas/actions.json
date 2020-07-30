@@ -1,0 +1,832 @@
+[
+    {
+        "name": "version",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "nonce",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "gas_limit",
+        "type": "NUMERIC",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "gas_price",
+        "type": "NUMERIC",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "sender",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "status",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "height",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "hash",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "timestamp",
+        "type": "TIMESTAMP",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "gas_consumed",
+        "type": "NUMERIC",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "contract_address",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "action_type",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "transfer",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "recipient",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "execution",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "contract",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "data",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "start_sub_chain",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "chain_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "security_deposit",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "operation_deposit",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "start_height",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "parent_height_offset",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stop_sub_chain",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "chain_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "stop_height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "put_block",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "roots",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "name",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    },
+                    {
+                        "name": "value",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "create_deposit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "chain_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "recipient",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "settle_deposit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "recipient",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "terminate_plum_chain",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_put_block",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "roots",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "name",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    },
+                    {
+                        "name": "value",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "plum_create_deposit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "recipient",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_start_exit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "previous_transfer",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "previous_transfer_block_proof",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "previous_transfer_block_height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "exit_transfer",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "exit_transfer_block_proof",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "exit_transfer_block_height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_challenge_exit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "coin_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "challenge_transfer",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "challenge_transfer_block_proof",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "challenge_transfer_block_height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_response_challenge_exit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "coin_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "challenge_transfer",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "response_transfer",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "response_transfer_block_proof",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "previous_transfer_block_height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_finalize_exit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "sub_chain_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "coin_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_settle_deposit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "coin_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "plum_transfer",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "coin_id",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "denomination",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "owner",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "recipient",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "deposit_to_rewarding_fund",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "data",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "claim_from_rewarding_fund",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "data",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "grant_reward",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "type",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_create",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "candidate_name",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "staked_amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "staked_duration",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "auto_stake",
+                "type": "BOOL",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_unstake",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_withdraw",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_add_deposit",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_restake",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "staked_duration",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "auto_stake",
+                "type": "BOOL",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_change_candidate",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "candidate_name",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "stake_transfer_ownership",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "bucket_index",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "voter_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "candidate_register",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "name",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "operator_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "reward_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "staked_amount",
+                "type": "NUMERIC",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "staked_duration",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "auto_stake",
+                "type": "BOOL",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "owner_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "payload",
+                "type": "BYTES",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "candidate_update",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "name",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "operator_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "reward_address",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    },
+    {
+        "name": "put_poll_result",
+        "type": "RECORD",
+        "description": "",
+        "mode": "NULLABLE",
+        "fields": [
+            {
+                "name": "height",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "candidates",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "address",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    },
+                    {
+                        "name": "votes",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    },
+                    {
+                        "name": "pub_key",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    },
+                    {
+                        "name": "reward_address",
+                        "type": "STRING",
+                        "mode": "REQUIRED"
+                    }
+                ]
+            }
+        ]
+    }
+]

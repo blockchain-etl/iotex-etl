@@ -1,0 +1,38 @@
+[
+    {
+        "name": "height",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "timestamp",
+        "type": "TIMESTAMP",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "action_hash",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "amount",
+        "type": "NUMERIC",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "from",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "to",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    }
+]

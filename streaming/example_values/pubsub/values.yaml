@@ -4,7 +4,7 @@ stream:
     tag: 0.0.4
 config:
   PROVIDER_URI: "grpcs://api.mainnet.iotex.one:443"
-  STREAM_OUTPUT: "projects/iotex-etl-dev/topics/crypto_iotex"
+  STREAM_OUTPUT: "projects/iotex-etl-dev/topics/mainnet"
   GCS_PREFIX: "gs://iotex-etl-streaming-dev/iotex-etl/streaming"
   LAG_BLOCKS: "10"
   ENTITY_TYPES: "block,action,log,evm_transfer"

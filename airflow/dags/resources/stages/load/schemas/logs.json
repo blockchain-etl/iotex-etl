@@ -1,0 +1,44 @@
+[
+    {
+        "name": "height",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "timestamp",
+        "type": "TIMESTAMP",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "action_hash",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "contract_address",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "topics",
+        "type": "STRING",
+        "description": "",
+        "mode": "REPEATED"
+    },
+    {
+        "name": "data",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "index",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    }
+]
