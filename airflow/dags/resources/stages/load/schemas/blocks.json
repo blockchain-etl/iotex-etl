@@ -31,19 +31,19 @@
     },
     {
         "name": "tx_root",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "REQUIRED"
     },
     {
         "name": "receipt_root",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "REQUIRED"
     },
     {
         "name": "delta_state_digest",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "REQUIRED"
     },
@@ -55,7 +55,7 @@
     },
     {
         "name": "signature",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "REQUIRED"
     },
