@@ -35,7 +35,7 @@ from iotexetl.rpc.iotex_rpc import IotexRpc
 @click.option('-p', '--provider-uri', default='grpcs://api.mainnet.iotex.one:443', show_default=True, type=str,
               help='The URI of the remote Iotex node')
 @click.option('-o', '--output', type=str,
-              help='Either Google PubSub topic path e.g. projects/your-project/topics/crypto_iotex; '
+              help='Either Google PubSub topic path e.g. projects/your-project/topics/mainnet; '
                    'If not specified will print to console')
 @click.option('-s', '--start-block', default=None, show_default=True, type=int, help='Start block')
 @click.option('-e', '--entity-types', default=',', show_default=True, type=str,
