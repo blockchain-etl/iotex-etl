@@ -1,17 +1,18 @@
 ### blocks
 
-Column             | Type               |
--------------------|--------------------|
-version            | INTEGER            |
-height             | INTEGER            |
-timestamp          | TIMESTAMP          |
-block_hash         | STRING             |
-prev_block_hash    | STRING             |
-tx_root            | STRING             |
-receipt_root       | STRING             |
-delta_state_digest | STRING             |
-producer_pubkey    | STRING             |
-signature          | STRING             |
+| Column             | Type               |
+|--------------------|--------------------|
+| version            | INTEGER            |
+| height             | INTEGER            |
+| hash               | STRING             |
+| timestamp          | TIMESTAMP          |
+| prev_block_hash    | STRING             |
+| tx_root            | STRING             |
+| receipt_root       | STRING             |
+| delta_state_digest | STRING             |
+| producer           | STRING             |
+| signature          | STRING             |
+| number_of_actions  | INTEGER            |
 
 ### actions
 
@@ -30,11 +31,11 @@ signature          | STRING             |
 | gas_consumed                                                | INTEGER           |
 | contract_address                                            | STRING            |
 | transfer                                                    | STRUCT            |
-| transfer.amount                                             | STRING            |
+| transfer.amount                                             | INTEGER           |
 | transfer.recipient                                          | STRING            |
 | transfer.payload                                            | STRING            |
 | execution                                                   | STRUCT            |
-| execution.amount                                            | STRING            |
+| execution.amount                                            | INTEGER           |
 | execution.contract                                          | STRING            |
 | execution.data                                              | STRING            |
 | start_sub_chain                                             | STRUCT            |
@@ -55,10 +56,10 @@ signature          | STRING             |
 | put_block.roots.value                                       | STRING            |
 | create_deposit                                              | STRUCT            |
 | create_deposit.chain_id                                     | INTEGER           |
-| create_deposit.amount                                       | STRING            |
+| create_deposit.amount                                       | INTEGER           |
 | create_deposit.recipient                                    | STRING            |
 | settle_deposit                                              | STRUCT            |
-| settle_deposit.amount                                       | STRING            |
+| settle_deposit.amount                                       | INTEGER           |
 | settle_deposit.recipient                                    | STRING            |
 | settle_deposit.index                                        | INTEGER           |
 | terminate_plum_chain                                        | STRUCT            |
@@ -71,7 +72,7 @@ signature          | STRING             |
 | plum_put_block.roots.value                                  | STRING            |
 | plum_create_deposit                                         | STRUCT            |
 | plum_create_deposit.sub_chain_address                       | STRING            |
-| plum_create_deposit.amount                                  | STRING            |
+| plum_create_deposit.amount                                  | INTEGER           |
 | plum_create_deposit.recipient                               | STRING            |
 | plum_start_exit                                             | STRUCT            |
 | plum_start_exit.sub_chain_address                           | STRING            |
@@ -105,17 +106,17 @@ signature          | STRING             |
 | plum_transfer.owner                                         | STRING            |
 | plum_transfer.recipient                                     | STRING            |
 | deposit_to_rewarding_fund                                   | STRUCT            |
-| deposit_to_rewarding_fund.amount                            | STRING            |
+| deposit_to_rewarding_fund.amount                            | INTEGER           |
 | deposit_to_rewarding_fund.data                              | STRING            |
 | claim_from_rewarding_fund                                   | STRUCT            |
-| claim_from_rewarding_fund.amount                            | STRING            |
+| claim_from_rewarding_fund.amount                            | INTEGER           |
 | claim_from_rewarding_fund.data                              | STRING            |
 | grant_reward                                                | STRUCT            |
 | grant_reward.type                                           | INTEGER           |
 | grant_reward.height                                         | INTEGER           |
 | stake_create                                                | STRUCT            |
 | stake_create.candidate_name                                 | STRING            |
-| stake_create.staked_amount                                  | STRING            |
+| stake_create.staked_amount                                  | INTEGER           |
 | stake_create.staked_duration                                | INTEGER           |
 | stake_create.auto_stake                                     | BOOLEAN           |
 | stake_create.payload                                        | STRING            |
@@ -127,7 +128,7 @@ signature          | STRING             |
 | stake_withdraw.payload                                      | STRING            |
 | stake_add_deposit                                           | STRUCT            |
 | stake_add_deposit.bucket_index                              | INTEGER           |
-| stake_add_deposit.amount                                    | STRING            |
+| stake_add_deposit.amount                                    | INTEGER           |
 | stake_add_deposit.payload                                   | STRING            |
 | stake_restake                                               | STRUCT            |
 | stake_restake.bucket_index                                  | INTEGER           |
@@ -146,15 +147,15 @@ signature          | STRING             |
 | candidate_register.name                                     | STRING            |
 | candidate_register.operator_address                         | STRING            |
 | candidate_register.reward_address                           | STRING            |
-| candidate_register.staked_amount                            | STRING            |
+| candidate_register.staked_amount                            | INTEGER           |
 | candidate_register.staked_duration                          | INTEGER           |
 | candidate_register.auto_stake                               | BOOLEAN           |
 | candidate_register.owner_address                            | STRING            |
 | candidate_register.payload                                  | STRING            |
-| candidate_basic_info                                        | STRUCT            |
-| candidate_basic_info.name                                   | STRING            |
-| candidate_basic_info.operator_address                       | STRING            |
-| candidate_basic_info.reward_address                         | STRING            |
+| candidate_update                                            | STRUCT            |
+| candidate_update.name                                       | STRING            |
+| candidate_update.operator_address                           | STRING            |
+| candidate_update.reward_address                             | STRING            |
 | put_poll_result                                             | STRUCT            |
 | put_poll_result.height                                      | INTEGER           |
 | put_poll_result.candidates                                  | STRUCT (REPEATED) |
@@ -165,26 +166,26 @@ signature          | STRING             |
 
 ### logs
 
-Column            | Type               |
-------------------|--------------------|
-height            | INTEGER            |
-timestamp         | TIMESTAMP          |
-action_hash       | STRING             |
-contract_address  | STRING             |
-topics            | STRING (REPEATED)  |
-data              | STRING             |
-blk_height        | INTEGER            |
-act_hash          | STRING             |
-index             | INTEGER            |
+| Column            | Type               |
+|-------------------|--------------------|
+| height            | INTEGER            |
+| timestamp         | TIMESTAMP          |
+| action_hash       | STRING             |
+| contract_address  | STRING             |
+| topics            | STRING (REPEATED)  |
+| data              | STRING             |
+| blk_height        | INTEGER            |
+| act_hash          | STRING             |
+| index             | INTEGER            |
 
 ### evm_transfers
 
-Column            | Type               |
-------------------|--------------------|
-height            | INTEGER            |
-timestamp         | TIMESTAMP          |
-action_hash       | STRING             |
-amount            | STRING             |
-from              | STRING             |
-to                | STRING             |
-index             | INTEGER            |
+| Column            | Type               |
+|-------------------|--------------------|
+| height            | INTEGER            |
+| timestamp         | TIMESTAMP          |
+| action_hash       | STRING             |
+| amount            | INTEGER            |
+| from              | STRING             |
+| to                | STRING             |
+| index             | INTEGER            |

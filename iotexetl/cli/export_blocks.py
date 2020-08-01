@@ -36,12 +36,12 @@ logging_basic_config()
 @click.option('-s', '--start-block', default=0, show_default=True, type=int, help='Start block')
 @click.option('-e', '--end-block', required=True, type=int, help='End block')
 @click.option('-p', '--provider-uri', default='grpcs://api.mainnet.iotex.one:443', show_default=True, type=str,
-              help='The URI of the remote Iotex node')
+              help='The URI of the remote IoTeX node.')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-b', '--batch-size', default=10, show_default=True, type=int,
               help='The number of blocks to export in batch.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
-@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json', 'csv']),
+@click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
 def export_blocks(start_block, end_block, provider_uri, max_workers, batch_size, output_dir, output_format):
     """Exports blocks, actions, receipts, and logs."""
