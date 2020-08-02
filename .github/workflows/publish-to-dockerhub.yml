@@ -15,6 +15,7 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@2.18
         with:
           name: blockchainetl/iotex-etl
+          workdir: cli
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tag_semver: true
