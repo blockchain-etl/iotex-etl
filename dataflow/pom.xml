@@ -38,6 +38,7 @@
     <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
     <maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
     <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+    <junit-jupiter.version>5.5.2</junit-jupiter.version>
   </properties>
 
   <build>
@@ -186,5 +187,13 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 </project>
