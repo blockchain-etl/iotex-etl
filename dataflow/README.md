@@ -24,6 +24,7 @@
    mvn -e -Pdataflow-runner compile exec:java \
    -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline \
    -Dexec.args="--chainConfigFile=chainConfigIotexDev.json \
+   --outputErrorsTable=mainnet.errors \
    --tempLocation=gs://${BUCKET}/temp \
    --project=${PROJECT} \
    --runner=DataflowRunner \
