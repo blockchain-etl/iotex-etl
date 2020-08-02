@@ -29,7 +29,7 @@ Data is available for you to query right away in [Google BigQuery](https://conso
         --disk-size=30GB --machine-type=custom-1-4096 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
         --network=default --subnetwork=default
     
-    gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=iotex-etl==0.0.5
+    gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=iotex-etl==0.0.6
     ```
    
     Note that if Composer API is not enabled the command above will auto prompt to enable it.
