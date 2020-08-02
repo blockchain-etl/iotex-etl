@@ -1,7 +1,31 @@
-# IoTeX ETL
+# IoTeX ETL Architecture
 
-[![Build Status](https://travis-ci.org/blockchain-etl/iotex-etl.png)](https://travis-ci.org/blockchain-etl/iotex-etl)
+![blockchain_etl_architecture.svg](iotex_etl_architecture.svg)
 
-Example actions:
-- Execution: https://iotexscan.io/action/87dc614c88d8f02d0f6f92532ea9c8c4d1aab02ce65cb5db15159251ca5aeda5
-- Transfer: https://iotexscan.io/action/28271edf75e641f8ddd5794fc4f775206054ba75b30289822a62d2e0abb45ed0
+1. The nodes are deployed with Terraform and run in Kubernetes. 
+  Refer to these for more details:
+    - Template repository for deploying Terraform configurations: https://github.com/blockchain-etl/blockchain-terraform-deployment
+    - Terraform configuration files for running blockchain nodes: https://github.com/blockchain-etl/blockchain-terraform
+    - Kubernetes manifests for running blockchain nodes: https://github.com/blockchain-etl/blockchain-kubernetes
+
+2. The blockchain data is polled periodically from the nodes and pushed to Google Pub/Sub. 
+  Refer to these for more details:
+    - Article explaining how to subscribe to public blockchain data in Pub/Sub: 
+  https://medium.com/google-cloud/live-ethereum-and-bitcoin-data-in-google-bigquery-and-pub-sub-765b71cd57b5 
+    - Streaming blockchain data to Google Pub/Sub in Kubernetes: 
+  https://github.com/blockchain-etl/iotex-etl/streaming
+    - CLI tools for polling blockchain data from nodes: 
+  https://github.com/blockchain-etl/iotex-etl/cli. 
+
+3. Airflow DAGs export and load blockchain data to BigQuery daily. 
+  Refer to these for more details:
+    - Article explaining how the DAGs work: 
+  https://cloud.google.com/blog/products/data-analytics/ethereum-bigquery-how-we-built-dataset.
+    - Airflow DAGs for exporting, loading, and parsing blockchain data: 
+  https://github.com/blockchain-etl/iotex-etl/airflow.
+  
+4. The blockchain data is pulled from Pub/Sub, transformed and streamed to BigQuery.
+  Refer to these for more details:
+    - Dataflow pipelines for connecting Pub/Sub topics with BigQuery tables: 
+  https://github.com/blockchain-etl/iotex-etl/dataflow.
+ 
