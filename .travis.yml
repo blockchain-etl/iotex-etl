@@ -1,12 +1,21 @@
-language: python
 dist: xenial
 matrix:
   include:
-    - python: "3.6"
+    - language: python
+      python: "3.6"
       env: TOX_POSARGS="-e py36"
-    - python: "3.7"
+      script:
+        - cd cli && tox $TOX_POSARGS
+    - language: python
+      python: "3.7"
       env: TOX_POSARGS="-e py37"
+      script:
+        - cd cli && tox $TOX_POSARGS
+    - language: java
+      jdk:
+        - openjdk8
+        - openjdk11
+      script:
+        - cd dataflow && mvn test -B
 install:
   - travis_retry pip install tox
-script:
-  - cd cli && tox $TOX_POSARGS
