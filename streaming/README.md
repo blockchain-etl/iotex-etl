@@ -1,7 +1,10 @@
 # IoTeX ETL Streaming
 
 Streams the following IoTeX entities to Pub/Sub or Console using 
-[iotex-etl stream](https://github.com/blockchain-etl/iotex-etl/tree/develop/docs/commands.md#stream):
+[iotexetl stream](https://github.com/blockchain-etl/iotex-etl/tree/develop/docs/commands.md#stream):
+
+Read [this article](https://medium.com/google-cloud/live-ethereum-and-bitcoin-data-in-google-bigquery-and-pub-sub-765b71cd57b5) 
+explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud.google.com/pubsub/docs/overview). 
 
 - blocks
 - actions

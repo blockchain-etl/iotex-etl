@@ -1,34 +1,32 @@
-# IoTeX ETL Architecture
+# IoTeX ETL
 
 [![Build Status](https://travis-ci.org/blockchain-etl/iotex-etl.svg?branch=master)](https://travis-ci.org/blockchain-etl/iotex-etl)
 [![Telegram](https://img.shields.io/badge/telegram-join%20chat-blue.svg)](https://t.me/joinchat/GsMpbA3mv1OJ6YMp3T5ORQ)
 
-![blockchain_etl_architecture.svg](iotex_etl_architecture.svg)
+## Overview
 
-1. The nodes are deployed with Terraform and run in Kubernetes. 
-  Refer to these for more details:
-    - Template repository for deploying Terraform configurations: https://github.com/blockchain-etl/blockchain-terraform-deployment
-    - Terraform configuration files for running blockchain nodes: https://github.com/blockchain-etl/blockchain-terraform
-    - Kubernetes manifests for running blockchain nodes: https://github.com/blockchain-etl/blockchain-kubernetes
+IoTeX ETL allows you to setup an ETL pipeline in Google Cloud Platform for making IoTeX blockchain data available
+in BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting IoTeX data into JSON newline-delimited files
+partitioned by day. 
 
-2. The blockchain data is polled periodically from the nodes and pushed to Google Pub/Sub. 
-  Refer to these for more details:
-    - Article explaining how to subscribe to public blockchain data in Pub/Sub: 
-  https://medium.com/google-cloud/live-ethereum-and-bitcoin-data-in-google-bigquery-and-pub-sub-765b71cd57b5 
-    - Streaming blockchain data to Google Pub/Sub in Kubernetes: 
-  https://github.com/blockchain-etl/iotex-etl/streaming
-    - CLI tools for polling blockchain data from nodes: 
-  https://github.com/blockchain-etl/iotex-etl/cli. 
+Data is available for you to query right away in 
+[Google BigQuery](https://console.cloud.google.com/bigquery?page=dataset&d=mainnet&p=iotex-etl).
 
-3. Airflow DAGs export and load blockchain data to BigQuery daily. 
-  Refer to these for more details:
-    - Article explaining how the DAGs work: 
-  https://cloud.google.com/blog/products/data-analytics/ethereum-bigquery-how-we-built-dataset.
-    - Airflow DAGs for exporting, loading, and parsing blockchain data: 
-  https://github.com/blockchain-etl/iotex-etl/airflow.
+## Architecture
+
+![iotex_etl_architecture.svg](iotex_etl_architecture.svg)
+
+[Google Slides version](https://docs.google.com/presentation/d/1VFMR4f8lghnpGZWZTevRTv6Zn9n9IUWHRnNrQsNE-8Y/edit#slide=id.p89)
+
+1. The nodes are run in a Kubernetes cluster. 
+    Refer to [IoTeX Node in Kubernetes](https://github.com/blockchain-etl/iotex-kubernetes) for deployment instructions.
+
+2. [Airflow DAGs](https://airflow.apache.org/) export and load IoTeX data to BigQuery daily. 
+    Refer to [IoTeX ETL Airflow](/airflow) for deployment instructions.
   
-4. The blockchain data is pulled from Pub/Sub, transformed and streamed to BigQuery.
-  Refer to these for more details:
-    - Dataflow pipelines for connecting Pub/Sub topics with BigQuery tables: 
-  https://github.com/blockchain-etl/iotex-etl/dataflow.
+3. IoTeX data is polled periodically from the nodes and pushed to Google Pub/Sub. 
+    Refer to [IoTeX ETL Streaming](/streaming) for deployment instructions.  
+  
+4. IoTeX data is pulled from Pub/Sub, transformed and streamed to BigQuery. 
+    Refer to [IoTeX ETL Dataflow](/dataflow) for deployment instructions.  
  
