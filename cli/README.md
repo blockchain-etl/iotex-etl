@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/blockchain-etl/iotex-etl.svg?branch=master)](https://travis-ci.org/blockchain-etl/iotex-etl)
 [![Telegram](https://img.shields.io/badge/telegram-join%20chat-blue.svg)](https://t.me/joinchat/GsMpbA3mv1OJ6YMp3T5ORQ)
 
-IoTeX ETL lets you convert blockchain data into JSON format.
+IoTeX ETL CLI lets you convert IoTeX data into JSON newline-delimited format.
 
 [Full documentation available here](http://iotex-etl.readthedocs.io/).
 

@@ -1,7 +1,6 @@
 # IoTeX ETL Airflow
 
 Airflow DAGs for exporting and loading the IoTeX blockchain data to Google BigQuery.
-Data is available for you to query right away in [Google BigQuery](https://console.cloud.google.com/bigquery).
 
 ## Prerequisites
 

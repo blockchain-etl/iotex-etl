@@ -1,6 +1,11 @@
 # IoTeX ETL Dataflow
 
-1. Create GCS bucket used for staging and temp location:
+[Apache Beam](https://beam.apache.org/) pipeline for moving IoTeX data from Pub/Sub to BigQuery. 
+Deployed in [Google Dataflow](https://cloud.google.com/dataflow).  
+
+## Setting Up
+
+1. Create a GCS bucket used for staging and temp location:
 
     ```bash
     gcloud config set project <your_gcp_project>
@@ -39,7 +44,7 @@
    " 
    ``` 
 
-To rewind subscription to a previous date:
+To rewind subscriptions to a previous date:
 
 ```bash   
 for entity in blocks actions logs evm_transfers

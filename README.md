@@ -30,3 +30,6 @@ Data is available for you to query right away in
 4. IoTeX data is pulled from Pub/Sub, transformed and streamed to BigQuery. 
     Refer to [IoTeX ETL Dataflow](/dataflow) for deployment instructions.  
  
+## Setting Up
+
+1. 
