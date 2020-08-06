@@ -50,17 +50,8 @@ substitutions:
   _REGISTRY: gcr.io
   _ENV: dev
   _CHART_NAME: iotex-etl-streaming
-  _ARTIFACT_FILENAME: iotex-etl-streaming-chart-version
   _HELM_REPO_NAME: iotex-etl-k8s
   _HELM_REPO_URL: gs://iotex-etl-k8s/charts
-  _ARTIFACT_URL: gs://artifacts-/versions/
 options:
   env:
     - SKIP_CLUSTER_CONFIG=true
-
-artifacts:
-  objects:
-    location: gs://artifacts-${PROJECT_ID}/versions/${_ENV}/
-    paths:
-      - $_ARTIFACT_FILENAME
-
