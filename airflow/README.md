@@ -25,7 +25,7 @@ Airflow DAGs for exporting and loading the IoTeX blockchain data to Google BigQu
     ```bash
     ENVIRONMENT_NAME=${PROJECT}-${ENVIRONMENT_INDEX} && echo "Environment name is ${ENVIRONMENT_NAME}"
     gcloud composer environments create ${ENVIRONMENT_NAME} --location=us-central1 --zone=us-central1-a \
-        --disk-size=30GB --machine-type=custom-1-4096 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
+        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
         --network=default --subnetwork=default
     
     gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=iotex-etl==0.0.7
@@ -121,9 +121,3 @@ Read [Airflow UI overview](https://airflow.apache.org/docs/stable/ui.html) and
  
 In rare cases you may need to inspect GKE cluster logs in 
 [GKE console](https://console.cloud.google.com/kubernetes/workload?project=iotex-etl-dev). 
-
-**Speed up the initial export**
-
-To speed up the initial data export it is recommended to use `n1-standard-2` instance type for the Cloud Composer cluster.
-After the initial export is finished a new cluster with `custom-1-4096` should be created with `export_start_date`
-Airflow variable set to the previous date.
