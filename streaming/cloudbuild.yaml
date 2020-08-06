@@ -50,6 +50,7 @@ substitutions:
   _REGISTRY: gcr.io
   _ENV: dev
   _CHART_NAME: iotex-etl-streaming
+  _ARTIFACT_FILENAME: iotex-etl-streaming-chart-version
   _HELM_REPO_NAME: iotex-etl-k8s
   _HELM_REPO_URL: gs://iotex-etl-k8s/charts
 options:
