@@ -3,13 +3,13 @@ steps:
     dir: 'airflow'
     args: ["-m", "rsync", "-r", "-c", "-d", "./dags", "gs://${_BUCKET}/dags"]
 
-  - name: gcr.io/cloud-builders/gcloud
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: 'airflow'
-    args: ["composer", "environments", "storage", "data", "import", "--source=./${_VARIABLES_FILENAME}", "--environment=${_ENVIRONMENT_NAME}", "--location=${_LOCATION}"]
+    args: ["gcloud", "composer", "environments", "storage", "data", "import", "--source=./${_VARIABLES_FILENAME}", "--environment=${_ENVIRONMENT_NAME}", "--location=${_LOCATION}"]
 
-  - name: gcr.io/cloud-builders/gcloud
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: 'airflow'
-    args: ["composer", "environments", "run", "${_ENVIRONMENT_NAME}", "--location=${_LOCATION}", "variables", "--", "--i", "${_DATA_DIR}/${_VARIABLES_FILENAME}"]
+    args: ["gcloud", "composer", "environments", "run", "${_ENVIRONMENT_NAME}", "--location=${_LOCATION}", "variables", "--", "--i", "${_DATA_DIR}/${_VARIABLES_FILENAME}"]
 
 substitutions:
  _BUCKET: your-bucket
