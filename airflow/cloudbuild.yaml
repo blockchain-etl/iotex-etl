@@ -3,17 +3,5 @@ steps:
     dir: 'airflow'
     args: ["-m", "rsync", "-r", "-c", "-d", "./dags", "gs://${_BUCKET}/dags"]
 
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    dir: 'airflow'
-    args: ["gcloud", "composer", "environments", "storage", "data", "import", "--source=./${_VARIABLES_FILENAME}", "--environment=${_ENVIRONMENT_NAME}", "--location=${_LOCATION}"]
-
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    dir: 'airflow'
-    args: ["gcloud", "composer", "environments", "run", "${_ENVIRONMENT_NAME}", "--location=${_LOCATION}", "variables", "--", "--i", "${_DATA_DIR}/${_VARIABLES_FILENAME}"]
-
 substitutions:
  _BUCKET: your-bucket
- _ENVIRONMENT_NAME: iotex-etl-0
- _LOCATION: us-central1
- _DATA_DIR: "/home/airflow/gcs/data/"
- _VARIABLES_FILENAME: airflow_variables.json
