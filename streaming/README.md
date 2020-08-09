@@ -23,7 +23,7 @@ explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud
     --zone us-central1-a \
     --num-nodes 1 \
     --disk-size 10GB \
-    --machine-type custom-2-4096 \
+    --machine-type n1-standard-1 \
     --network default \
     --subnetwork default \
     --scopes pubsub,storage-rw,logging-write,monitoring-write,service-management,service-control,trace
