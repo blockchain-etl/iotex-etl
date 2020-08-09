@@ -25,7 +25,7 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
    
 3. Update `chainConfigIotexDev.json` with your values.
 
-3. Start the Dataflow job in:
+4. Start the Dataflow job in:
 
     ```bash
    mvn -e -Pdataflow-runner compile exec:java \

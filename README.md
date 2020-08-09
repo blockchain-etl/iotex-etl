@@ -30,3 +30,19 @@ Data is available for you to query right away in
 4. IoTeX data is pulled from Pub/Sub, transformed and streamed to BigQuery. 
     Refer to [IoTeX ETL Dataflow](/dataflow) for deployment instructions.  
  
+## Setting Up
+
+1. Follow the instructions in [IoTeX Node in Kubernetes](https://github.com/blockchain-etl/iotex-kubernetes) to deploy
+    an IoTeX node in GKE. Wait until it's fully synced. Make note of the Load Balancer IP from the node deployment, it
+    will be used in Airflow and Streamer components below.
+
+2. Follow the instructions in [IoTeX ETL Airflow](/airflow) to deploy a Cloud Composer cluster for 
+    exporting and loading historical IoTeX data. It may take several hours for the export DAG to catch up. During this
+    time "load" and "verify_streaming" DAGs will fail. 
+
+3. Follow the instructions in [IoTeX ETL Streaming](/streaming) to deploy the Streamer component. For the value in 
+    `last_synced_block.txt` specify the last block number of the previous day. You can query it in BigQuery:
+    `SELECT height FROM mainnet.blocks ORDER BY height DESC LIMIT 1`.
+
+4. Follow the instructions in [IoTeX ETL Dataflow](/dataflow) to deploy the Dataflow component. Monitor 
+    "verify_streaming" DAG in Airflow console, once the Dataflow job catches up the latest block, the DAG will succeed.
