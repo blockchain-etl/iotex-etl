@@ -87,6 +87,20 @@ gcloud source repos clone ${REPO_NAME} && cd ${REPO_NAME}
 git add airflow_variables.json && git commit -m "Initial commit"
 git push
 ```
+
+To automate import variables in airflow_variables.json to Cloud composer, perform the following steps:
+- Copy [example cloud build](./docs/cloudbuild.yaml) to the root of repository
+- Navigate to Cloud Build Triggers console https://console.cloud.google.com/cloud-build/triggers.
+- Click **Create push trigger** button.
+- Specify the following configuration options for the trigger:
+    - Name: `import-airflow-variables`
+    - Event: `Push to a branch`
+    - Source: `^master$`
+    - Build configuration: `Cloud Build configuration file (yaml or json)`
+    - Cloud Build configuration file location: `cloudbuild.yaml`
+    - Substitution variables:
+        - `_ENVIRONMENT_NAME`: `Cloud Composer environment name`, e.g. `_ENVIRONMENT_NAME`: `iotex-etl-0`
+        - `_LOCATION`: `Cloud Composer location`, e.g. `_LOCATION`: `us-central1`
   
 ## Deploying Airflow DAGs
 
