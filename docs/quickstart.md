@@ -1,6 +1,6 @@
 # Quickstart
 
-Install IoTeX ETL:
+Install IoTeX ETL CLI:
 
 ```bash
 pip install iotex-etl

@@ -9,7 +9,7 @@ IoTeX ETL CLI lets you convert IoTeX data into JSON newline-delimited format.
 
 ## Quickstart
 
-Install IoTeX ETL:
+Install IoTeX ETL CLI:
 
 ```bash
 pip3 install iotex-etl

@@ -5,8 +5,8 @@
 
 ## Overview
 
-IoTeX ETL allows you to setup an ETL pipeline in Google Cloud Platform for making IoTeX blockchain data available
-in BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting IoTeX data into JSON newline-delimited files
+IoTeX ETL allows you to setup an ETL pipeline in Google Cloud Platform for ingesting IoTeX blockchain data 
+into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting IoTeX data into JSON newline-delimited files
 partitioned by day. 
 
 Data is available for you to query right away in 
