@@ -66,3 +66,27 @@ explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud
     kubectl describe pods
     kubectl describe node [NODE_NAME]
     ```
+
+## Configuration
+
+The following table lists the configurable parameters of the iotex-etl-streaming chart and their default values.
+
+Parameter                       | Description                                       | Default
+------------------------------- | ------------------------------------------------- | ----------------------------------------------------------
+`stream.image.repository`       | Stream image source repository name               | `blockchainetl/iotex-etl`
+`stream.image.tag`              | Image release tag                                 | `1.0.0`
+`stream.image.pullPolicy`       | Image pull policy                                 | `IfNotPresent`
+`stream.resources`              | CPU/Memory resource request/limit                 | `100m/128Mi, 350m/512Mi`
+`config.PROVIDER_URI`           | URI of IoTeX node                                 | `grpcs://api.mainnet.iotex.one:443`
+`config.STREAM_OUTPUT`          | Google Pub Sub topic path                         | `projects/<your-project>/topics/crypto_iotex`
+`config.GCS_PREFIX`             | Google Storage directory of last synced block file| `gs://<your-bucket>/iotex-etl/streaming`
+`config.ENTITY_TYPES`           | The list of entity types to export                | ``
+`config.LAG_BLOCKS`             | The number of blocks to lag behind the network    | `10`
+`config.MAX_WORKERS`            | The number of workers                             | `4`
+`lsb_file`                      | Last synced block file                            | `last_synced_block.txt`
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```bash
+$ helm install --name iotex --values example_values/pubsub/values.yaml charts/iotex-etl-streaming
+```
