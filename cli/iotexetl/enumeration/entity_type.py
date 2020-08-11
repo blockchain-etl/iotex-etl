@@ -3,5 +3,6 @@ class EntityType:
     ACTION = 'action'
     LOG = 'log'
     EVM_TRANSFER = 'evm_transfer'
+    TRANSACTION_LOG = 'transaction_log'
 
-    ALL_FOR_STREAMING = [BLOCK, ACTION, LOG, EVM_TRANSFER]
+    ALL_FOR_STREAMING = [BLOCK, ACTION, LOG, TRANSACTION_LOG]

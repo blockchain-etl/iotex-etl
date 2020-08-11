@@ -20,15 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 from iotexetl.jobs import RETRY_EXCEPTIONS
-from iotexetl.mappers.implicit_transfer_log_mapper import map_implicit_transfer_log
+from iotexetl.mappers.transaction_log_mapper import map_transaction_logs
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
 from blockchainetl_common.utils import validate_range
 
 
-# Exports implicit transfer logs
-class ExportImplicitTransferLogsJob(BaseJob):
+# Exports transaction logs
+class ExportTransactionLogsJob(BaseJob):
     def __init__(
             self,
             start_block,
@@ -57,10 +57,10 @@ class ExportImplicitTransferLogsJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        logs = self.iotex_service.get_implicit_transfer_logs(block_number_batch)
-        for log in logs:
-            for implicit_transfer_log in map_implicit_transfer_log(log):
-                self.item_exporter.export_item(implicit_transfer_log)
+        for block_transaction_log in self.iotex_service.get_transaction_logs(block_number_batch):
+            block = self.iotex_service.get_block(block_transaction_log.blockIdentifier.height)
+            for transaction_log in map_transaction_logs(block, block_transaction_log):
+                self.item_exporter.export_item(transaction_log)
 
     def _end(self):
         self.batch_work_executor.shutdown()

@@ -22,8 +22,7 @@
 
 import click
 
-from iotexetl.jobs.export_implicit_transfer_logs_job import ExportImplicitTransferLogsJob
-
+from iotexetl.jobs.export_transaction_logs_job import ExportTransactionLogsJob
 from iotexetl.exporters.iotex_item_exporter import IotexItemExporter
 from iotexetl.rpc.iotex_rpc import IotexRpc
 from blockchainetl_common.logging_utils import logging_basic_config
@@ -41,10 +40,10 @@ logging_basic_config()
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
 @click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
-def export_implicit_transfer_logs(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
-    """Exports implicit transfer logs."""
+def export_transaction_logs(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
+    """Exports transaction logs."""
 
-    job = ExportImplicitTransferLogsJob(
+    job = ExportTransactionLogsJob(
         start_block=start_block,
         end_block=end_block,
         iotex_rpc=ThreadLocalProxy(lambda: IotexRpc(provider_uri)),
