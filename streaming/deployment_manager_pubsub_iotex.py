@@ -2,7 +2,7 @@ def GenerateConfig(context):
     resources = []
 
     chains = ['mainnet']
-    entity_types = ['blocks', 'actions', 'logs', 'evm_transfers']
+    entity_types = ['blocks', 'actions', 'logs', 'transaction_logs']
 
     for chain in chains:
         topic_name_prefix = chain

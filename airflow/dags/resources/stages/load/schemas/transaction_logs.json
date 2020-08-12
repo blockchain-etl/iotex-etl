@@ -1,0 +1,50 @@
+[
+    {
+        "name": "height",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "timestamp",
+        "type": "TIMESTAMP",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "action_hash",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "index",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "topic",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "amount",
+        "type": "NUMERIC",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "sender",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "recipient",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    }
+]
