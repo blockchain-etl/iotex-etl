@@ -10,8 +10,7 @@ from airflow.operators import python_operator
 
 from iotexetl.cli import (
     get_block_range_for_date,
-    export_evm_transfers,
-    export_implicit_transfer_logs,
+    export_transaction_logs,
     export_blocks,
 )
 from iotexetl_airflow.gcs_utils import upload_to_gcs
@@ -116,14 +115,14 @@ def build_export_dag(
                 os.path.join(tempdir, "logs.json"), export_path("logs", execution_date)
             )
 
-    def export_evm_transfers_command(execution_date, provider_uri, **kwargs):
+    def export_transaction_logs_command(execution_date, provider_uri, **kwargs):
         with TemporaryDirectory() as tempdir:
             start_block, end_block = get_block_range(tempdir, execution_date, provider_uri)
 
-            logging.info('Calling export_evm_transfers({}, {}, {}, {}, {})'.format(
+            logging.info('Calling export_transaction_logs({}, {}, {}, {}, {})'.format(
                 start_block, end_block, provider_uri, export_max_workers, tempdir))
 
-            export_evm_transfers.callback(
+            export_transaction_logs.callback(
                 start_block=start_block,
                 end_block=end_block,
                 provider_uri=provider_uri,
@@ -132,35 +131,14 @@ def build_export_dag(
                 output_format='json'
             )
 
-            local_path = os.path.join(tempdir, "evm_transfers.json")
-            remote_path = export_path("evm_transfers", execution_date)
+            local_path = os.path.join(tempdir, "transaction_logs.json")
+            remote_path = export_path("transaction_logs", execution_date)
             if os.path.exists(local_path):
                 copy_to_export_path(local_path, remote_path)
             else:
                 # Upload an empty file to indicate export is finished
                 open(local_path, mode='a').close()
                 copy_to_export_path(local_path, remote_path)
-
-
-    def export_implicit_transfer_logs_command(execution_date, provider_uri, **kwargs):
-        with TemporaryDirectory() as tempdir:
-            start_block, end_block = get_block_range(tempdir, execution_date, provider_uri)
-
-            logging.info('Calling export_implicit_transfer_logs({}, {}, {}, {}, {})'.format(
-                start_block, end_block, provider_uri, export_max_workers, tempdir))
-
-            export_implicit_transfer_logs.callback(
-                start_block=start_block,
-                end_block=end_block,
-                provider_uri=provider_uri,
-                max_workers=export_max_workers,
-                output_dir=tempdir,
-                output_format='json'
-            )
-
-            copy_to_export_path(
-                os.path.join(tempdir, "implicit_transfer_logs.json"), export_path("implicit_transfer_logs", execution_date)
-            )
 
     def add_export_task(toggle, task_id, python_callable, dependencies=None):
         if toggle:
@@ -189,8 +167,9 @@ def build_export_dag(
 
     add_export_task(
         True,
-        "export_evm_transfers",
-        add_provider_uri_fallback_loop(export_evm_transfers_command, provider_uris)
+        "export_transaction_logs",
+        add_provider_uri_fallback_loop(export_transaction_logs_command, provider_uris),
+        dependencies=[export_blocks_operator]
     )
 
     return dag

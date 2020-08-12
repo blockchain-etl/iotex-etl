@@ -186,12 +186,12 @@ def build_load_dag(
     load_blocks_task = add_load_tasks('blocks')
     load_actions_task = add_load_tasks('actions')
     load_logs_task = add_load_tasks('logs')
-    load_evm_transfers_task = add_load_tasks('evm_transfers')
+    load_transaction_logs_task = add_load_tasks('transaction_logs')
 
     merge_blocks_task = add_merge_tasks('blocks', dependencies=[load_blocks_task])
     merge_actions_task = add_merge_tasks('actions', dependencies=[load_actions_task])
     merge_logs_task = add_merge_tasks('logs', dependencies=[load_logs_task])
-    merge_evm_transfers_task = add_merge_tasks('evm_transfers', dependencies=[load_evm_transfers_task])
+    merge_transaction_logs_task = add_merge_tasks('transaction_logs', dependencies=[load_transaction_logs_task])
 
     verify_blocks_count_task = add_verify_tasks('blocks_count', dependencies=[merge_blocks_task])
     verify_blocks_have_latest_task = add_verify_tasks('blocks_have_latest', dependencies=[merge_blocks_task])
