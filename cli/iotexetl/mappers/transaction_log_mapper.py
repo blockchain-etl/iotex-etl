@@ -10,7 +10,7 @@ def map_transaction_logs(raw_block, block_transaction_log):
                 'action_hash': log.actionHash.hex(),
                 'index': index,
                 'topic': string_utils.base64_string(transaction.topic),
-                'amount': transaction.amount,
+                'amount': string_utils.to_int(transaction.amount),
                 'sender': transaction.sender,
                 'recipient': transaction.recipient,
                 'timestamp': raw_block.block.header.core.timestamp.ToJsonString(),
