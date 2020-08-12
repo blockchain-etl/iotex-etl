@@ -23,7 +23,6 @@
 import click
 
 from iotexetl.cli.export_blocks import export_blocks
-from iotexetl.cli.export_evm_transfers import export_evm_transfers
 from iotexetl.cli.export_transaction_logs import export_transaction_logs
 from iotexetl.cli.export_logs import export_logs
 from iotexetl.cli.get_block_range_for_date import get_block_range_for_date

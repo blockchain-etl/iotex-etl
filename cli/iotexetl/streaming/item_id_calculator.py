@@ -38,6 +38,8 @@ class ItemIdCalculator:
             return concat(item_type, item.get('hash'))
         elif item_type == 'log' and item.get('action_hash') is not None and item.get('index') is not None:
             return concat(item_type, item.get('action_hash'), item.get('index'))
+        elif item_type == 'transaction_log' and item.get('action_hash') is not None and item.get('index') is not None:
+            return concat(item_type, item.get('action_hash'), item.get('index'))
 
         logging.warning('item_id for item {} is None'.format(json.dumps(item)))
 
