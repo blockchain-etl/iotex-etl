@@ -46,7 +46,6 @@ def read_resource(resource_group, file_name):
     (5892481, 5892481, 1, 'blocks_with_put_poll_result', ['block', 'action', 'log'], 'mock'),
     (5890899, 5890899, 1, 'blocks_with_claim_from_rewarding_fund', ['block', 'action', 'log'], 'mock'),
     (5892110, 5892110, 1, 'blocks_with_stake_create', ['block', 'action', 'log'], 'mock'),
-    (5906248, 5906248, 1, 'evm_transfers', ['evm_transfer'], 'mock'),
 ])
 def test_stream(tmpdir, start_block, end_block, batch_size, resource_group, entity_types, provider_type):
     try:
@@ -57,7 +56,6 @@ def test_stream(tmpdir, start_block, end_block, batch_size, resource_group, enti
     blocks_output_file = str(tmpdir.join('actual_blocks.json'))
     actions_output_file = str(tmpdir.join('actual_actions.json'))
     logs_output_file = str(tmpdir.join('actual_logs.json'))
-    evm_transfers_output_file = str(tmpdir.join('actual_evm_transfers.json'))
 
     streamer_adapter = IotexStreamerAdapter(
         iotex_rpc=ThreadLocalProxy(
@@ -70,7 +68,6 @@ def test_stream(tmpdir, start_block, end_block, batch_size, resource_group, enti
                 'block': blocks_output_file,
                 'action': actions_output_file,
                 'log': logs_output_file,
-                'evm_transfer': evm_transfers_output_file,
             }
         ),
         entity_types=entity_types,
@@ -102,11 +99,4 @@ def test_stream(tmpdir, start_block, end_block, batch_size, resource_group, enti
         print(read_file(logs_output_file))
         compare_lines_ignore_order(
             read_resource(resource_group, 'expected_logs.json'), read_file(logs_output_file)
-        )
-
-    if EntityType.EVM_TRANSFER in entity_types:
-        print('=====================')
-        print(read_file(evm_transfers_output_file))
-        compare_lines_ignore_order(
-            read_resource(resource_group, 'expected_evm_transfers.json'), read_file(evm_transfers_output_file)
         )

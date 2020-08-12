@@ -39,7 +39,6 @@ def cli(ctx):
 
 # export
 cli.add_command(export_blocks, "export_blocks")
-cli.add_command(export_evm_transfers, "export_evm_transfers")
 cli.add_command(export_transaction_logs, "export_transaction_logs")
 cli.add_command(export_logs, "export_logs")
 

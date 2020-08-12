@@ -31,7 +31,6 @@ def create_item_exporter(output):
             'block': output + '.blocks',
             'action': output + '.actions',
             'log': output + '.logs',
-            'evm_transfer': output + '.evm_transfers',
         })
     elif item_exporter_type == ItemExporterType.CONSOLE:
         item_exporter = ConsoleItemExporter()
