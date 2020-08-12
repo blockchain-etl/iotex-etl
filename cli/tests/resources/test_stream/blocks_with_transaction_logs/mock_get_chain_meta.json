@@ -1,0 +1,12 @@
+{
+  "chainMeta": {
+    "height": "6098532",
+    "numActions": "6478365",
+    "tps": "1",
+    "epoch": {
+      "num": "10993",
+      "height": "6098041"
+    },
+    "tpsFloat": 0.18181819
+  }
+}
