@@ -178,14 +178,15 @@
 | act_hash          | STRING             |
 | index             | INTEGER            |
 
-### evm_transfers
+### transaction_logs
 
 | Column            | Type               |
 |-------------------|--------------------|
 | height            | INTEGER            |
 | timestamp         | TIMESTAMP          |
 | action_hash       | STRING             |
+| topic             | STRING             |
 | amount            | INTEGER            |
-| from              | STRING             |
-| to                | STRING             |
+| sender            | STRING             |
+| recipient         | STRING             |
 | index             | INTEGER            |
