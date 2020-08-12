@@ -23,11 +23,33 @@ Options:
 #### export blocks
 
 ```bash
-iotexetl export_blocks --start-block 0 --end-block 100 \
+iotexetl export_blocks --start-block 1 --end-block 100 \
 --provider-uri grpcs://api.mainnet.iotex.one:443 --output-dir output 
 ```
 
 Exports blocks, actions, receipts, and logs to individual files in the folder specified in `--output-dir`.
+
+```
+Options:
+  -s, --start-block INTEGER       Start block  [default: 0]
+  -e, --end-block INTEGER         End block  [required]
+  -p, --provider-uri TEXT         The URI of the remote IoTex node  [default:
+                                  grpcs://api.mainnet.iotex.one:443]
+  -w, --max-workers INTEGER       The maximum number of workers.  [default: 5]
+  -b, --batch-size INTEGER        How many blocks to batch in single request. [default: 10]
+  -o, --output-dir TEXT           The output directory for block data.
+  -f, --output-format [json]      The output format.  [default: json]
+  -h, --help                      Show this message and exit.
+```
+
+#### export transaction logs
+
+```bash
+iotexetl export_transaction_logs --start-block 1 --end-block 100 \
+--provider-uri grpcs://api.mainnet.iotex.one:443 --output-dir output 
+```
+
+Exports transaction logs to file in folder specified in `--output-dir`.
 
 ```
 Options:

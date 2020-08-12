@@ -6,6 +6,6 @@ Data is available for you to query right away in [Google BigQuery](https://conso
 
 ## Features
 
-* Easily export: blocks, actions, receipts, logs.
+* Easily export: blocks, actions, receipts, logs, transaction_logs.
 * Supported formats: JSON newline-delimited files.
 * Partitioning by date.

@@ -43,13 +43,9 @@ class IotexRpc:
             byIndex=api_pb2.GetBlockMetasByIndexRequest(start=start_height, count=count)
         ), timeout=self.timeout)
 
-    def get_evm_transfers(self, block_number):
-        return self.stub.GetEvmTransfersByBlockHeight(
-            api_pb2.GetEvmTransfersByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
-
-    def get_implicit_transfer_logs(self, block_number):
-        return self.stub.GetImplicitTransferLogByBlockHeight(
-            api_pb2.GetImplicitTransferLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
+    def get_transaction_logs(self, block_number):
+        return self.stub.GetTransactionLogByBlockHeight(
+            api_pb2.GetTransactionLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
     def get_logs(self, block_number_batch):
         return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(),

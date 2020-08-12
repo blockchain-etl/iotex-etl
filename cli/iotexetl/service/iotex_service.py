@@ -61,13 +61,12 @@ class IotexService(object):
                 raise
             return None
 
-    def get_implicit_transfer_logs(self, block_number_batch):
+    def get_transaction_logs(self, block_number_batch):
         if not block_number_batch:
             return []
         for block_number in block_number_batch:
-            response = self.iotex_rpc.get_implicit_transfer_logs(block_number)
-            for block in response.blockImplicitTransferLog:
-                yield block
+            response = self.iotex_rpc.get_transaction_logs(block_number)
+            yield response
 
     def get_logs(self, block_number_batch):
         if not block_number_batch:

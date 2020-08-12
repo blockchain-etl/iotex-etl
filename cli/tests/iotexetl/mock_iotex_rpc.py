@@ -40,9 +40,9 @@ class MockIotexRpc:
         file_content = self.read_resource(build_file_name('get_block_metas', start_height, count))
         return json_format.Parse(file_content, api_pb2.GetBlockMetasResponse())
 
-    def get_evm_transfers(self, block_number):
-        file_content = self.read_resource(build_file_name('get_evm_transfers', block_number))
-        return json_format.Parse(file_content, api_pb2.GetEvmTransfersByBlockHeightResponse())
+    def get_transaction_logs(self, block_number):
+        file_content = self.read_resource(build_file_name('get_transaction_logs', block_number))
+        return json_format.Parse(file_content, api_pb2.GetTransactionLogByBlockHeightResponse())
 
     def get_chain_meta(self):
         file_content = self.read_resource(build_file_name('get_chain_meta'))

@@ -20,27 +20,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 from iotexetl.jobs import RETRY_EXCEPTIONS
-from iotexetl.mappers.evm_transfer_mapper import map_evm_transfers
+from iotexetl.mappers.transaction_log_mapper import map_transaction_logs
 from iotexetl.service.iotex_service import IotexService
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
 from blockchainetl_common.utils import validate_range
 
 
-# Exports blocks, actions, and receipts
-class ExportEvmTransfersJob(BaseJob):
+# Exports transaction logs
+class ExportTransactionLogsJob(BaseJob):
     def __init__(
             self,
             start_block,
             end_block,
             iotex_rpc,
             max_workers,
-            item_exporter):
+            item_exporter,
+            batch_size=1):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(1, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
+        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.iotex_service = IotexService(iotex_rpc)
@@ -56,13 +57,10 @@ class ExportEvmTransfersJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        assert len(block_number_batch) == 1
-        block_number = block_number_batch[0]
-        block_evm_transfers = self.iotex_service.get_evm_transfers(block_number)
-        if block_evm_transfers:
-            block = self.iotex_service.get_block(block_evm_transfers.blockHeight)
-            for evm_transfer in map_evm_transfers(block, block_evm_transfers):
-                self.item_exporter.export_item(evm_transfer)
+        for block_transaction_log in self.iotex_service.get_transaction_logs(block_number_batch):
+            block = self.iotex_service.get_block(block_transaction_log.blockIdentifier.height)
+            for transaction_log in map_transaction_logs(block, block_transaction_log):
+                self.item_exporter.export_item(transaction_log)
 
     def _end(self):
         self.batch_work_executor.shutdown()

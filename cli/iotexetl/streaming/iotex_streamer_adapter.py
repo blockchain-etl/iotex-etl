@@ -4,8 +4,8 @@ from blockchainetl_common.jobs.exporters.console_item_exporter import ConsoleIte
 from blockchainetl_common.jobs.exporters.in_memory_item_exporter import InMemoryItemExporter
 from iotexetl.enumeration.entity_type import EntityType
 from iotexetl.jobs.export_blocks_job import ExportBlocksJob
+from iotexetl.jobs.export_transaction_logs_job import ExportTransactionLogsJob
 
-from iotexetl.jobs.export_evm_transfers_job import ExportEvmTransfersJob
 from iotexetl.streaming.item_id_calculator import ItemIdCalculator
 
 
@@ -37,17 +37,17 @@ class IotexStreamerAdapter:
         if self._should_export(EntityType.BLOCK) or self._should_export(EntityType.ACTION) or self._should_export(EntityType.LOG):
             blocks, actions, logs = self._export_blocks(start_block, end_block)
 
-        # Extract evm transfers
-        evm_transfers = []
-        if self._should_export(EntityType.EVM_TRANSFER):
-            evm_transfers = self._export_evm_transfers(start_block, end_block)
+        # Extract transaction logs
+        transaction_logs = []
+        if self._should_export(EntityType.TRANSACTION_LOG):
+            transaction_logs = self._export_transaction_logs(start_block, end_block)
 
         logging.info('Exporting with ' + type(self.item_exporter).__name__)
 
         all_items = blocks + \
             actions + \
             logs + \
-            evm_transfers
+            transaction_logs
 
         self.calculate_item_ids(all_items)
 
@@ -72,17 +72,17 @@ class IotexStreamerAdapter:
         logs = item_exporter.get_items(EntityType.LOG)
         return blocks, actions, logs
 
-    def _export_evm_transfers(self, start_block, end_block):
-        item_exporter = InMemoryItemExporter(item_types=[EntityType.EVM_TRANSFER])
-        job = ExportEvmTransfersJob(
+    def _export_transaction_logs(self, start_block, end_block):
+        item_exporter = InMemoryItemExporter(item_types=[EntityType.TRANSACTION_LOG])
+        job = ExportTransactionLogsJob(
             start_block=start_block,
             end_block=end_block,
             iotex_rpc=self.iotex_rpc,
             max_workers=self.max_workers,
             item_exporter=item_exporter)
         job.run()
-        evm_transfers = item_exporter.get_items(EntityType.EVM_TRANSFER)
-        return evm_transfers
+        transaction_logs = item_exporter.get_items(EntityType.TRANSACTION_LOG)
+        return transaction_logs
 
     def _should_export(self, entity_type):
         if entity_type == EntityType.BLOCK:
@@ -90,7 +90,7 @@ class IotexStreamerAdapter:
 
         if entity_type == EntityType.ACTION \
                 or entity_type == EntityType.LOG \
-                or entity_type == EntityType.EVM_TRANSFER:
+                or entity_type == EntityType.TRANSACTION_LOG:
             return entity_type in self.entity_types
 
         raise ValueError('Unexpected entity type ' + entity_type)

@@ -99,15 +99,15 @@ class APIServiceStub(object):
                 request_serializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightRequest.SerializeToString,
                 response_deserializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightResponse.FromString,
                 )
-        self.GetImplicitTransferLogByActionHash = channel.unary_unary(
-                '/iotexapi.APIService/GetImplicitTransferLogByActionHash',
-                request_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.SerializeToString,
-                response_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.FromString,
+        self.GetTransactionLogByActionHash = channel.unary_unary(
+                '/iotexapi.APIService/GetTransactionLogByActionHash',
+                request_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.FromString,
                 )
-        self.GetImplicitTransferLogByBlockHeight = channel.unary_unary(
-                '/iotexapi.APIService/GetImplicitTransferLogByBlockHeight',
-                request_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.SerializeToString,
-                response_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.FromString,
+        self.GetTransactionLogByBlockHeight = channel.unary_unary(
+                '/iotexapi.APIService/GetTransactionLogByBlockHeight',
+                request_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.FromString,
                 )
         self.StreamBlocks = channel.unary_stream(
                 '/iotexapi.APIService/StreamBlocks',
@@ -258,13 +258,13 @@ class APIServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetImplicitTransferLogByActionHash(self, request, context):
+    def GetTransactionLogByActionHash(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetImplicitTransferLogByBlockHeight(self, request, context):
+    def GetTransactionLogByBlockHeight(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -383,15 +383,15 @@ def add_APIServiceServicer_to_server(servicer, server):
                     request_deserializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightRequest.FromString,
                     response_serializer=proto_dot_api_dot_api__pb2.GetEvmTransfersByBlockHeightResponse.SerializeToString,
             ),
-            'GetImplicitTransferLogByActionHash': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetImplicitTransferLogByActionHash,
-                    request_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.FromString,
-                    response_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.SerializeToString,
+            'GetTransactionLogByActionHash': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTransactionLogByActionHash,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.SerializeToString,
             ),
-            'GetImplicitTransferLogByBlockHeight': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetImplicitTransferLogByBlockHeight,
-                    request_deserializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.FromString,
-                    response_serializer=proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.SerializeToString,
+            'GetTransactionLogByBlockHeight': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTransactionLogByBlockHeight,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.SerializeToString,
             ),
             'StreamBlocks': grpc.unary_stream_rpc_method_handler(
                     servicer.StreamBlocks,
@@ -691,7 +691,7 @@ class APIService(object):
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetImplicitTransferLogByActionHash(request,
+    def GetTransactionLogByActionHash(request,
             target,
             options=(),
             channel_credentials=None,
@@ -700,14 +700,14 @@ class APIService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetImplicitTransferLogByActionHash',
-            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashRequest.SerializeToString,
-            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByActionHashResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetTransactionLogByActionHash',
+            proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetImplicitTransferLogByBlockHeight(request,
+    def GetTransactionLogByBlockHeight(request,
             target,
             options=(),
             channel_credentials=None,
@@ -716,9 +716,9 @@ class APIService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetImplicitTransferLogByBlockHeight',
-            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightRequest.SerializeToString,
-            proto_dot_api_dot_api__pb2.GetImplicitTransferLogByBlockHeightResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetTransactionLogByBlockHeight',
+            proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -767,5 +767,100 @@ class APIService(object):
         return grpc.experimental.unary_unary(request, target, '/iotexapi.APIService/GetElectionBuckets',
             proto_dot_api_dot_api__pb2.GetElectionBucketsRequest.SerializeToString,
             proto_dot_api_dot_api__pb2.GetElectionBucketsResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class TransactionLogServiceStub(object):
+    """experiment
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.GetTransactionLogByActionHash = channel.unary_unary(
+                '/iotexapi.TransactionLogService/GetTransactionLogByActionHash',
+                request_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.FromString,
+                )
+        self.GetTransactionLogByBlockHeight = channel.unary_unary(
+                '/iotexapi.TransactionLogService/GetTransactionLogByBlockHeight',
+                request_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.SerializeToString,
+                response_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.FromString,
+                )
+
+
+class TransactionLogServiceServicer(object):
+    """experiment
+    """
+
+    def GetTransactionLogByActionHash(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetTransactionLogByBlockHeight(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_TransactionLogServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'GetTransactionLogByActionHash': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTransactionLogByActionHash,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.SerializeToString,
+            ),
+            'GetTransactionLogByBlockHeight': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTransactionLogByBlockHeight,
+                    request_deserializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.FromString,
+                    response_serializer=proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'iotexapi.TransactionLogService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class TransactionLogService(object):
+    """experiment
+    """
+
+    @staticmethod
+    def GetTransactionLogByActionHash(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.TransactionLogService/GetTransactionLogByActionHash',
+            proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetTransactionLogByActionHashResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetTransactionLogByBlockHeight(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/iotexapi.TransactionLogService/GetTransactionLogByBlockHeight',
+            proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightRequest.SerializeToString,
+            proto_dot_api_dot_api__pb2.GetTransactionLogByBlockHeightResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
