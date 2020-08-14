@@ -66,6 +66,31 @@ def build_load_dag(
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
+    def add_seed_tasks(task):
+        def seed_task():
+            client = bigquery.Client()
+            job_config = bigquery.LoadJobConfig()
+            schema_path = os.path.join(dags_folder, 'resources/stages/seed/schemas/{task}.json'.format(task=task))
+            job_config.schema = read_bigquery_schema_from_file(schema_path)
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job_config.write_disposition = 'WRITE_TRUNCATE'
+            job_config.ignore_unknown_values = True
+
+            file_path = os.path.join(dags_folder, 'resources/stages/seed/data/{task}.json'.format(task=task))
+            table_ref = create_dataset(client, dataset_name, destination_dataset_project_id).table(task)
+            load_job = client.load_table_from_file(open(file_path, mode='r+b'), table_ref, job_config=job_config)
+            submit_bigquery_job(load_job, job_config)
+            assert load_job.state == 'DONE'
+
+        seed_operator = PythonOperator(
+            task_id='seed_{task}'.format(task=task),
+            python_callable=seed_task,
+            execution_timeout=timedelta(minutes=30),
+            dag=dag
+        )
+
+        return seed_operator
+
     def add_load_tasks(task, time_partitioning_field='timestamp'):
         wait_sensor = GoogleCloudStorageObjectSensor(
             task_id='wait_latest_{task}'.format(task=task),
@@ -182,6 +207,8 @@ def build_load_dag(
             for dependency in dependencies:
                 dependency >> verify_task
         return verify_task
+
+    add_seed_tasks('initial_balances')
 
     load_blocks_task = add_load_tasks('blocks')
     load_actions_task = add_load_tasks('actions')
