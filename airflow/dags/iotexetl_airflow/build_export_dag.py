@@ -168,8 +168,7 @@ def build_export_dag(
     add_export_task(
         True,
         "export_transaction_logs",
-        add_provider_uri_fallback_loop(export_transaction_logs_command, provider_uris),
-        dependencies=[export_blocks_operator]
+        add_provider_uri_fallback_loop(export_transaction_logs_command, provider_uris)
     )
 
     return dag
