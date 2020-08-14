@@ -6,6 +6,7 @@ def map_transaction_logs(raw_block, block_transaction_log):
         for index, transaction in enumerate(log.transactions):
             yield {
                 'type': 'transaction_log',
+                'transaction_log_type': transaction.type,
                 'height': block_transaction_log.blockIdentifier.height,
                 'action_hash': log.actionHash.hex(),
                 'index': index,
