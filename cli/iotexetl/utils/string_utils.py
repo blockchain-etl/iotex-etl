@@ -2,7 +2,7 @@ import base64
 
 
 def base64_string(val):
-    if val is None:
+    if val is None or val == b'':
         return val
     return base64.b64encode(val).decode('utf-8')
 
