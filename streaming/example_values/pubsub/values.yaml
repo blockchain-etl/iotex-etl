@@ -1,7 +1,7 @@
 stream:
   image:
     repository: blockchainetl/iotex-etl
-    tag: 0.0.8
+    tag: 0.0.9
 config:
   PROVIDER_URI: "grpcs://api.mainnet.iotex.one:443"
   STREAM_OUTPUT: "projects/iotex-etl-dev/topics/mainnet"
