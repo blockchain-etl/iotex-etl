@@ -90,7 +90,7 @@
             {
                 "name": "payload",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -113,7 +113,7 @@
             {
                 "name": "data",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -512,7 +512,7 @@
             {
                 "name": "data",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -530,7 +530,7 @@
             {
                 "name": "data",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -581,7 +581,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -599,7 +599,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -617,7 +617,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -640,7 +640,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -668,7 +668,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -691,7 +691,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -714,7 +714,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -762,7 +762,7 @@
             {
                 "name": "payload",
                 "type": "BYTES",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -818,7 +818,7 @@
                     {
                         "name": "pub_key",
                         "type": "STRING",
-                        "mode": "REQUIRED"
+                        "mode": "NULLABLE"
                     },
                     {
                         "name": "reward_address",

@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import logging
+from random import random
 
 import click
 from blockchainetl_common.streaming.streaming_utils import configure_signals, configure_logging
@@ -57,6 +58,7 @@ def stream(last_synced_block_file, lag, provider_uri, output, start_block, entit
     from iotexetl.streaming.iotex_streamer_adapter import IotexStreamerAdapter
     from blockchainetl_common.streaming.streamer import Streamer
 
+    provider_uri = pick_random_provider_uri(provider_uri)
     logging.info('Using ' + provider_uri)
 
     streamer_adapter = IotexStreamerAdapter(
@@ -89,3 +91,8 @@ def parse_entity_types(entity_types):
                     .format(entity_type, ','.join(EntityType.ALL_FOR_STREAMING)))
 
     return entity_types
+
+
+def pick_random_provider_uri(provider_uri):
+    provider_uris = [uri.strip() for uri in provider_uri.split(',')]
+    return random.choice(provider_uris)

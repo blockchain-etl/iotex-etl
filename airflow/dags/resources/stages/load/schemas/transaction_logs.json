@@ -33,7 +33,7 @@
         "name": "topic",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "amount",
