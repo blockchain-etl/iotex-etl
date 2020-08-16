@@ -1,5 +1,11 @@
 [
     {
+        "name": "transaction_log_type",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
         "name": "height",
         "type": "INTEGER",
         "description": "",
