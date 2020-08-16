@@ -33,7 +33,7 @@
         "name": "data",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "index",
