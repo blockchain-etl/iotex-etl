@@ -1,10 +1,10 @@
 stream:
   image:
     repository: blockchainetl/iotex-etl
-    tag: 0.0.9
+    tag: 0.0.10
 config:
   PROVIDER_URI: "grpcs://api.mainnet.iotex.one:443"
-  STREAM_OUTPUT: "projects/iotex-etl-dev/topics/mainnet"
-  GCS_PREFIX: "gs://iotex-etl-streaming-dev/iotex-etl/streaming"
+  STREAM_OUTPUT: "projects/iotex-etl/topics/mainnet"
+  GCS_PREFIX: "gs://iotex-etl-streaming-0/iotex-etl/streaming"
   LAG_BLOCKS: "10"
   ENTITY_TYPES: "block,action,log,transaction_log"
