@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 import logging
-from random import random
+import random
 
 import click
 from blockchainetl_common.streaming.streaming_utils import configure_signals, configure_logging
