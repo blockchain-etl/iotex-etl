@@ -146,19 +146,6 @@
         </dependency>
       </dependencies>
     </profile>
-
-    <profile>
-      <id>dataflow-runner</id>
-      <!-- Makes the DataflowRunner available when running a pipeline. -->
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.beam</groupId>
-          <artifactId>beam-runners-google-cloud-dataflow-java</artifactId>
-          <version>${beam.version}</version>
-          <scope>runtime</scope>
-        </dependency>
-      </dependencies>
-    </profile>
     
   </profiles>
 
@@ -167,6 +154,14 @@
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-pubsub</artifactId>
       <version>${pubsub.version}</version>
+    </dependency>
+
+    <!-- Used when runner is set to 'DataflowRunner' -->
+    <dependency>
+      <groupId>org.apache.beam</groupId>
+      <artifactId>beam-runners-google-cloud-dataflow-java</artifactId>
+      <version>${beam.version}</version>
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>

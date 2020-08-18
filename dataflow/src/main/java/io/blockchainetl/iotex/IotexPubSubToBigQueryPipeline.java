@@ -28,7 +28,7 @@ public class IotexPubSubToBigQueryPipeline {
 
         List<ChainConfig> chainConfigs = readChainConfigs(options.getChainConfigFile());
 
-        List<String> entityNames = Lists.newArrayList("blocks", "actions", "logs", "evm_transfers");
+        List<String> entityNames = Lists.newArrayList("blocks", "actions", "logs", "transaction_logs");
 
         for (ChainConfig chainConfig : chainConfigs) {
             for (String entityName : entityNames) {

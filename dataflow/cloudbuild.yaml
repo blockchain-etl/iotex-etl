@@ -1,0 +1,16 @@
+steps:
+  - name: 'maven:3-jdk-8'
+    dir: 'dataflow'
+    entrypoint: mvn
+    args:
+      - compile
+      - exec:java
+      - -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline
+      - -Dexec.args="--runner=DataflowRunner --project=$_PROJECT_ID --stagingLocation=$_PIPELINE_FOLDER/staging --templateLocation=$_PIPELINE_FOLDER/template --tempLocation=$_PIPELINE_FOLDER/temp --chainConfigFile=$_CHAIN_CONFIG_FILENAME --region=$_REGION"
+    id: 'build dataflow'
+
+substitutions:
+  _PROJECT_ID: iotex-etl
+  _PIPELINE_FOLDER: gs://iotex-etl-dataflow-0/iotex-pubsub-to-bigquery
+  _CHAIN_CONFIG_FILENAME: chainConfigIotexDev.json
+  _REGION: us-central1
