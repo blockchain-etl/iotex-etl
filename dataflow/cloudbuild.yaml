@@ -1,12 +1,20 @@
 steps:
   - name: 'maven:3-jdk-8'
     dir: 'dataflow'
+    entrypoint: bash
     args:
-      - compile
-      - exec:java
-      - -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline
-      - -Dexec.args="--runner=DataflowRunner --project=$_PROJECT_ID --stagingLocation=$_PIPELINE_FOLDER/staging --templateLocation=$_PIPELINE_FOLDER/template --tempLocation=$_PIPELINE_FOLDER/temp --chainConfigFile=$_CHAIN_CONFIG_FILENAME --region=$_REGION"
-      - -Pdataflow-runner
+      - -c
+      - |
+        compile exec:java
+        -Dexec.args="--runner=DataflowRunner \
+        --project=$_PROJECT_ID \
+        --stagingLocation=$_PIPELINE_FOLDER/staging \
+        --templateLocation=$_PIPELINE_FOLDER/template \
+        --tempLocation=$_PIPELINE_FOLDER/temp \
+        --chainConfigFile=$_CHAIN_CONFIG_FILENAME \
+        --region=$_REGION"
+        -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline
+        -Pdataflow-runner
     id: 'build dataflow'
 
 substitutions:
