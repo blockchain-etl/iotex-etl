@@ -5,7 +5,7 @@ steps:
     args:
       - -c
       - |
-        compile exec:java
+        mvn compile exec:java
         -Dexec.args="--runner=DataflowRunner \
         --project=$_PROJECT_ID \
         --stagingLocation=$_PIPELINE_FOLDER/staging \
