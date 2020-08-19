@@ -5,15 +5,15 @@ steps:
     args:
       - -c
       - |
-        mvn compile exec:java
+        mvn compile exec:java \
         -Dexec.args="--runner=DataflowRunner \
         --project=$_PROJECT_ID \
         --stagingLocation=$_PIPELINE_FOLDER/staging \
         --templateLocation=$_PIPELINE_FOLDER/template \
         --tempLocation=$_PIPELINE_FOLDER/temp \
         --chainConfigFile=$_CHAIN_CONFIG_FILENAME \
-        --region=$_REGION"
-        -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline
+        --region=$_REGION" \
+        -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline \
         -Pdataflow-runner
     id: 'build dataflow'
 
