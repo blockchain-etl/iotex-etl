@@ -7,12 +7,24 @@ import org.apache.beam.sdk.options.Validation;
 import org.apache.beam.sdk.options.ValueProvider;
 
 public interface PubSubToBigQueryPipelineOptions extends PipelineOptions, StreamingOptions {
-    
-    @Description("JSON file containing chain configuration")
-    @Validation.Required
-    String getChainConfigFile();
 
-    void setChainConfigFile(String value);
+    @Description("The transform name prefix")
+    @Validation.Required
+    String getTransformNamePrefix();
+
+    void setTransformNamePrefix(String value);
+
+    @Description("The prefix of PubSub subscription")
+    @Validation.Required
+    ValueProvider<String> getPubSubSubscriptionPrefix();
+
+    void setPubSubSubscriptionPrefix(ValueProvider<String> value);
+
+    @Description("The BigQuery dataset name")
+    @Validation.Required
+    ValueProvider<String> getBigQueryDataset();
+
+    void setBigQueryDataset(ValueProvider<String> value);
 
     @Description("BigQuery table to output errors to. The name should be in the format of " +
         "<project-id>:<dataset-id>.<table-name>.")
