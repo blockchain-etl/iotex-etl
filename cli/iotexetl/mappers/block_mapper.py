@@ -19,8 +19,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 from iotexetl.utils import iotex_utils
 from iotexetl.utils.string_utils import base64_string
+
 
 def map_block(raw_block, raw_block_meta):
     header = raw_block.block.header

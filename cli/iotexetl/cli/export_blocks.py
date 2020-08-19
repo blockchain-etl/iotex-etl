@@ -29,6 +29,8 @@ from iotexetl.rpc.iotex_rpc import IotexRpc
 from blockchainetl_common.logging_utils import logging_basic_config
 from blockchainetl_common.thread_local_proxy import ThreadLocalProxy
 
+from iotexetl.utils.iotex_utils import set_iotex_utils_context
+
 logging_basic_config()
 
 
@@ -37,14 +39,18 @@ logging_basic_config()
 @click.option('-e', '--end-block', required=True, type=int, help='End block')
 @click.option('-p', '--provider-uri', default='grpcs://api.mainnet.iotex.one:443', show_default=True, type=str,
               help='The URI of the remote IoTeX node.')
+@click.option('-t', '--testnet', required=False, is_flag=True, help='Whether it\'s a testnet.')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-b', '--batch-size', default=10, show_default=True, type=int,
               help='The number of blocks to export in batch.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
 @click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
-def export_blocks(start_block, end_block, provider_uri, max_workers, batch_size, output_dir, output_format):
+def export_blocks(start_block, end_block, provider_uri, testnet, max_workers, batch_size, output_dir, output_format):
     """Exports blocks, actions, receipts, and logs."""
+
+    if testnet:
+        set_iotex_utils_context(address_prefix='it')
 
     job = ExportBlocksJob(
         start_block=start_block,
