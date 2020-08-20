@@ -20,7 +20,7 @@ Options:
   -h, --help                      Show this message and exit.
 ```
 
-#### export blocks
+#### export_blocks
 
 ```bash
 iotexetl export_blocks --start-block 1 --end-block 100 \
@@ -42,7 +42,7 @@ Options:
   -h, --help                      Show this message and exit.
 ```
 
-#### export transaction logs
+#### export_transaction_logs
 
 ```bash
 iotexetl export_transaction_logs --start-block 1 --end-block 100 \
