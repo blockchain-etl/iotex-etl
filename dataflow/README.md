@@ -47,9 +47,10 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 To rewind subscriptions to a previous date:
 
 ```bash   
-for entity in blocks actions logs evm_transfers
+PROJECT=<your_project>
+for entity in blocks actions logs transaction_logs
 do
     gcloud alpha pubsub subscriptions seek \
-    projects/iotex-etl-dev/subscriptions/mainnet.dataflow.bigquery.${entity} --time=2020-08-01T23:00:00.000Z
+    projects/$PROJECT/subscriptions/mainnet.dataflow.bigquery.${entity} --time=2020-08-21T23:00:00.000Z
 done
 ```
