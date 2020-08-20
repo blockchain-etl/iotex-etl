@@ -1,7 +1,0 @@
-[
-    {
-        "transformNamePrefix": "Iotex",
-        "pubSubSubscriptionPrefix": "projects/iotex-etl/subscriptions/mainnet.dataflow.bigquery",
-        "bigQueryDataset": "iotex-etl:mainnet"
-    }
-]

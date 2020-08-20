@@ -51,7 +51,8 @@ to configure email notifications.
 - For a new environment clone IoTeX ETL Airflow: `git clone https://github.com/blockchain-etl/iotex-etl && cd iotex-etl/airflow`. 
   For an existing environment use the `airflow_variables.json` file from 
   [Cloud Source Repository](#creating-a-cloud-source-repository-for-airflow-variables) for your environment.
-- Edit `airflow_variables.json` and update configuration options with your values. 
+- Copy `example_airflow_variables.json` to `airflow_variables.json`. 
+  Edit `airflow_variables.json` and update configuration options with your values. 
   You can find variables description in the table below. For the `mainnet_output_bucket` variable 
   specify the bucket created on step 1 above. You can get it by running `echo $BUCKET`.
 - Open Airflow UI. You can get its URL from `airflowUri` configuration option: 
@@ -77,7 +78,7 @@ Note that the variable names must be prefixed with `{chain}_`, e.g. `mainnet_out
 | `load_schedule_interval` | load cron schedule, default: `0 2 * * *` |
 | `load_end_date` | load end date, used for integration testing, default: None |
 
-### Creating a Cloud Source Repository for Airflow variables
+### Creating a Cloud Source Repository for Configuration Files
 
 It is recommended to keep airflow_variables.json in a version control system e.g. git. 
 Below are the commands for creating a Cloud Source Repository to hold airflow_variables.json: 
@@ -101,6 +102,7 @@ To automate import variables in airflow_variables.json to Cloud composer, perfor
     - Name: `import-airflow-variables`
     - Event: `Push to a branch`
     - Source: `^master$`
+    - Included files filter: `airflow/**`
     - Build configuration: `Cloud Build configuration file (yaml or json)`
     - Cloud Build configuration file location: `cloudbuild.yaml`
     - Substitution variables:

@@ -23,14 +23,14 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
      src/main/resources/errors-schema.json 
     ```  
    
-3. Update `chainConfigIotexDev.json` with your values.
+3. Copy `exampleChainConfig.json` to `chainConfig.json` and update `chainConfig.json` with your values.
 
 4. Start the Dataflow job in:
 
     ```bash
    mvn -e -Pdataflow-runner compile exec:java \
    -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline \
-   -Dexec.args="--chainConfigFile=chainConfigIotexDev.json \
+   -Dexec.args="--chainConfigFile=chainConfig.json \
    --outputErrorsTable=mainnet.errors \
    --tempLocation=gs://${BUCKET}/temp \
    --project=${PROJECT} \
@@ -44,13 +44,19 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
    " 
    ``` 
 
-To rewind subscriptions to a previous date:
+### Creating a Cloud Source Repository for Configuration Files
 
-```bash   
-PROJECT=<your_project>
-for entity in blocks actions logs transaction_logs
-do
-    gcloud alpha pubsub subscriptions seek \
-    projects/$PROJECT/subscriptions/mainnet.dataflow.bigquery.${entity} --time=2020-08-21T23:00:00.000Z
-done
+Below are the commands for creating a Cloud Source Repository to hold chainConfig.json: 
+
+```bash
+REPO_NAME=${PROJECT}-dataflow-config-${ENVIRONMENT_INDEX} && echo "Repo name ${REPO_NAME}"
+gcloud source repos create ${REPO_NAME}
+gcloud source repos clone ${REPO_NAME} && cd ${REPO_NAME}
+
+# Put chainConfig.json to the root of the repo
+
+git add chainConfig.json && git commit -m "Initial commit"
+git push
 ```
+
+Check a [separate file](ops.md) for operations.

@@ -54,13 +54,13 @@ explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud
     kubectl create secret generic streaming-app-key --from-file=key.json=$HOME/Downloads/key.json
     ```
    
-5. Copy [example values](example_values) directory to `values` dir and adjust all the files at least with 
+5. Copy [example_values.yaml](example_values.yaml) file to `values.yaml` and adjust it at least with 
     your bucket and project ID.
 
 6. Install ETL apps via helm using chart from this repo and values we adjust on previous step, for example:
 
     ```bash
-    helm install --name iotex-etl charts/iotex-etl-streaming --values example_values/pubsub/values.yaml
+    helm install --name iotex-etl charts/iotex-etl-streaming --values values.yaml
     ``` 
 
 7. Use `describe` command to troubleshoot, f.e.:
@@ -92,5 +92,22 @@ Parameter                                                | Description          
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name iotex --values example_values/pubsub/values.yaml charts/iotex-etl-streaming
+$ helm install --name iotex --values values.yaml charts/iotex-etl-streaming
 ```
+
+### Creating a Cloud Source Repository for Configuration Files
+
+Below are the commands for creating a Cloud Source Repository to hold values.yaml: 
+
+```bash
+REPO_NAME=${PROJECT}-streaming-config-${ENVIRONMENT_INDEX} && echo "Repo name ${REPO_NAME}"
+gcloud source repos create ${REPO_NAME}
+gcloud source repos clone ${REPO_NAME} && cd ${REPO_NAME}
+
+# Put values.yaml to the root of the repo
+
+git add values.yaml && git commit -m "Initial commit"
+git push
+```
+
+Check a [separate file](ops.md) for operations.
