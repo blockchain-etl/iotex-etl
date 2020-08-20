@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 from iotexetl.mappers.receipt_mapper import map_receipt
 from iotexetl.utils import string_utils, iotex_utils
 from iotexetl.utils.string_utils import to_int
@@ -90,6 +91,7 @@ def map_action(raw):
 
         yield {**map_base_action(raw.block, action), **map_receipt(receipt), **action_dict}
 
+
 def map_base_action(block, action):
     return {
         'type': 'action',
@@ -100,6 +102,7 @@ def map_base_action(block, action):
         'sender': iotex_utils.pubkey_to_address(action.senderPubKey),
         'timestamp': block.header.core.timestamp.ToJsonString()
     }
+
 
 def map_transfer(action):
     transfer = action.core.transfer
@@ -112,6 +115,7 @@ def map_transfer(action):
         }
     }
 
+
 def map_execution(action):
     execution = action.core.execution
     return {
@@ -122,6 +126,7 @@ def map_execution(action):
             'data': string_utils.base64_string(execution.data),
         }
     }
+
 
 def map_start_sub_chain(action):
     start_sub_chain = action.core.startSubChain
@@ -136,6 +141,7 @@ def map_start_sub_chain(action):
         }
     }
 
+
 def map_stop_sub_chain(action):
     stop_sub_chain = action.core.stopSubChain
     return {
@@ -146,6 +152,7 @@ def map_stop_sub_chain(action):
             'sub_chain_address': stop_sub_chain.subChainAddress
         }
     }
+
 
 def map_put_block(action):
     put_block = action.core.putBlock
@@ -158,6 +165,7 @@ def map_put_block(action):
         }
     }
 
+
 def map_create_deposit(action):
     create_deposit = action.core.createDeposit
     return {
@@ -168,6 +176,7 @@ def map_create_deposit(action):
             'recipient': create_deposit.recipient,
         }
     }
+
 
 def map_settle_deposit(action):
     settle_deposit = action.core.settleDeposit
@@ -180,10 +189,12 @@ def map_settle_deposit(action):
         }
     }
 
+
 def map_create_plum_chain(action):
     return {
         'action_type': 'create_plum_chain'
     }
+
 
 def map_terminate_plum_chain(action):
     terminate_plum_chain = action.core.terminatePlumChain
@@ -194,6 +205,7 @@ def map_terminate_plum_chain(action):
         }
     }
 
+
 def map_plum_put_block(action):
     plum_put_block = action.core.plumPutBlock
     return {
@@ -201,9 +213,11 @@ def map_plum_put_block(action):
         'plum_put_block': {
             'sub_chain_address': plum_put_block.subChainAddress,
             'height': plum_put_block.height,
-            'roots': [{'name': name, 'value': string_utils.base64_string(value)} for name, value in plum_put_block.roots.items()],
+            'roots': [{'name': name, 'value': string_utils.base64_string(value)} for name, value in
+                      plum_put_block.roots.items()],
         }
     }
+
 
 def map_plum_create_deposit(action):
     plum_create_deposit = action.core.plumCreateDeposit
@@ -215,6 +229,7 @@ def map_plum_create_deposit(action):
             'recipient': plum_create_deposit.recipient,
         }
     }
+
 
 def map_plum_start_exit(action):
     plum_start_exit = action.core.plumStartExit
@@ -231,6 +246,7 @@ def map_plum_start_exit(action):
         }
     }
 
+
 def map_plum_challenge_exit(action):
     plum_challenge_exit = action.core.plumChallengeExit
     return {
@@ -239,10 +255,12 @@ def map_plum_challenge_exit(action):
             'sub_chain_address': plum_challenge_exit.subChainAddress,
             'coin_id': plum_challenge_exit.coinID,
             'challenge_transfer': string_utils.base64_string(plum_challenge_exit.challengeTransfer),
-            'challenge_transfer_block_proof': string_utils.base64_string(plum_challenge_exit.challengeTransferBlockProof),
+            'challenge_transfer_block_proof': string_utils.base64_string(
+                plum_challenge_exit.challengeTransferBlockProof),
             'challenge_transfer_block_height': plum_challenge_exit.challengeTransferBlockHeight,
         }
     }
+
 
 def map_plum_response_challenge_exit(action):
     plum_response_challenge_exit = action.core.plumResponseChallengeExit
@@ -253,10 +271,12 @@ def map_plum_response_challenge_exit(action):
             'coin_id': plum_response_challenge_exit.coinID,
             'challenge_transfer': string_utils.base64_string(plum_response_challenge_exit.challengeTransfer),
             'response_transfer': string_utils.base64_string(plum_response_challenge_exit.responseTransfer),
-            'response_transfer_block_proof': string_utils.base64_string(plum_response_challenge_exit.responseTransferBlockProof),
+            'response_transfer_block_proof': string_utils.base64_string(
+                plum_response_challenge_exit.responseTransferBlockProof),
             'previous_transfer_block_height': plum_response_challenge_exit.previousTransferBlockHeight
         }
     }
+
 
 def map_plum_finalize_exit(action):
     plum_finalize_exit = action.core.finalizeExit
@@ -268,6 +288,7 @@ def map_plum_finalize_exit(action):
         }
     }
 
+
 def map_plum_settle_deposit(action):
     plum_settle_deposit = action.core.plumSettleDeposit
     return {
@@ -276,6 +297,7 @@ def map_plum_settle_deposit(action):
             'coin_id': plum_settle_deposit.coinID
         }
     }
+
 
 def map_plum_transfer(action):
     plum_transfer = action.core.plumTransfer
@@ -289,6 +311,7 @@ def map_plum_transfer(action):
         }
     }
 
+
 def map_deposit_to_rewarding_fund(action):
     deposit_to_rewarding_fund = action.core.depositToRewardingFund
     return {
@@ -298,6 +321,7 @@ def map_deposit_to_rewarding_fund(action):
             'data': string_utils.base64_string(deposit_to_rewarding_fund.data),
         }
     }
+
 
 def map_claim_from_rewarding_fund(action):
     claim_from_rewarding_fund = action.core.claimFromRewardingFund
@@ -309,6 +333,7 @@ def map_claim_from_rewarding_fund(action):
         }
     }
 
+
 def map_grant_reward(action):
     grant_reward = action.core.grantReward
     return {
@@ -318,6 +343,7 @@ def map_grant_reward(action):
             'height': grant_reward.height
         }
     }
+
 
 def map_stake_create(action):
     stake_create = action.core.stakeCreate
@@ -332,6 +358,7 @@ def map_stake_create(action):
         }
     }
 
+
 def map_stake_unstake(action):
     stake_unstake = action.core.stakeUnstake
     return {
@@ -341,6 +368,7 @@ def map_stake_unstake(action):
             'payload': string_utils.base64_string(stake_unstake.payload),
         }
     }
+
 
 def map_stake_withdraw(action):
     stake_withdraw = action.core.stakeWithdraw
@@ -352,6 +380,7 @@ def map_stake_withdraw(action):
         }
     }
 
+
 def map_stake_add_deposit(action):
     stake_add_deposit = action.core.stakeAddDeposit
     return {
@@ -362,6 +391,7 @@ def map_stake_add_deposit(action):
             'payload': string_utils.base64_string(stake_add_deposit.payload),
         }
     }
+
 
 def map_stake_restake(action):
     stake_restake = action.core.stakeRestake
@@ -375,6 +405,7 @@ def map_stake_restake(action):
         }
     }
 
+
 def map_stake_change_candidate(action):
     stake_change_candidate = action.core.stakeChangeCandidate
     return {
@@ -386,6 +417,7 @@ def map_stake_change_candidate(action):
         }
     }
 
+
 def map_stake_transfer_ownership(action):
     stake_transfer_ownership = action.core.stakeTransferOwnership
     return {
@@ -396,6 +428,7 @@ def map_stake_transfer_ownership(action):
             'payload': string_utils.base64_string(stake_transfer_ownership.payload),
         }
     }
+
 
 def map_candidate_register(action):
     candidate_register = action.core.candidateRegister
@@ -413,6 +446,7 @@ def map_candidate_register(action):
         }
     }
 
+
 def map_candidate_update(action):
     candidate_update = action.core.candidateUpdate
     return {
@@ -424,6 +458,7 @@ def map_candidate_update(action):
         }
     }
 
+
 def map_put_poll_result(action):
     put_poll_result = action.core.putPollResult
     candidates = [map_candidate(candidate) for candidate in put_poll_result.candidates.candidates]
@@ -434,6 +469,7 @@ def map_put_poll_result(action):
             'candidates': candidates,
         }
     }
+
 
 def map_candidate(candidate):
     return {

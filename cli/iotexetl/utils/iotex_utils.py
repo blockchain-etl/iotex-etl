@@ -1,9 +1,19 @@
 import bech32
 from eth_hash.auto import keccak as keccak_256
 
+DEFAULT_ADDRESS_PREFIX = 'io'
 
-def pubkey_to_address(pubkey, prefix='io'):
+
+def set_iotex_utils_context(address_prefix):
+    global DEFAULT_ADDRESS_PREFIX
+    DEFAULT_ADDRESS_PREFIX = address_prefix
+
+
+def pubkey_to_address(pubkey, prefix=None):
     """This implements the algorithm described here https://github.com/iotexproject/iotex-address"""
+    if prefix is None:
+        prefix = DEFAULT_ADDRESS_PREFIX
+
     if pubkey is None or len(pubkey) < 1:
         return None
     pubkey_hash = keccak_256(pubkey[1:])
