@@ -93,6 +93,7 @@ def build_export_dag(
                 start_block=start_block,
                 end_block=end_block,
                 provider_uri=provider_uri,
+                testnet=False,
                 max_workers=export_max_workers,
                 batch_size=100,
                 output_dir=tempdir,
