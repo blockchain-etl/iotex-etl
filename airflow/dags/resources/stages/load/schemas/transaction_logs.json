@@ -45,12 +45,12 @@
         "name": "sender",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "recipient",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     }
 ]
