@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 from iotexetl.utils import string_utils
+from iotexetl.utils.string_utils import to_none_if_empty
 
 
 def map_transaction_logs(raw_block, block_transaction_log):
@@ -34,7 +35,7 @@ def map_transaction_logs(raw_block, block_transaction_log):
                 'index': index,
                 'topic': string_utils.base64_string(transaction.topic),
                 'amount': string_utils.to_int(transaction.amount),
-                'sender': transaction.sender,
-                'recipient': transaction.recipient,
+                'sender': to_none_if_empty(transaction.sender),
+                'recipient': to_none_if_empty(transaction.recipient),
                 'timestamp': raw_block.block.header.core.timestamp.ToJsonString(),
             }
