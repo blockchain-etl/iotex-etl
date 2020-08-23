@@ -25,13 +25,13 @@
     },
     {
         "name": "topics",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "REPEATED"
     },
     {
         "name": "data",
-        "type": "STRING",
+        "type": "BYTES",
         "description": "",
         "mode": "NULLABLE"
     },

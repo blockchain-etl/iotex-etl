@@ -63,7 +63,7 @@
         "name": "contract_address",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "action_type",
@@ -85,7 +85,7 @@
             {
                 "name": "recipient",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "payload",
@@ -169,7 +169,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -182,7 +182,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "height",
@@ -227,7 +227,7 @@
             {
                 "name": "recipient",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -245,7 +245,7 @@
             {
                 "name": "recipient",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "index",
@@ -263,7 +263,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -276,7 +276,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "height",
@@ -311,7 +311,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "amount",
@@ -321,7 +321,7 @@
             {
                 "name": "recipient",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -334,7 +334,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "previous_transfer",
@@ -377,7 +377,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "coin_id",
@@ -410,7 +410,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "coin_id",
@@ -448,7 +448,7 @@
             {
                 "name": "sub_chain_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "coin_id",
@@ -494,7 +494,7 @@
             {
                 "name": "recipient",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -709,7 +709,7 @@
             {
                 "name": "voter_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "payload",
@@ -732,12 +732,12 @@
             {
                 "name": "operator_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "reward_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "staked_amount",
@@ -757,7 +757,7 @@
             {
                 "name": "owner_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "payload",
@@ -780,12 +780,12 @@
             {
                 "name": "operator_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             },
             {
                 "name": "reward_address",
                 "type": "STRING",
-                "mode": "REQUIRED"
+                "mode": "NULLABLE"
             }
         ]
     },
@@ -808,7 +808,7 @@
                     {
                         "name": "address",
                         "type": "STRING",
-                        "mode": "REQUIRED"
+                        "mode": "NULLABLE"
                     },
                     {
                         "name": "votes",
@@ -823,7 +823,7 @@
                     {
                         "name": "reward_address",
                         "type": "STRING",
-                        "mode": "REQUIRED"
+                        "mode": "NULLABLE"
                     }
                 ]
             }
