@@ -22,7 +22,7 @@
 
 from iotexetl.mappers.receipt_mapper import map_receipt
 from iotexetl.utils import string_utils, iotex_utils
-from iotexetl.utils.string_utils import to_int
+from iotexetl.utils.string_utils import to_int, to_none_if_empty
 
 
 def map_action(raw):
@@ -110,7 +110,7 @@ def map_transfer(action):
         'action_type': 'transfer',
         'transfer': {
             'amount': to_int(transfer.amount),
-            'recipient': transfer.recipient,
+            'recipient': to_none_if_empty(transfer.recipient),
             'payload': string_utils.base64_string(transfer.payload),
         }
     }
@@ -149,7 +149,7 @@ def map_stop_sub_chain(action):
         'stop_sub_chain': {
             'chain_id': stop_sub_chain.chainID,
             'stop_height': stop_sub_chain.stopHeight,
-            'sub_chain_address': stop_sub_chain.subChainAddress
+            'sub_chain_address': to_none_if_empty(stop_sub_chain.subChainAddress)
         }
     }
 
@@ -159,7 +159,7 @@ def map_put_block(action):
     return {
         'action_type': 'put_block',
         'put_block': {
-            'sub_chain_address': put_block.subChainAddress,
+            'sub_chain_address': to_none_if_empty(put_block.subChainAddress),
             'height': put_block.height,
             'roots': [{'name': root.name, 'value': string_utils.base64_string(root.value)} for root in put_block.roots]
         }
@@ -201,7 +201,7 @@ def map_terminate_plum_chain(action):
     return {
         'action_type': 'terminate_plum_chain',
         'terminate_plum_chain': {
-            'sub_chain_address': terminate_plum_chain.subChainAddress
+            'sub_chain_address': to_none_if_empty(terminate_plum_chain.subChainAddress)
         }
     }
 
@@ -211,7 +211,7 @@ def map_plum_put_block(action):
     return {
         'action_type': 'plum_put_block',
         'plum_put_block': {
-            'sub_chain_address': plum_put_block.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_put_block.subChainAddress),
             'height': plum_put_block.height,
             'roots': [{'name': name, 'value': string_utils.base64_string(value)} for name, value in
                       plum_put_block.roots.items()],
@@ -224,7 +224,7 @@ def map_plum_create_deposit(action):
     return {
         'action_type': 'plum_create_deposit',
         'plum_create_deposit': {
-            'sub_chain_address': plum_create_deposit.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_create_deposit.subChainAddress),
             'amount': to_int(plum_create_deposit.amount),
             'recipient': plum_create_deposit.recipient,
         }
@@ -236,7 +236,7 @@ def map_plum_start_exit(action):
     return {
         'action_type': 'plum_start_exit',
         'plum_start_exit': {
-            'sub_chain_address': plum_start_exit.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_start_exit.subChainAddress),
             'previous_transfer': string_utils.base64_string(plum_start_exit.previousTransfer),
             'previous_transfer_block_proof': string_utils.base64_string(plum_start_exit.previousTransferBlockProof),
             'previous_transfer_block_height': plum_start_exit.previousTransferBlockHeight,
@@ -252,7 +252,7 @@ def map_plum_challenge_exit(action):
     return {
         'action_type': 'plum_challenge_exit',
         'plum_challenge_exit': {
-            'sub_chain_address': plum_challenge_exit.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_challenge_exit.subChainAddress),
             'coin_id': plum_challenge_exit.coinID,
             'challenge_transfer': string_utils.base64_string(plum_challenge_exit.challengeTransfer),
             'challenge_transfer_block_proof': string_utils.base64_string(
@@ -267,7 +267,7 @@ def map_plum_response_challenge_exit(action):
     return {
         'action_type': 'plum_response_challenge_exit',
         'plum_response_challenge_exit': {
-            'sub_chain_address': plum_response_challenge_exit.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_response_challenge_exit.subChainAddress),
             'coin_id': plum_response_challenge_exit.coinID,
             'challenge_transfer': string_utils.base64_string(plum_response_challenge_exit.challengeTransfer),
             'response_transfer': string_utils.base64_string(plum_response_challenge_exit.responseTransfer),
@@ -283,7 +283,7 @@ def map_plum_finalize_exit(action):
     return {
         'action_type': 'plum_finalize_exit',
         'plum_finalize_exit': {
-            'sub_chain_address': plum_finalize_exit.subChainAddress,
+            'sub_chain_address': to_none_if_empty(plum_finalize_exit.subChainAddress),
             'coin_id': plum_finalize_exit.coinID,
         }
     }
@@ -424,7 +424,7 @@ def map_stake_transfer_ownership(action):
         'action_type': 'stake_transfer_ownership',
         'stake_transfer_ownership': {
             'bucket_index': stake_transfer_ownership.bucketIndex,
-            'voter_address': stake_transfer_ownership.voterAddress,
+            'voter_address': to_none_if_empty(stake_transfer_ownership.voterAddress),
             'payload': string_utils.base64_string(stake_transfer_ownership.payload),
         }
     }
@@ -436,12 +436,12 @@ def map_candidate_register(action):
         'action_type': 'candidate_register',
         'candidate_register': {
             'name': candidate_register.candidate.name,
-            'operator_address': candidate_register.candidate.operatorAddress,
-            'reward_address': candidate_register.candidate.rewardAddress,
+            'operator_address': to_none_if_empty(candidate_register.candidate.operatorAddress),
+            'reward_address': to_none_if_empty(candidate_register.candidate.rewardAddress),
             'staked_amount': to_int(candidate_register.stakedAmount),
             'staked_duration': candidate_register.stakedDuration,
             'auto_stake': candidate_register.autoStake,
-            'owner_address': candidate_register.ownerAddress,
+            'owner_address': to_none_if_empty(candidate_register.ownerAddress),
             'payload': string_utils.base64_string(candidate_register.payload),
         }
     }
@@ -453,8 +453,8 @@ def map_candidate_update(action):
         'action_type': 'candidate_update',
         'candidate_update': {
             'name': candidate_update.name,
-            'operator_address': candidate_update.operatorAddress,
-            'reward_address': candidate_update.rewardAddress,
+            'operator_address': to_none_if_empty(candidate_update.operatorAddress),
+            'reward_address': to_none_if_empty(candidate_update.rewardAddress),
         }
     }
 
@@ -473,8 +473,8 @@ def map_put_poll_result(action):
 
 def map_candidate(candidate):
     return {
-        'address': candidate.address,
+        'address': to_none_if_empty(candidate.address),
         'votes': string_utils.base64_string(candidate.votes),
         'pub_key': string_utils.base64_string(candidate.pubKey),
-        'reward_address': candidate.rewardAddress
+        'reward_address': to_none_if_empty(candidate.rewardAddress)
     }

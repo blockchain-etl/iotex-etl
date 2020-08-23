@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from iotexetl.utils.string_utils import to_int
+from iotexetl.utils.string_utils import to_int, to_none_if_empty
 
 
 def map_receipt(receipt):
@@ -29,5 +29,5 @@ def map_receipt(receipt):
         'height': receipt.blkHeight,
         'hash': receipt.actHash.hex(),
         'gas_consumed': to_int(receipt.gasConsumed),
-        'contract_address': receipt.contractAddress
+        'contract_address': to_none_if_empty(receipt.contractAddress)
     }

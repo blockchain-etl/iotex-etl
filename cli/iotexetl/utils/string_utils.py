@@ -18,3 +18,9 @@ def to_int(val):
         return int(val)
 
     return val
+
+
+def to_none_if_empty(val):
+    if val == '':
+        return None
+    return val
