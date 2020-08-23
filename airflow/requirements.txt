@@ -4,4 +4,4 @@ google-cloud-bigquery
 google-cloud-storage
 google-api-python-client
 pytest==5.4.1
-iotex-etl==1.0.0
+iotex-etl==1.0.1
