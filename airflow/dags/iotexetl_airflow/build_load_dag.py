@@ -26,6 +26,7 @@ def build_load_dag(
         destination_dataset_project_id,
         chain='iotex',
         notification_emails=None,
+        success_notification_emails=None,
         load_start_date=datetime(2018, 6, 30),
         load_end_date=None,
         load_schedule_interval='0 0 * * *',
@@ -44,7 +45,7 @@ def build_load_dag(
         'start_date': load_start_date,
         'end_date': load_end_date,
         'email_on_failure': True,
-        'email_on_retry': True,
+        'email_on_retry': False,
         'retries': 5,
         'retry_delay': timedelta(minutes=5)
     }
@@ -224,10 +225,10 @@ def build_load_dag(
     verify_blocks_have_latest_task = add_verify_tasks('blocks_have_latest', dependencies=[merge_blocks_task])
     verify_actions_count_task = add_verify_tasks('actions_count', dependencies=[merge_blocks_task, merge_actions_task])
 
-    if notification_emails and len(notification_emails) > 0:
+    if success_notification_emails and len(success_notification_emails) > 0:
         send_email_task = EmailOperator(
             task_id='send_email',
-            to=[email.strip() for email in notification_emails.split(',')],
+            to=[email.strip() for email in success_notification_emails.split(',')],
             subject='IoTeX ETL Airflow Load DAG Succeeded',
             html_content='IoTeX ETL Airflow Load DAG Succeeded - {}'.format(chain),
             dag=dag
@@ -235,5 +236,7 @@ def build_load_dag(
         verify_blocks_count_task >> send_email_task
         verify_blocks_have_latest_task >> send_email_task
         verify_actions_count_task >> send_email_task
+        merge_logs_task >> send_email_task
+        merge_transaction_logs_task >> send_email_task
 
     return dag
