@@ -5,7 +5,7 @@ Airflow DAGs for exporting and loading the IoTeX blockchain data to Google BigQu
 - [mainnet_export_dag.py](dags/mainnet_export_dag.py) - exports mainnet IoTeX data to a GCS bucket.
 - [mainnet_load_dag.py](dags/mainnet_load_dag.py) - loads mainnet IoTeX data from GCS bucket to BigQuery.
 - [mainnet_verify_streaming_dag.py](dags/mainnet_verify_streaming_dag.py) - verifies the consistency and 
-    data latency in mainnet BigQuery tables.
+    data latency in crypto_iotex BigQuery tables.
 
 ## Prerequisites
 

@@ -19,7 +19,7 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 
     ```bash
     bq mk --table --description "IoTeX ETL Streaming Errors" \
-     ${PROJECT}:mainnet.errors \
+     ${PROJECT}:crypto_iotex.errors \
      src/main/resources/errors-schema.json 
     ```  
    
@@ -31,7 +31,7 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
    mvn -e -Pdataflow-runner compile exec:java \
    -Dexec.mainClass=io.blockchainetl.iotex.IotexPubSubToBigQueryPipeline \
    -Dexec.args="--chainConfigFile=chainConfig.json \
-   --outputErrorsTable=mainnet.errors \
+   --outputErrorsTable=<errors_table_project>:crypto_iotex.errors \
    --tempLocation=gs://${BUCKET}/temp \
    --project=${PROJECT} \
    --runner=DataflowRunner \

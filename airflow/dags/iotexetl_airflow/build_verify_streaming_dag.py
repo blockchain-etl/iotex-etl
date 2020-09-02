@@ -14,12 +14,12 @@ logging.getLogger().setLevel(logging.DEBUG)
 def build_verify_streaming_dag(
         dag_id,
         destination_dataset_project_id,
-        chain='mainnet',
+        chain='iotex',
         notification_emails=None,
         start_date=datetime(2019, 4, 22),
         schedule_interval='*/10 * * * *',
         max_lag_in_minutes=10):
-    dataset_name = chain
+    dataset_name = f'crypto_{chain}'
 
     environment = {
         'dataset_name': dataset_name,
