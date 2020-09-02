@@ -38,7 +38,9 @@ explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud
 2. Create Pub/Sub topics and subscriptions:
 
     ```bash
-   gcloud deployment-manager deployments create iotex-etl-pubsub-0 --template deployment_manager_pubsub_iotex.py 
+   gcloud deployment-manager deployments create iotex-etl-pubsub-topics-0 --template deployment_manager_pubsub_topics.py
+   gcloud deployment-manager deployments create iotex-etl-pubsub-subscriptions-0 --template deployment_manager_pubsub_subscriptions.py \
+    --properties topics_project:<project_where_topics_deployed>
    ```
 
 3. Create GCS bucket. Upload a text file with block number you want to start streaming from to 

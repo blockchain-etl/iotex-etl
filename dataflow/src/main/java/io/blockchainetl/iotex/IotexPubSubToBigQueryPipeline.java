@@ -46,10 +46,10 @@ public class IotexPubSubToBigQueryPipeline {
         String transformNamePrefix = chainConfig.getTransformNamePrefix();
 
         WriteResult writeResult = pipeline
-            .apply(transformNamePrefix + "PubSubListener", PubsubIO.readStrings()
+            .apply(transformNamePrefix + "PubSubListener-" + entityName , PubsubIO.readStrings()
                 .fromSubscription(subscriptionName)
                 .withIdAttribute(PUBSUB_ID_ATTRIBUTE))
-            .apply(transformNamePrefix + "WriteToBigQuery", BigQueryIO.<String>write()
+            .apply(transformNamePrefix + "WriteToBigQuery-" + entityName, BigQueryIO.<String>write()
                 .to(tableName)
                 .withFormatFunction(new EntityJsonToTableRow())
                 .ignoreUnknownValues()
@@ -61,7 +61,7 @@ public class IotexPubSubToBigQueryPipeline {
                 .withFailedInsertRetryPolicy(InsertRetryPolicy.retryTransientErrors()));
 
         writeResult.getFailedInsertsWithErr()
-            .apply(transformNamePrefix + "BigQueryErrorsSink", new BigQueryErrorsSink(
+            .apply(transformNamePrefix + "BigQueryErrorsSink-" + entityName, new BigQueryErrorsSink(
                 options.getOutputErrorsTable(), FileUtils.readFileFromClasspath("errors-schema.json")));
     }
 

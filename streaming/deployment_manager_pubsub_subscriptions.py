@@ -1,8 +1,12 @@
 def GenerateConfig(context):
     resources = []
 
-    chains = ['mainnet']
+    chains = ['crypto_iotex']
     entity_types = ['blocks', 'actions', 'logs', 'transaction_logs']
+
+    topics_project = context.properties['topics_project']
+    if topics_project is None:
+        topics_project = context.env['project']
 
     for chain in chains:
         topic_name_prefix = chain
@@ -12,22 +16,15 @@ def GenerateConfig(context):
 
         for entity_type in entity_types:
             topic_name = topic_name_prefix + '.' + entity_type
-            topic_resource_name = topic_name.replace('.', '-')
+            topic_full_name = f'projects/{topics_project}/topics/{topic_name}'
             subscription_name = subscription_name_prefix + '.' + entity_type
             subscription_resource_name = subscription_name.replace('.', '-')
-            resources.append({
-                'name': topic_resource_name,
-                'type': 'pubsub.v1.topic',
-                'properties': {
-                    'topic': topic_name
-                }
-            })
             resources.append({
                 'name': subscription_resource_name,
                 'type': 'pubsub.v1.subscription',
                 'properties': {
                     'subscription': subscription_name,
-                    'topic': '$(ref.' + topic_resource_name + '.name)',
+                    'topic': topic_full_name,
                     'ackDeadlineSeconds': 30,
                     'retainAckedMessages': True,
                     'messageRetentionDuration': message_retention_duration,

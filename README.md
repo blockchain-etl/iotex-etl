@@ -10,7 +10,7 @@ into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting IoTeX d
 partitioned by day. 
 
 Data is available for you to query right away in 
-[Google BigQuery](https://console.cloud.google.com/bigquery?page=dataset&d=mainnet&p=iotex-etl).
+[Google BigQuery](https://console.cloud.google.com/bigquery?page=dataset&d=crypto_iotex&p=public-data-finance).
 
 ## Architecture
 
@@ -42,7 +42,7 @@ Data is available for you to query right away in
 
 3. Follow the instructions in [IoTeX ETL Streaming](/streaming) to deploy the Streamer component. For the value in 
     `last_synced_block.txt` specify the last block number of the previous day. You can query it in BigQuery:
-    `SELECT height FROM mainnet.blocks ORDER BY height DESC LIMIT 1`.
+    `SELECT height FROM crypto_iotex.blocks ORDER BY height DESC LIMIT 1`.
 
 4. Follow the instructions in [IoTeX ETL Dataflow](/dataflow) to deploy the Dataflow component. Monitor 
     "verify_streaming" DAG in Airflow console, once the Dataflow job catches up the latest block, the DAG will succeed.
