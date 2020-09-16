@@ -67,9 +67,3 @@ class IotexService(object):
         for block_number in block_number_batch:
             response = self.iotex_rpc.get_transaction_logs(block_number)
             yield response
-
-    def get_logs(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        response = self.iotex_rpc.get_logs(block_number_batch)
-        return response.logs
