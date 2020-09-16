@@ -39,7 +39,7 @@ from iotexetl.rpc.iotex_rpc import IotexRpc
               help='Either Google PubSub topic path e.g. projects/your-project/topics/mainnet; '
                    'If not specified will print to console')
 @click.option('-s', '--start-block', default=None, show_default=True, type=int, help='Start block')
-@click.option('-e', '--entity-types', default=',', show_default=True, type=str,
+@click.option('-e', '--entity-types', default=','.join(EntityType.ALL_FOR_STREAMING), show_default=True, type=str,
               help='The list of entity types to export.')
 @click.option('--period-seconds', default=10, show_default=True, type=int, help='How many seconds to sleep between syncs')
 @click.option('-b', '--batch-size', default=10, show_default=True, type=int, help='How many blocks to batch in single request')

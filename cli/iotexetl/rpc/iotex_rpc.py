@@ -47,12 +47,6 @@ class IotexRpc:
         return self.stub.GetTransactionLogByBlockHeight(
             api_pb2.GetTransactionLogByBlockHeightRequest(blockHeight=block_number), timeout=self.timeout)
 
-    def get_logs(self, block_number_batch):
-        return self.stub.GetLogs(api_pb2.GetLogsRequest(filter=api_pb2.LogsFilter(),
-                                                        byRange=api_pb2.GetLogsByRange(fromBlock=block_number_batch[0],
-                                                                                       count=len(block_number_batch))),
-                                 timeout=self.timeout)
-
     def get_chain_meta(self):
         return self.stub.GetChainMeta(api_pb2.GetChainMetaRequest(), timeout=self.timeout)
 
