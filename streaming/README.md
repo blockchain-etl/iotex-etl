@@ -2,10 +2,7 @@
 
 Streams IoTeX data to [Google Pub/Sub](https://cloud.google.com/pubsub) using 
 [iotexetl stream](https://github.com/blockchain-etl/iotex-etl/tree/develop/docs/commands.md#stream). 
-Runs in Google Kubernetes Engine. 
-
-Read [this article](https://medium.com/google-cloud/live-ethereum-and-bitcoin-data-in-google-bigquery-and-pub-sub-765b71cd57b5) 
-explaining how to subscribe to public blockchain data in [Pub/Sub](https://cloud.google.com/pubsub/docs/overview). 
+Runs in Google Kubernetes Engine.  
 
 ## Prerequisites
 
@@ -113,3 +110,75 @@ git push
 ```
 
 Check a [separate file](ops.md) for operations.
+
+## Subscribing to Live IoTeX Data Feeds
+
+Install Google Cloud SDK:
+
+```bash
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+gcloud init
+```
+
+Create a Pub/Sub subscription for IoTeX actions:
+
+```bash
+gcloud pubsub subscriptions create crypto_iotex.actions.test --topic=crypto_iotex.actions --topic-project=public-data-finance
+```
+
+Read a single message from the subscription to test it works:
+
+```bash
+gcloud pubsub subscriptions pull crypto_iotex.actions.test
+```
+
+Now you can run a subscriber and process the messages in the subscription, using this Python script:
+
+`subscribe.py`:
+
+```python
+import time
+from google.cloud import pubsub_v1
+project_id = "<your_project>"
+subscription_name = "crypto_iotex.actions.test"
+subscriber = pubsub_v1.SubscriberClient()
+# The `subscription_path` method creates a fully qualified identifier
+# in the form `projects/{project_id}/subscriptions/{subscription_name}`
+subscription_path = subscriber.subscription_path(project_id, subscription_name)
+def callback(message):
+    print('Received message: {}'.format(message))
+    message.ack()
+subscriber.subscribe(subscription_path, callback=callback)
+# The subscriber is non-blocking. We must keep the main thread from
+# exiting to allow it to process messages asynchronously in the background.
+print('Listening for messages on {}'.format(subscription_path))
+while True:
+    time.sleep(60)
+```
+
+Make sure to provide project id in the script above
+
+Install the dependencies and run the script:
+
+```bash
+pip install google-cloud-pubsub==1.0.1
+python subscribe.py
+```
+
+You should see:
+
+```
+Listening for messages...
+Received message: Message {
+  data: b'{"type": "action", "version": 1, "nonce": 0, "gas_...'
+  attributes: {}
+}
+Received message: Message {
+  data: b'{"type": "action", "version": 1, "nonce": 0, "gas_...'
+  attributes: {}
+}
+...
+```
+
+You can also use Go, Java, Node.js or C#: https://cloud.google.com/pubsub/docs/pull.
