@@ -2,7 +2,7 @@
 
 IoTeX ETL CLI lets you convert IoTeX blockchain data to JSON newline-delimited files.
 
-Data is available for you to query right away in [Google BigQuery](https://console.cloud.google.com/bigquery).
+Data is available for you to query right away in [Google BigQuery](https://console.cloud.google.com/bigquery?page=dataset&d=crypto_iotex&p=public-data-finance).
 
 ## Features
 
