@@ -88,7 +88,7 @@ For the latest version, check out the repo and call
 
 2. Install grpcio-tools package `pip install grpcio-tools`
 
-3. Run following commands to generated code
+3. Run following commands to generate code to python directory
 ```
 mkdir python
 python -m grpc_tools.protoc -I. -I ./proto/types --python_out=./python --grpc_python_out=./python ./proto/api/api.proto
