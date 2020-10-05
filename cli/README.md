@@ -81,3 +81,16 @@ For the latest version, check out the repo and call
         > docker run iotex-etl:latest stream --start-block 500000 --log-file log.txt
         > echo "Stream to Pub/Sub"
         > docker run -v /path_to_credentials_file/:/iotex-etl/ --env GOOGLE_APPLICATION_CREDENTIALS=/iotex-etl/credentials_file.json iotex-etl:latest stream --start-block 500000 --output projects/<your-project>/topics/mainnet
+
+## Generating iotex types and api code
+
+1. Clone iotex-proto git repository `https://github.com/iotexproject/iotex-proto`
+
+2. Install grpcio-tools package `pip install grpcio-tools`
+
+3. Run following commands to generated code
+```
+mkdir python
+python -m grpc_tools.protoc -I. -I ./proto/types --python_out=./python --grpc_python_out=./python ./proto/api/api.proto
+python -m grpc_tools.protoc -I. -I ./proto/types --python_out=./python --grpc_python_out=./python ./proto/types/*
+```
