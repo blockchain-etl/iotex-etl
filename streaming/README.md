@@ -76,7 +76,7 @@ The following table lists the configurable parameters of the iotex-etl-streaming
 Parameter                                                | Description                                       | Default
 -------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------
 `stream.image.repository`                                | Stream image source repository name               | `blockchainetl/iotex-etl`
-`stream.image.tag`                                       | Image release tag                                 | `1.0.1`
+`stream.image.tag`                                       | Image release tag                                 | `1.0.2`
 `stream.image.pullPolicy`                                | Image pull policy                                 | `IfNotPresent`
 `stream.resources`                                       | CPU/Memory resource request/limit                 | `100m/128Mi, 350m/512Mi`
 `stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS`   | The number of seconds since new blocks have been pulled from the node, after which the deployment is considered unhealthy                 | `600`
@@ -162,7 +162,7 @@ Make sure to provide project id in the script above
 Install the dependencies and run the script:
 
 ```bash
-pip install google-cloud-pubsub==1.0.1
+pip install google-cloud-pubsub==1.0.2
 python subscribe.py
 ```
 
